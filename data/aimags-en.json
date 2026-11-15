@@ -1,0 +1,170 @@
+{
+  "arkhangai": {
+    "name": "Arkhangai",
+    "capital": "Tsetserleg",
+    "lead": "A green province on the northern slopes of the Khangai Mountains, rich in forested steppe, rivers and hot springs.",
+    "history": "The Khöshöö Tsaidam monuments to Bilge Khagan and Kul Tigin of the Turkic Khaganate stand in Khashaat district. The present province was founded in 1931.",
+    "nature": "In the west lie the crater of the extinct Khorgo volcano and Terkhiin Tsagaan Lake, formed when its lava flow dammed a river.",
+    "sights": ["Terkhiin Tsagaan Lake", "Khorgo volcano", "Taikhar Rock", "Tsenkher hot springs", "Zayain Gegeen Monastery"]
+  },
+  "bayan-ulgii": {
+    "name": "Bayan-Ölgii",
+    "capital": "Ölgii",
+    "lead": "Mongolia's westernmost province, set among the high peaks of the Mongolian Altai.",
+    "history": "Founded in 1940. Most of its people are ethnic Kazakhs, who still keep the tradition of hunting with golden eagles.",
+    "nature": "Khüiten Peak in Altai Tavan Bogd is the highest point in Mongolia. Permanent snow, glaciers and alpine lakes are everywhere.",
+    "sights": ["Altai Tavan Bogd", "Potanin Glacier", "Tolbo Lake", "Petroglyphic complexes of the Mongolian Altai", "Golden Eagle Festival"]
+  },
+  "bayankhongor": {
+    "name": "Bayankhongor",
+    "capital": "Bayankhongor",
+    "lead": "Stretching from the Khangai Mountains down to the Gobi, it combines mountains, steppe and desert.",
+    "history": "Founded in 1941. Traces of Stone Age people were found in Tsagaan Agui (White Cave) in Bayanlig district.",
+    "nature": "The Khangai range rises in the north, the Valley of the Lakes crosses the middle, and the Gobi-Altai range and desert fill the south.",
+    "sights": ["Shargaljuut hot springs", "Ikh Bogd mountain", "Böön Tsagaan Lake", "Orog Lake", "Tsagaan Agui cave"]
+  },
+  "bulgan": {
+    "name": "Bulgan",
+    "capital": "Bulgan",
+    "lead": "A forest-steppe province along the Orkhon and Selenge river basins.",
+    "history": "Founded in 1938. Dashinchilen district holds the Khitan-era ruins of Khar Bukh Balgas and the 17th-century White House of Tsogt Taij.",
+    "nature": "Extinct volcanoes such as Uran Togoo, forests and fertile valleys.",
+    "sights": ["Uran Togoo volcano", "Khögnö Khan mountain", "Khar Bukh Balgas ruins", "White House of Tsogt Taij"]
+  },
+  "govi-altai": {
+    "name": "Govi-Altai",
+    "capital": "Altai",
+    "lead": "A vast province spanning the Mongolian Altai, the Gobi-Altai range and the great Gobi.",
+    "history": "Founded in 1940. It is the second-largest province by area.",
+    "nature": "The Great Gobi Strictly Protected Area is home to the rare Gobi bear (mazaalai) and the wild Bactrian camel.",
+    "sights": ["Great Gobi Strictly Protected Area", "Sutai Khairkhan", "Eej Khairkhan mountain", "Khasagt Khairkhan"]
+  },
+  "govisumber": {
+    "name": "Govisümber",
+    "capital": "Choir",
+    "lead": "A small province along the railway, with the smallest population in the country.",
+    "history": "Once part of Dornogovi. Choir was a separate municipality before being organised as a province.",
+    "nature": "Lies in the transition zone between steppe and Gobi, with coal deposits.",
+    "sights": ["Choir Bogd mountain"]
+  },
+  "darkhan-uul": {
+    "name": "Darkhan-Uul",
+    "capital": "Darkhan",
+    "lead": "An industrial province around Darkhan, Mongolia's second-largest city.",
+    "history": "Darkhan was founded in 1961 and developed as an industrial centre. It became a province in 1994.",
+    "nature": "Located in the Kharaa river valley, well suited to farming.",
+    "sights": ["Morin Khuur monument", "Buddha statue", "Darkhan-Uul Museum"]
+  },
+  "dornogovi": {
+    "name": "Dornogovi",
+    "capital": "Sainshand",
+    "lead": "A south-eastern Gobi province crossed by the Ulaanbaatar–Beijing railway.",
+    "history": "Founded in 1931. The 19th-century lama and poet Danzanravjaa founded Khamar Monastery here.",
+    "nature": "Gobi desert and steppe. Zamyn-Üüd is the main border crossing with China.",
+    "sights": ["Khamar Monastery", "Shambhala energy centre", "Danzanravjaa Museum", "Zamyn-Üüd"]
+  },
+  "dornod": {
+    "name": "Dornod",
+    "capital": "Choibalsan",
+    "lead": "Mongolia's easternmost province: a vast sea of grassland steppe.",
+    "history": "Founded in 1941. The 1939 Battle of Khalkhin Gol took place here.",
+    "nature": "Untouched grasslands such as the Menen steppe host great herds of Mongolian gazelle. The Khökh Lake depression is the country's lowest point.",
+    "sights": ["Khalkhin Gol battlefield memorials", "Buir Lake", "Menen steppe", "Khökh Lake"]
+  },
+  "dundgovi": {
+    "name": "Dundgovi",
+    "capital": "Mandalgovi",
+    "lead": "The 'Middle Gobi' province, south of Ulaanbaatar.",
+    "history": "Founded in 1942. The ruins of Ongi Monastery lie on the banks of the Ongi river in Saikhan-Ovoo district.",
+    "nature": "A transition zone between steppe and Gobi, known for granite rock formations and eroded cliffs.",
+    "sights": ["Baga Gazriin Chuluu", "Ikh Gazriin Chuluu", "Tsagaan Suvarga cliffs", "Ongi Monastery"]
+  },
+  "zavkhan": {
+    "name": "Zavkhan",
+    "capital": "Uliastai",
+    "lead": "Running from the western Khangai Mountains to the Great Lakes Depression.",
+    "history": "Uliastai grew from a Manchu-era garrison town in the 18th century. The province was founded in 1931.",
+    "nature": "Snow-capped Otgontenger is the highest peak of the Khangai range. Sand dunes, lakes and rivers sit side by side.",
+    "sights": ["Otgontenger mountain", "Telmen Lake", "Khar Lake", "Bor Khyar sand dunes"]
+  },
+  "orkhon": {
+    "name": "Orkhon",
+    "capital": "Erdenet",
+    "lead": "The smallest province by area, a mining region centred on the city of Erdenet.",
+    "history": "The city grew up after the Erdenet copper and molybdenum plant opened in 1978. It became a province in 1994.",
+    "nature": "Surrounded by Bulgan province, in the forest-steppe zone.",
+    "sights": ["Friendship monument", "Mining Museum"]
+  },
+  "selenge": {
+    "name": "Selenge",
+    "capital": "Sükhbaatar",
+    "lead": "Along the northern border; the country's main farming region.",
+    "history": "Founded in 1934. The 18th-century Amarbayasgalant Monastery is one of the largest monasteries to survive intact.",
+    "nature": "The confluence of the Orkhon and Selenge rivers, forest-steppe and fertile valleys.",
+    "sights": ["Amarbayasgalant Monastery", "Selenge River", "Saikhan pass", "Altanbulag"]
+  },
+  "sukhbaatar": {
+    "name": "Sükhbaatar",
+    "capital": "Baruun-Urt",
+    "lead": "A south-eastern province, home of the extinct volcanoes of Dariganga.",
+    "history": "The province is named after D. Sükhbaatar. The Dariganga area has many ancient stone figures.",
+    "nature": "Steppe, extinct volcanoes, sand dunes and small lakes.",
+    "sights": ["Shiliin Bogd mountain", "Altan Ovoo", "Ganga Lake", "Taliin Agui cave"]
+  },
+  "tuv": {
+    "name": "Töv",
+    "capital": "Zuunmod",
+    "lead": "The central province that surrounds the capital, Ulaanbaatar.",
+    "history": "Founded in 1931. The ruins of the 18th-century Manzushir Monastery lie on the slopes of Bogd Khan mountain.",
+    "nature": "Western spurs of the Khentii range and the Tuul river basin. Przewalski's horses (takhi) were reintroduced in Khustai National Park.",
+    "sights": ["Gorkhi-Terelj National Park", "Khustai National Park", "Manzushir Monastery", "Bogd Khan mountain", "Chinggis Khaan Equestrian Statue"]
+  },
+  "uvs": {
+    "name": "Uvs",
+    "capital": "Ulaangom",
+    "lead": "A north-western province in the Great Lakes Depression.",
+    "history": "Founded in 1931. Dörvöd, Bayad and Khoton peoples make up most of its population.",
+    "nature": "Uvs Lake is Mongolia's largest lake by area, and its basin is a UNESCO World Heritage Site.",
+    "sights": ["Uvs Lake", "Khyargas Lake", "Kharkhiraa and Türgen mountains", "Üüreg Lake"]
+  },
+  "khovd": {
+    "name": "Khovd",
+    "capital": "Khovd",
+    "lead": "Spanning the Mongolian Altai and the Great Lakes Depression, the homeland of many ethnic groups.",
+    "history": "Khovd town grew up in the Manchu era in the 18th century. Khoit Tsenkher cave preserves Stone Age rock paintings.",
+    "nature": "Snow-capped mountains, the Khar-Us, Khar and Dörgön lakes, and the Gobi side by side.",
+    "sights": ["Khoit Tsenkher cave", "Khar-Us Lake", "Tsambagarav mountain", "Mönkhkhairkhan mountain"]
+  },
+  "khentii": {
+    "name": "Khentii",
+    "capital": "Chinggis City",
+    "lead": "The Khentii Mountains and the Onon and Kherlen river basins — the birthplace of Chinggis Khaan.",
+    "history": "Delüün Boldog in Dadal district is held to be Temüjin's birthplace. The provincial centre, Öndörkhaan, was renamed Chinggis City in 2013.",
+    "nature": "Taiga in the north and steppe in the south. The sacred landscape around Burkhan Khaldun is a UNESCO World Heritage Site.",
+    "sights": ["Burkhan Khaldun mountain", "Delüün Boldog", "Khar Zürkhnii Khökh Lake", "Öglögchiin Kherem wall", "Avarga ruins"]
+  },
+  "khuvsgul": {
+    "name": "Khövsgöl",
+    "capital": "Mörön",
+    "lead": "A northern province of taiga, mountains and the great Lake Khövsgöl.",
+    "history": "Founded in 1931. Bronze Age deer stones stand at Uushigiin Övör near Mörön.",
+    "nature": "Lake Khövsgöl is Mongolia's deepest lake and holds the most fresh water. Reindeer-herding Tsaatan families live in the taiga.",
+    "sights": ["Lake Khövsgöl", "Darkhad Depression", "Uushigiin Övör deer stones", "Khoridol Saridag range"]
+  },
+  "uvurkhangai": {
+    "name": "Övörkhangai",
+    "capital": "Arvaikheer",
+    "lead": "On the southern slopes of the Khangai Mountains — the cradle of Mongolian history.",
+    "history": "Karakorum, capital of the Mongol Empire, stood here. Erdene Zuu Monastery was built on its ruins in 1586.",
+    "nature": "The Orkhon Valley is a UNESCO World Heritage cultural landscape. Mountains in the north give way to Gobi in the south.",
+    "sights": ["Erdene Zuu Monastery", "Kharkhorin (Karakorum)", "Orkhon Waterfall", "Tövkhön Monastery", "Khujirt hot springs"]
+  },
+  "umnugovi": {
+    "name": "Ömnögovi",
+    "capital": "Dalanzadgad",
+    "lead": "The largest province by area: the heart of the Gobi.",
+    "history": "Founded in 1931. Dinosaur eggs found at Bayanzag in the 1920s made it famous worldwide.",
+    "nature": "The Gurvan Saikhan range, sand dunes and saxaul Gobi. The Oyu Tolgoi and Tavan Tolgoi deposits are here.",
+    "sights": ["Yolyn Am", "Khongoryn Els sand dunes", "Bayanzag (Flaming Cliffs)", "Gobi Gurvan Saikhan National Park"]
+  }
+}
