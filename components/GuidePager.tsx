@@ -40,11 +40,6 @@ export default function GuidePager({ lang, current }: { lang: Lang; current: Pag
             {p.eyebrow !== p.title && <span className="guide-pager-eyebrow">{p.eyebrow}</span>}
             <span className="guide-pager-title">{p.title}</span>
             <span className="guide-pager-lead">{p.lead}</span>
-            <span className="card-arrow" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4 10h12M11 5l5 5-5 5" />
-              </svg>
-            </span>
           </TransitionLink>
         );
       })}

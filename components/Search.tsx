@@ -83,7 +83,7 @@ export default function Search({ lang }: { lang: Lang }) {
       id: `a-${a.slug}`,
       kind: "province",
       title: a.name + t.provinceSuffix,
-      sub: `${t.regions[a.regionId].name} · ${t.capitalShort}: ${a.capital}`,
+      sub: `${t.regions[a.regionId].name}, ${t.capitalShort}: ${a.capital}`,
       href: `/${lang}/province/${a.slug}`,
       hay: fold(`${a.slug} ${a.capital} ${a.lead} ${a.sights.join(" ")} ${a.experiences.map((e) => t.experiences[e].title).join(" ")}`),
     }));

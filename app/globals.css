@@ -1,18 +1,22 @@
 :root {
-  --ground: #f5f0e6;
-  --surface: #fffaf0;
-  --ink: #1c2730;
-  --muted: #56616b;
-  --line: #d9d0be;
-  --sky: #0e5a9e;
-  --sky-dark: #0b4a82;
+  /* named after the ger: the sky over it, its felt, the blue of the door's
+     ornament, the painted door, butter and brass, the steppe */
+  --ground: #e8eef3; /* tenger: sky haze */
+  --surface: #f7f6f2; /* esgii: felt */
+  --ink: #163a5f; /* khökh: ornament blue */
+  --muted: #4b5b6b;
+  --line: #c9d4de;
+  --sky: #1f4f80;
+  --sky-dark: #163a5f;
   --on-sky: #ffffff;
-  --sky-tint: #d9e8f3;
-  --steppe: #4a7436;
-  --gobi: #c8872a;
+  --sky-tint: #d4e0ea;
+  --door: #b8431c; /* khaalga: the painted door — primary actions only */
+  --door-dark: #963515;
+  --steppe: #5e7a3a; /* tal */
+  --gobi: #d9a441; /* shar tos: butter, brass */
 
-  --font-display: var(--font-pt-serif), Georgia, serif;
-  --font-text: var(--font-pt-sans), "Helvetica Neue", Arial, sans-serif;
+  --font-display: var(--font-alegreya), Georgia, serif;
+  --font-text: var(--font-alegreya-sans), "Helvetica Neue", Arial, sans-serif;
 
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -261,16 +265,16 @@ main {
 
 /* CJK: system fonts (no multi-megabyte web fonts); PT keeps Latin digits */
 html:lang(ja) {
-  --font-display: var(--font-pt-serif), "Hiragino Mincho ProN", "Yu Mincho", YuMincho, "Noto Serif JP", serif;
-  --font-text: var(--font-pt-sans), "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", Meiryo, "Noto Sans JP", sans-serif;
+  --font-display: var(--font-alegreya), "Hiragino Mincho ProN", "Yu Mincho", YuMincho, "Noto Serif JP", serif;
+  --font-text: var(--font-alegreya-sans), "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", Meiryo, "Noto Sans JP", sans-serif;
 }
 html:lang(ko) {
-  --font-display: var(--font-pt-serif), "Nanum Myeongjo", AppleMyungjo, "Noto Serif KR", Batang, serif;
-  --font-text: var(--font-pt-sans), "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  --font-display: var(--font-alegreya), "Nanum Myeongjo", AppleMyungjo, "Noto Serif KR", Batang, serif;
+  --font-text: var(--font-alegreya-sans), "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
 }
 html:lang(zh) {
-  --font-display: var(--font-pt-serif), "Songti SC", STSong, "Noto Serif SC", SimSun, serif;
-  --font-text: var(--font-pt-sans), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  --font-display: var(--font-alegreya), "Songti SC", STSong, "Noto Serif SC", SimSun, serif;
+  --font-text: var(--font-alegreya-sans), "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
 }
 /* CJK has no italics or capitals: keep emphasis upright and drop wide tracking */
 html:is(:lang(ja), :lang(ko), :lang(zh)) :is(em, .kicker, .atlas-capital text) {
@@ -3876,4 +3880,242 @@ html:lang(ko) li {
   opacity: 1;
   fill: var(--gobi);
   transition: transform 0.2s var(--ease-out);
+}
+
+/* =====================================================================
+   Design pass (frontend-design skill), Nov 2026.
+   Palette from the ger (tokens in :root), Alegreya type, and the generic
+   "generated page" tells removed: all-caps labels, numbered kickers,
+   scroll-in animations on every block, hover lifts on every card, one
+   radius and one shadow on everything. The ger landing page is left as is.
+   ===================================================================== */
+
+/* sentence case everywhere; small labels are just smaller, not shouted */
+.label,
+.hero-eyebrow,
+.season-months,
+.glance dt,
+.tl-era-range,
+.search-count,
+.search-group,
+.route-tip-label,
+.phrases thead th,
+.guide-pager-eyebrow {
+  text-transform: none;
+  letter-spacing: 0;
+}
+.label {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+}
+.kicker {
+  display: none;
+}
+
+/* type: Alegreya headings sit slightly tighter; serif body text gets air */
+.h2,
+.h3,
+.hero-title,
+.about-title,
+.tl-title,
+.card-title,
+.preview-title {
+  letter-spacing: -0.005em;
+}
+body {
+  line-height: 27px;
+}
+.text-block p,
+.about-intro {
+  max-width: 64ch;
+}
+
+/* left-aligned sections; no centred headline blocks */
+.section-head--center {
+  align-items: flex-start;
+  text-align: left;
+  margin: 0;
+}
+
+/* header: sky haze instead of cream */
+.site-header {
+  background: rgba(232, 238, 243, 0.9);
+  border-bottom-color: var(--line);
+}
+
+/* primary action = the painted door colour, and nothing else uses it */
+.primary-btn {
+  background: var(--door);
+  box-shadow: none;
+  border-radius: 8px;
+}
+.primary-btn:hover {
+  background: var(--door-dark);
+  transform: none;
+}
+.ghost-btn {
+  border-radius: 8px;
+}
+.ghost-btn--light:hover {
+  transform: none;
+}
+
+/* a radius hierarchy instead of 16px on everything:
+   photos 4px, panels 10px, controls 8px; borders instead of soft shadows */
+.card,
+.tile,
+.plan-card,
+.info-card,
+.locator,
+.map-card,
+.preview,
+.glance,
+.tl-card,
+.guide-pager-card {
+  border-radius: 10px;
+  box-shadow: none;
+  border: 1px solid var(--line);
+}
+.card-media,
+.gallery-item,
+.tl-photo-media,
+.preview-media {
+  border-radius: 4px;
+}
+.card-media {
+  border-radius: 0;
+}
+.chip,
+.lang-switch,
+.legend-item,
+.tag,
+.exp-list li {
+  border-radius: 8px;
+}
+
+/* no lift or zoom on hover for every card; the title answers instead */
+.card:hover,
+.tile:hover {
+  transform: none;
+  box-shadow: none;
+}
+.card:hover .card-media img,
+.tile:hover img,
+.gallery-item:hover img {
+  transform: none;
+}
+.card:hover .card-title,
+.guide-pager-card:hover .guide-pager-title {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 4px;
+}
+
+/* motion: one entrance per page (the hero's .anim-up sequence); content
+   further down is simply there, not faded in block by block */
+@media (scripting: enabled) {
+  .reveal,
+  .reveal .sights li,
+  .reveal .mini-timeline li,
+  .tl-item.reveal,
+  .tl-item.reveal:nth-child(even) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* province page: facts in one panel; highlights as a plain two-column list */
+.hero-region {
+  margin: 0;
+  font-size: 17px;
+  line-height: 24px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+}
+.fact-list {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+.fact-list > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+.fact-list > div:first-child {
+  padding-top: 0;
+}
+.fact-list dt {
+  color: var(--muted);
+  font-size: 15px;
+}
+.fact-list dd {
+  margin: 0;
+  font-weight: 700;
+}
+.fact-list .fact-long {
+  font-weight: 500;
+}
+.side-heading {
+  margin: 8px 0 10px;
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 26px;
+}
+.info-card {
+  gap: 14px;
+}
+.sights {
+  display: block;
+  columns: 2 220px;
+  column-gap: 40px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sights li {
+  break-inside: avoid;
+  display: block;
+  padding: 10px 0;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  border-bottom: 1px solid var(--line);
+  font-weight: 500;
+}
+.detail-text {
+  gap: 36px;
+}
+
+/* dark band (seasons, if used) and footer follow the new ink */
+.band--dark {
+  background: var(--ink);
+}
+.site-footer {
+  background: var(--surface);
+}
+
+/* the atlas map card on felt instead of cream paper */
+.atlas {
+  background-color: var(--surface);
+  border-color: var(--line);
+}
+
+/* the facts no longer overlap the hero, so it needs no room for them */
+.hero--aimag .hero-content {
+  padding-bottom: 72px;
+}
+@media (max-width: 860px) {
+  .hero--aimag .hero-content {
+    padding-bottom: 88px;
+  }
+}
+
+/* the radius tokens themselves follow the hierarchy (panels 10px) */
+:root {
+  --radius-lg: 10px;
 }

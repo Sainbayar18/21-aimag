@@ -36,9 +36,6 @@ export default async function AboutPage({ params }: Props) {
           <Image src={hero.file} alt={hero.caption} fill priority sizes="100vw" />
         </div>
         <div className="hero-content container">
-          <p className="hero-eyebrow anim-up" style={{ animationDelay: "80ms" }}>
-            {a.kicker}
-          </p>
           <h1 className="hero-title anim-up" style={{ animationDelay: "180ms" }}>
             {a.pageTitle}
           </h1>

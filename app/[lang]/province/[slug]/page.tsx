@@ -5,7 +5,6 @@ import AimagCard from "@/components/AimagCard";
 import ExperienceIcon from "@/components/ExperienceIcon";
 import LocatorMap from "@/components/LocatorMap";
 import PhotoSlider from "@/components/PhotoSlider";
-import Reveal from "@/components/Reveal";
 import TransitionLink from "@/components/TransitionLink";
 import { getAimag, getGallery, getNeighbors, getPhoto, slugs } from "@/lib/aimags";
 import { getDict, isLang, langs } from "@/lib/i18n";
@@ -59,7 +58,7 @@ export default async function ProvincePage({ params }: Props) {
             </svg>
             {t.allProvinces}
           </TransitionLink>
-          <p className="hero-eyebrow anim-up" style={{ animationDelay: "120ms" }}>
+          <p className="hero-region anim-up" style={{ animationDelay: "120ms" }}>
             {region}
           </p>
           <h1 className="hero-title anim-up" style={{ animationDelay: "220ms" }}>
@@ -81,44 +80,42 @@ export default async function ProvincePage({ params }: Props) {
       </PhotoSlider>
 
       <div className="container stack">
-        <dl className="facts">
-          {facts.map((f, i) => (
-            <div key={f.label} className="anim-up" style={{ animationDelay: `${420 + i * 80}ms` }}>
-              <dt>{f.label}</dt>
-              <dd>{f.value}</dd>
-            </div>
-          ))}
-        </dl>
-
         <div className="detail-grid">
           <div className="detail-text">
-            <Reveal as="section" className="text-block">
-              <span className="section-icon section-icon--gobi" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 19V5a1 1 0 0 1 1-1h11l4 4v11a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z" />
-                  <path d="M8 9h8M8 13h8M8 17h5" />
-                </svg>
-              </span>
+            <section className="text-block">
               <h2 className="h2">{t.history}</h2>
               <p>{a.history}</p>
-            </Reveal>
-            <Reveal as="section" className="text-block" delay={100}>
-              <span className="section-icon section-icon--steppe" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="m3 20 6-11 4 6 3-4 5 9Z" />
-                  <circle cx="17" cy="6" r="2" />
-                </svg>
-              </span>
+            </section>
+            <section className="text-block">
               <h2 className="h2">{t.nature}</h2>
               <p>{a.nature}</p>
-            </Reveal>
+            </section>
+            <section className="text-block">
+              <h2 className="h2">{t.highlights}</h2>
+              <ul className="sights">
+                {a.sights.map((s) => (
+                  <li key={s}>{s}</li>
+                ))}
+              </ul>
+            </section>
           </div>
 
+          {/* the facts a traveller checks, together in one panel beside the text */}
           <aside className="detail-side">
-            <Reveal className="info-card" delay={120}>
-              <h2 className="label">{t.bestTime}</h2>
-              <p className="info-best">{t.seasonNames[a.season]}</p>
-              <h2 className="label">{t.experiencesHere}</h2>
+            <div className="info-card">
+              <dl className="fact-list">
+                {facts.map((f) => (
+                  <div key={f.label}>
+                    <dt>{f.label}</dt>
+                    <dd>{f.value}</dd>
+                  </div>
+                ))}
+                <div>
+                  <dt>{t.bestTime}</dt>
+                  <dd className="fact-long">{t.seasonNames[a.season]}</dd>
+                </div>
+              </dl>
+              <h2 className="side-heading">{t.experiencesHere}</h2>
               <ul className="exp-list">
                 {a.experiences.map((e) => (
                   <li key={e}>
@@ -127,47 +124,33 @@ export default async function ProvincePage({ params }: Props) {
                   </li>
                 ))}
               </ul>
-            </Reveal>
-            <Reveal delay={180}>
-              <h2 className="label side-label">{t.location}</h2>
+            </div>
+            <div>
+              <h2 className="side-heading">{t.location}</h2>
               <LocatorMap aimag={a} lang={lang} />
-            </Reveal>
+            </div>
           </aside>
         </div>
 
-        <Reveal as="section" className="section">
-          <h2 className="h2">{t.highlights}</h2>
-          <ol className="sights">
-            {a.sights.map((s, i) => (
-              <li key={s} style={{ transitionDelay: `${i * 60}ms` }}>
-                <span className="sight-num">{String(i + 1).padStart(2, "0")}</span>
-                {s}
-              </li>
-            ))}
-          </ol>
-        </Reveal>
-
         {gallery.length > 1 && (
           <section className="section">
-            <Reveal>
-              <h2 className="h2">{t.gallery}</h2>
-            </Reveal>
+            <h2 className="h2">{t.gallery}</h2>
             <div className={`gallery gallery--${Math.min(gallery.length, 5)}`}>
-              {gallery.map((p, i) => (
-                <Reveal key={p.file} as="figure" className="gallery-item" delay={i * 70}>
+              {gallery.map((p) => (
+                <figure key={p.file} className="gallery-item">
                   <Image src={p.file} alt={p.caption} fill sizes="(max-width: 700px) 100vw, 50vw" />
                   <figcaption>{p.caption}</figcaption>
-                </Reveal>
+                </figure>
               ))}
             </div>
           </section>
         )}
 
-        <Reveal as="nav" className="pager">
+        <nav className="pager">
           <h2 className="visually-hidden">{t.pagerLabel}</h2>
           <AimagCard aimag={prev} lang={lang} eyebrow={t.prev} compact />
           <AimagCard aimag={next} lang={lang} eyebrow={t.next} compact />
-        </Reveal>
+        </nav>
       </div>
     </main>
   );

@@ -13,7 +13,7 @@ export default function PhotoCredit({
   const t = getDict(lang);
   return (
     <p className={`photo-credit ${className}`}>
-      {photo.caption} · {t.photoBy}:{" "}
+      {photo.caption}. {t.photoBy}:{" "}
       <a href={photo.source} target="_blank" rel="noopener noreferrer">
         {photo.author || "Wikimedia Commons"}
       </a>

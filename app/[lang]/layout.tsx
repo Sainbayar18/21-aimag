@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PT_Sans, PT_Serif } from "next/font/google";
+import { Alegreya, Alegreya_Sans } from "next/font/google";
 import LangSwitch from "@/components/LangSwitch";
 import Search from "@/components/Search";
 import TransitionLink, { ViewTransitionResolver } from "@/components/TransitionLink";
@@ -9,17 +9,23 @@ import { getAbout } from "@/lib/history";
 import { getDict, isLang, langs } from "@/lib/i18n";
 import "../globals.css";
 
-const ptSans = PT_Sans({
+/*
+ * Alegreya (headings) and Alegreya Sans (text): one family with a calligraphic,
+ * brush-like stroke — a nod to Mongolian manuscripts and the vertical script —
+ * and full Cyrillic including the Mongolian letters Ө and Ү. Japanese, Korean
+ * and Chinese fall back to system fonts (see globals.css).
+ */
+const alegreya = Alegreya({
   subsets: ["latin", "latin-ext", "cyrillic", "cyrillic-ext"],
-  weight: ["400", "700"],
-  variable: "--font-pt-sans",
+  weight: ["500", "700", "800"],
+  variable: "--font-alegreya",
 });
 
-const ptSerif = PT_Serif({
+const alegreyaSans = Alegreya_Sans({
   subsets: ["latin", "latin-ext", "cyrillic", "cyrillic-ext"],
-  weight: ["400", "700"],
+  weight: ["400", "500", "700"],
   style: ["normal", "italic"],
-  variable: "--font-pt-serif",
+  variable: "--font-alegreya-sans",
 });
 
 type Props = { children: React.ReactNode; params: Promise<{ lang: string }> };
@@ -35,7 +41,7 @@ export async function generateMetadata({ params }: Omit<Props, "children">): Pro
   if (!isLang(lang)) return {};
   const t = getDict(lang);
   return {
-    title: { default: t.metaTitle, template: `%s · ${t.brand}` },
+    title: { default: t.metaTitle, template: `%s | ${t.brand}` },
     description: t.metaDescription,
     alternates: { languages: Object.fromEntries(langs.map((l) => [l, `/${l}`])) },
   };
@@ -48,7 +54,7 @@ export default async function LangLayout({ children, params }: Props) {
   const g = getGuide(lang);
 
   return (
-    <html lang={t.htmlLang} className={`${ptSans.variable} ${ptSerif.variable}`}>
+    <html lang={t.htmlLang} className={`${alegreya.variable} ${alegreyaSans.variable}`}>
       <body>
         <a href="#main" className="skip-link">
           {t.skip}
