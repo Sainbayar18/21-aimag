@@ -12,7 +12,7 @@ const ru: GuideText = {
     skip: "Сразу к сайту",
     sceneTitle: "Внутри юрты",
     hint: "Нажимайте на вещи в юрте",
-    scrollHint: "или пролистайте вниз — там весь сайт",
+    scrollHint: "или посмотрите все 21 аймак",
     back: "Назад к двери",
     close: "Закрыть",
     objectsLabel: "Вещи в юрте",

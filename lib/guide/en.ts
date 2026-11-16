@@ -12,7 +12,7 @@ const en: GuideText = {
     skip: "Go straight to the site",
     sceneTitle: "Inside the ger",
     hint: "Pick up the things in the ger",
-    scrollHint: "or scroll down for the whole site",
+    scrollHint: "or browse all 21 provinces",
     back: "Back to the door",
     close: "Close",
     objectsLabel: "Things in the ger",

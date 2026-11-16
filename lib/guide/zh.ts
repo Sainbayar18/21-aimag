@@ -11,7 +11,7 @@ const zh: GuideText = {
     skip: "直接进入网站",
     sceneTitle: "蒙古包内",
     hint: "点一点包里的物件",
-    scrollHint: "或向下滚动浏览整个网站",
+    scrollHint: "或浏览全部21个省",
     back: "回到门口",
     close: "关闭",
     objectsLabel: "蒙古包里的物件",

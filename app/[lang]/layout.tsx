@@ -68,7 +68,7 @@ export default async function LangLayout({ children, params }: Props) {
             </TransitionLink>
             <nav className="site-nav" aria-label={t.navLabel}>
               <TransitionLink href={`/${lang}/about`}>{getAbout(lang).nav}</TransitionLink>
-              <TransitionLink href={`/${lang}#destinations`}>{t.nav.destinations}</TransitionLink>
+              <TransitionLink href={`/${lang}/destinations`}>{t.nav.destinations}</TransitionLink>
               <TransitionLink href={`/${lang}/itineraries`}>{g.nav.itineraries}</TransitionLink>
               <TransitionLink href={`/${lang}/culture`}>{g.nav.culture}</TransitionLink>
               <TransitionLink href={`/${lang}/practical`}>{g.nav.practical}</TransitionLink>
@@ -89,7 +89,7 @@ export default async function LangLayout({ children, params }: Props) {
               <span className="brand-sub">{t.brandSub}</span>
               <nav className="footer-nav" aria-label={t.navLabel}>
                 <TransitionLink href={`/${lang}/about`}>{getAbout(lang).nav}</TransitionLink>
-                <TransitionLink href={`/${lang}#destinations`}>{t.nav.destinations}</TransitionLink>
+                <TransitionLink href={`/${lang}/destinations`}>{t.nav.destinations}</TransitionLink>
                 <TransitionLink href={`/${lang}/itineraries`}>{g.nav.itineraries}</TransitionLink>
                 <TransitionLink href={`/${lang}/culture`}>{g.nav.culture}</TransitionLink>
                 <TransitionLink href={`/${lang}/practical`}>{g.nav.practical}</TransitionLink>

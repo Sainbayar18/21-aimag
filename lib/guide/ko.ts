@@ -12,7 +12,7 @@ const ko: GuideText = {
     skip: "사이트로 바로 가기",
     sceneTitle: "게르 안",
     hint: "게르 안의 물건을 눌러 보세요",
-    scrollHint: "또는 아래로 내려 사이트 전체 보기",
+    scrollHint: "또는 21개 아이막 모두 보기",
     back: "문으로 돌아가기",
     close: "닫기",
     objectsLabel: "게르 안의 물건",

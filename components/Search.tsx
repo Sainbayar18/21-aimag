@@ -51,6 +51,7 @@ export default function Search({ lang }: { lang: Lang }) {
 
     const pages: Hit[] = [
       { id: "p-home", kind: "page", title: t.brand, sub: t.brandSub, href: `/${lang}`, hay: "" },
+      { id: "p-destinations", kind: "page", title: t.destinationsTitle, sub: t.destinationsLead, href: `/${lang}/destinations`, hay: "" },
       { id: "p-about", kind: "page", title: about.pageTitle, sub: about.pageLead, href: `/${lang}/about`, hay: "" },
       {
         id: "p-culture",

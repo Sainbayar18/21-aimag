@@ -36,7 +36,6 @@ export default function Explorer({ lang, middle }: { lang: Lang; middle?: ReactN
     <>
       <section className="section" aria-labelledby="experiences-title">
         <Reveal className="section-head section-head--center">
-          <p className="kicker">02</p>
           <h2 id="experiences-title" className="h2">{t.experiencesTitle}</h2>
           <p className="lead muted">{t.experiencesLead}</p>
         </Reveal>
@@ -67,7 +66,6 @@ export default function Explorer({ lang, middle }: { lang: Lang; middle?: ReactN
 
       <section id="destinations" className="section" aria-labelledby="destinations-title">
         <Reveal className="section-head">
-          <p className="kicker">04</p>
           <h2 id="destinations-title" className="h2">{t.destinationsTitle}</h2>
           <p className="lead muted">{t.destinationsLead}</p>
         </Reveal>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import TransitionLink from "@/components/TransitionLink";
 import { useEffect, useRef, useState } from "react";
 import { GerExterior, GerInterior } from "@/components/ger/GerScenes";
 import { getGuide, gerObjectIds, gerObjects, type GerObjectId } from "@/lib/guide";
@@ -12,9 +13,9 @@ const SEEN_KEY = "ger-entered";
  * The landing scene: a ger door you open, and then the inside of the ger, where
  * the things standing around are the way into the rest of the site.
  *
- * It sits on top of the home page rather than replacing it — the page below
- * still carries all the content and markup, so nothing here is load-bearing for
- * crawlers or for anyone who skips it.
+ * It is the whole home page. Everything it leads to has its own page, and the
+ * "skip" links go straight to the province list for anyone who would rather
+ * not open the door.
  */
 export default function GerEntry({ lang }: { lang: Lang }) {
   const router = useRouter();
@@ -47,10 +48,6 @@ export default function GerEntry({ lang }: { lang: Lang }) {
     setInside(false);
   }
 
-  function skip() {
-    document.getElementById("home-top")?.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
   function follow(id: GerObjectId) {
     const { target } = gerObjects[id];
     if (target.kind === "page") {
@@ -70,18 +67,18 @@ export default function GerEntry({ lang }: { lang: Lang }) {
         <GerExterior label={g.doorAria} onEnter={enter} />
         <div className="ger-out-content container">
           <p className="ger-kicker">{g.doorKicker}</p>
-          <h2 className="ger-title">{g.doorTitle}</h2>
+          <h1 className="ger-title">{g.doorTitle}</h1>
           <p className="ger-lead">{g.doorLead}</p>
           <button type="button" className="ger-door-cta" onClick={enter} tabIndex={inside ? -1 : 0}>
             {g.doorAction}
           </button>
         </div>
-        <button type="button" className="ger-skip" onClick={skip} tabIndex={inside ? -1 : 0}>
+        <TransitionLink href={`/${lang}/destinations`} className="ger-skip" tabIndex={inside ? -1 : 0}>
           {g.skip}
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M12 5v14M6 13l6 6 6-6" />
+            <path d="M4 12h14M13 6l6 6-6 6" />
           </svg>
-        </button>
+        </TransitionLink>
       </div>
 
       {/* ——— inside ——— */}
@@ -138,12 +135,12 @@ export default function GerEntry({ lang }: { lang: Lang }) {
             </svg>
             {g.back}
           </button>
-          <button type="button" className="ger-scroll" onClick={skip} tabIndex={inside ? 0 : -1}>
+          <TransitionLink href={`/${lang}/destinations`} className="ger-scroll" tabIndex={inside ? 0 : -1}>
             {g.scrollHint}
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M12 5v14M6 13l6 6 6-6" />
+              <path d="M4 12h14M13 6l6 6-6 6" />
             </svg>
-          </button>
+          </TransitionLink>
         </div>
       </div>
     </section>

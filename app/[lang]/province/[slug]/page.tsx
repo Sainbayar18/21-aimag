@@ -53,7 +53,7 @@ export default async function ProvincePage({ params }: Props) {
     <main>
       <PhotoSlider photos={gallery} lang={lang} label={t.photosLabel(a.name)} className="hero--aimag">
         <div className="hero-content container">
-          <TransitionLink href={`/${lang}#destinations`} className="back-link back-link--light anim-up">
+          <TransitionLink href={`/${lang}/destinations`} className="back-link back-link--light anim-up">
             <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 4l-6 6 6 6" />
             </svg>

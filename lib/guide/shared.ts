@@ -26,23 +26,24 @@ export type RouteId = (typeof routeIds)[number];
 
 /**
  * Things standing in the ger on the landing scene. Add an id here, give it a
- * place in `gerObjects` below and text in each language file, and it appears.
+ * place in `gerObjects` below, a clickable area in components/ger/GerScenes.tsx
+ * (SPOTS) and text in each language file, and it appears.
  */
 export const gerObjectIds = ["map", "chest", "ticket"] as const;
 export type GerObjectId = (typeof gerObjectIds)[number];
 
 export type GerObjectMeta = {
   id: GerObjectId;
-  /** where the pop-up card points, relative to the 1200×800 scene */
+  /** where the pulsing marker sits, in pixels of the 1376×768 interior picture */
   anchor: { x: number; y: number };
   /** an in-page anchor on the home page, or a path under /{lang} */
   target: { kind: "hash"; id: string } | { kind: "page"; path: string };
 };
 
 export const gerObjects: Record<GerObjectId, GerObjectMeta> = {
-  map: { id: "map", anchor: { x: 1019, y: 406 }, target: { kind: "hash", id: "map" } },
-  chest: { id: "chest", anchor: { x: 722, y: 452 }, target: { kind: "page", path: "culture" } },
-  ticket: { id: "ticket", anchor: { x: 372, y: 614 }, target: { kind: "page", path: "practical" } },
+  map: { id: "map", anchor: { x: 1206, y: 282 }, target: { kind: "page", path: "destinations" } },
+  chest: { id: "chest", anchor: { x: 604, y: 342 }, target: { kind: "page", path: "culture" } },
+  ticket: { id: "ticket", anchor: { x: 330, y: 592 }, target: { kind: "page", path: "practical" } },
 };
 
 /* ---------------- routes ---------------- */

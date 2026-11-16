@@ -12,7 +12,7 @@ const ja: GuideText = {
     skip: "サイトへ直接進む",
     sceneTitle: "ゲルの中",
     hint: "ゲルの中のものに触れてみてください",
-    scrollHint: "下にスクロールするとサイト全体が見られます",
+    scrollHint: "または21県をすべて見る",
     back: "扉に戻る",
     close: "閉じる",
     objectsLabel: "ゲルの中のもの",

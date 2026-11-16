@@ -3238,7 +3238,8 @@ html:lang(ko) li {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  min-height: min(92vh, 860px);
+  /* the ger is the whole home page now: fill the screen below the header */
+  min-height: max(600px, calc(100svh - 64px));
   background: #e4e2d2;
 }
 
@@ -3660,4 +3661,219 @@ html:lang(ko) li {
   .ger-pin {
     animation: none !important;
   }
+}
+
+/* ================= the ger as photographs =================
+   The scenes are now two pictures (components/ger/GerScenes.tsx); these rules
+   override the drawn-ger styles above. */
+.ger,
+.ger-stage--in {
+  background: #2a1d12;
+}
+/* the interior picture fills the stage; the heading floats over the roof */
+.ger-svg--in {
+  top: 0;
+  height: 100%;
+}
+
+/* dark veils so white text stays readable over sky, felt and roof */
+.ger-stage--out::before,
+.ger-stage--in::before,
+.ger-stage--in::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.ger-stage--out::before,
+.ger-stage--in::before {
+  top: 0;
+  height: 34%;
+  background: linear-gradient(to bottom, rgba(12, 16, 20, 0.62), rgba(12, 16, 20, 0));
+}
+.ger-stage--in::after {
+  bottom: 0;
+  height: 22%;
+  background: linear-gradient(to top, rgba(12, 16, 20, 0.55), rgba(12, 16, 20, 0));
+}
+.ger-out-content,
+.ger-in-top,
+.ger-objects,
+.ger-in-foot,
+.ger-skip,
+.ger-card {
+  z-index: 2;
+}
+.ger-kicker {
+  color: #f3dfb8;
+}
+.ger-title,
+.ger-in-title {
+  color: #fff;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+}
+.ger-lead,
+.ger-hint {
+  color: rgba(255, 255, 255, 0.92);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* hotspots: invisible until hovered, focused or chosen */
+.ger-photo .ger-hit {
+  fill: transparent;
+  stroke: transparent;
+  stroke-width: 4;
+  transition: fill 0.25s, stroke 0.25s;
+}
+.ger-photo .ger-hotspot:hover .ger-hit,
+.ger-photo .ger-hotspot.is-active .ger-hit {
+  fill: rgba(255, 244, 214, 0.14);
+  stroke: rgba(255, 250, 240, 0.95);
+}
+.ger-photo .ger-hotspot:focus-visible .ger-hit,
+.ger-photo .ger-door-g:focus-visible .ger-hit {
+  fill: rgba(14, 90, 158, 0.18);
+  stroke: #fff;
+}
+.ger-photo .ger-hotspot:hover,
+.ger-photo .ger-hotspot.is-active {
+  filter: drop-shadow(0 0 18px rgba(255, 226, 160, 0.55));
+}
+
+/* the door: a warm glow seeps out when you reach for it */
+.ger-door-glow {
+  fill: #ffe2a8;
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-out);
+}
+.ger-door-g:hover .ger-door-glow,
+.ger-door-g:focus-visible .ger-door-glow {
+  opacity: 0.22;
+}
+.ger-door-g:hover .ger-hit {
+  stroke: rgba(255, 250, 240, 0.9);
+}
+
+/* walking in: the outside picture pushes towards the door as it fades */
+.ger.is-inside .ger-stage--out {
+  transform: scale(1.35);
+  transform-origin: 52% 67%;
+}
+
+/* markers: own layer, animated with transform/opacity only (cheap to animate) */
+.ger-pins {
+  pointer-events: none;
+  will-change: transform;
+}
+.ger-pins .ger-pin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ger-pin-pulse 2.6s ease-in-out infinite;
+}
+@keyframes ger-pin-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ger-pins .ger-pin {
+    animation: none;
+  }
+}
+
+/* wide screens: the heading moves onto the felt left of the door, so the door
+   itself stays clear; a veil from the left keeps it readable */
+@media (min-width: 1200px) {
+  /* how many screen px one picture px takes under "slice": the larger of the
+     width and height ratios (stage height = the .ger min-height) */
+  .ger {
+    --ger-s: max(calc(100vw / 1376), calc(max(600px, 100svh - 64px) / 768));
+  }
+  .ger-out-content {
+    position: absolute;
+    top: 50%;
+    /* the door's left edge sits 100 picture px left of the picture's centre;
+       the text ends 40px short of it */
+    left: auto;
+    right: calc(50% + 100 * var(--ger-s) + 40px);
+    width: auto;
+    max-width: min(360px, calc(50vw - 100 * var(--ger-s) - 72px));
+    margin: 0;
+    padding: 0;
+    text-align: left;
+    transform: translateY(-50%);
+  }
+  .ger-out-content .ger-lead {
+    margin-left: 0;
+  }
+  .ger-stage--out::before {
+    top: 0;
+    bottom: 0;
+    right: auto;
+    width: 48%;
+    height: auto;
+    background: linear-gradient(to right, rgba(12, 16, 20, 0.7), rgba(12, 16, 20, 0.35) 55%, rgba(12, 16, 20, 0));
+  }
+}
+
+/* centre the card without transform: its entrance animation animates
+   transform and would otherwise wipe out a translateX(-50%) */
+.ger-card {
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  transform: none;
+}
+
+/* no boxes on hover: hit areas stay invisible for the mouse; only keyboard
+   focus draws a ring, so keyboard users can see where they are */
+.ger-photo .ger-hit,
+.ger-photo .ger-hotspot:hover .ger-hit,
+.ger-photo .ger-hotspot.is-active .ger-hit,
+.ger-door-g:hover .ger-hit {
+  fill: transparent;
+  stroke: transparent;
+}
+.ger-photo .ger-hotspot:hover,
+.ger-photo .ger-hotspot.is-active {
+  filter: none;
+}
+.ger-photo .ger-hotspot:focus-visible .ger-hit,
+.ger-photo .ger-door-g:focus-visible .ger-hit {
+  fill: transparent;
+  stroke: #fff;
+  stroke-width: 3;
+  stroke-dasharray: 10 8;
+}
+
+/* hover feedback lives on the marker instead: it grows and shows its name */
+.ger-pin-label {
+  font-family: var(--font-text);
+  font-size: 22px;
+  font-weight: 700;
+  fill: #fff;
+  paint-order: stroke;
+  stroke: rgba(20, 14, 8, 0.75);
+  stroke-width: 6px;
+  stroke-linejoin: round;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.ger-pin-g.is-lit .ger-pin-label {
+  opacity: 1;
+}
+.ger-pin-g.is-lit .ger-pin {
+  animation: none;
+  transform: scale(1.45);
+  opacity: 1;
+  fill: var(--gobi);
+  transition: transform 0.2s var(--ease-out);
 }
