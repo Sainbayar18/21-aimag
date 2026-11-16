@@ -1,0 +1,126 @@
+import type { Metadata } from "next";
+import Image from "next/image";
+import { notFound } from "next/navigation";
+import GuideIcon from "@/components/GuideIcon";
+import GuidePager from "@/components/GuidePager";
+import PhotoCredit from "@/components/PhotoCredit";
+import Reveal from "@/components/Reveal";
+import { getPhotoByFile } from "@/lib/aimags";
+import { cultureIds, getGuide } from "@/lib/guide";
+import { isLang, langs } from "@/lib/i18n";
+
+type Props = { params: Promise<{ lang: string }> };
+
+const HERO = "/images/gallery/bayan-ulgii-4.jpg";
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { lang } = await params;
+  if (!isLang(lang)) return {};
+  const c = getGuide(lang).culture;
+  return {
+    title: c.pageTitle,
+    description: c.metaDescription,
+    alternates: { languages: Object.fromEntries(langs.map((l) => [l, `/${l}/culture`])) },
+    openGraph: { images: [HERO] },
+  };
+}
+
+export default async function CulturePage({ params }: Props) {
+  const { lang } = await params;
+  if (!isLang(lang)) notFound();
+  const c = getGuide(lang).culture;
+  const hero = getPhotoByFile(HERO, lang)!;
+
+  return (
+    <main>
+      <section className="hero hero--guide">
+        <div className="hero-media">
+          <Image src={hero.file} alt={hero.caption} fill priority sizes="100vw" />
+        </div>
+        <div className="hero-content container">
+          <p className="hero-eyebrow anim-up" style={{ animationDelay: "80ms" }}>
+            {c.kicker}
+          </p>
+          <h1 className="hero-title anim-up" style={{ animationDelay: "180ms" }}>
+            {c.pageTitle}
+          </h1>
+          <p className="hero-lead anim-up" style={{ animationDelay: "300ms" }}>
+            {c.pageLead}
+          </p>
+        </div>
+        <PhotoCredit photo={hero} lang={lang} className="hero-credit" />
+      </section>
+
+      <div className="container stack">
+        <Reveal as="section" className="guide-intro">
+          {c.intro.map((p) => (
+            <p key={p.slice(0, 24)} className="about-intro">
+              {p}
+            </p>
+          ))}
+        </Reveal>
+
+        <section className="section">
+          <div className="guide-grid">
+            {cultureIds.map((id, i) => {
+              const s = c.sections[id];
+              return (
+                <Reveal as="article" key={id} className="guide-card" delay={(i % 2) * 80}>
+                  <span className="guide-card-icon" aria-hidden="true">
+                    <GuideIcon id={id} />
+                  </span>
+                  <h2 className="h3 guide-card-title">{s.title}</h2>
+                  <p className="guide-card-text">{s.text}</p>
+                  <ul className="guide-points">
+                    {s.points.map((p) => (
+                      <li key={p.slice(0, 24)}>{p}</li>
+                    ))}
+                  </ul>
+                </Reveal>
+              );
+            })}
+          </div>
+        </section>
+
+        <section className="section" aria-labelledby="etiquette-title">
+          <Reveal className="section-head section-head--center">
+            <h2 id="etiquette-title" className="h2">
+              {c.etiquetteTitle}
+            </h2>
+            <p className="lead muted">{c.etiquetteLead}</p>
+          </Reveal>
+          <div className="etiquette">
+            <Reveal className="etq etq--do">
+              <h3 className="etq-title">{c.doTitle}</h3>
+              <ul>
+                {c.dos.map((d) => (
+                  <li key={d.slice(0, 24)}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="m5 13 4 4 10-10" />
+                    </svg>
+                    <span>{d}</span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+            <Reveal className="etq etq--dont" delay={100}>
+              <h3 className="etq-title">{c.dontTitle}</h3>
+              <ul>
+                {c.donts.map((d) => (
+                  <li key={d.slice(0, 24)}>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M6 6l12 12M18 6 6 18" />
+                    </svg>
+                    <span>{d}</span>
+                  </li>
+                ))}
+              </ul>
+            </Reveal>
+          </div>
+        </section>
+
+        <GuidePager lang={lang} current="culture" />
+      </div>
+    </main>
+  );
+}

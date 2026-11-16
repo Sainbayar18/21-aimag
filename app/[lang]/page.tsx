@@ -2,10 +2,13 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import AboutTeaser from "@/components/AboutTeaser";
 import Explorer from "@/components/Explorer";
+import GerEntry from "@/components/GerEntry";
 import MongoliaMap from "@/components/MongoliaMap";
 import PhotoCredit from "@/components/PhotoCredit";
 import Reveal from "@/components/Reveal";
+import TransitionLink from "@/components/TransitionLink";
 import { getPhoto } from "@/lib/aimags";
+import { getGuide } from "@/lib/guide";
 import { getDict, isLang } from "@/lib/i18n";
 
 type Props = { params: Promise<{ lang: string }> };
@@ -36,7 +39,9 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <main>
-      <section className="hero hero--home">
+      <GerEntry lang={lang} />
+
+      <section id="home-top" className="hero hero--home">
         <div className="hero-media">
           <Image src={hero.file} alt={hero.caption} fill priority sizes="100vw" />
         </div>
@@ -56,9 +61,9 @@ export default async function HomePage({ params }: Props) {
             <a href="#map" className="primary-btn">
               {t.hero.ctaPrimary}
             </a>
-            <a href="#plan" className="ghost-btn ghost-btn--light">
+            <TransitionLink href={`/${lang}/practical`} className="ghost-btn ghost-btn--light">
               {t.hero.ctaSecondary}
-            </a>
+            </TransitionLink>
           </div>
         </div>
         <PhotoCredit photo={hero} lang={lang} className="hero-credit" />
@@ -138,6 +143,14 @@ export default async function HomePage({ params }: Props) {
               </Reveal>
             ))}
           </div>
+          <Reveal className="section-cta">
+            <TransitionLink href={`/${lang}/practical`} className="primary-btn">
+              {getGuide(lang).practical.pageTitle}
+            </TransitionLink>
+            <TransitionLink href={`/${lang}/itineraries`} className="ghost-btn">
+              {getGuide(lang).itineraries.pageTitle}
+            </TransitionLink>
+          </Reveal>
         </section>
       </div>
     </main>

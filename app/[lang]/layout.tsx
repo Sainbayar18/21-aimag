@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PT_Sans, PT_Serif } from "next/font/google";
 import LangSwitch from "@/components/LangSwitch";
+import Search from "@/components/Search";
 import TransitionLink, { ViewTransitionResolver } from "@/components/TransitionLink";
+import { getGuide } from "@/lib/guide";
 import { getAbout } from "@/lib/history";
 import { getDict, isLang, langs } from "@/lib/i18n";
 import "../globals.css";
@@ -43,6 +45,7 @@ export default async function LangLayout({ children, params }: Props) {
   const { lang } = await params;
   if (!isLang(lang)) notFound();
   const t = getDict(lang);
+  const g = getGuide(lang);
 
   return (
     <html lang={t.htmlLang} className={`${ptSans.variable} ${ptSerif.variable}`}>
@@ -66,11 +69,14 @@ export default async function LangLayout({ children, params }: Props) {
             <nav className="site-nav" aria-label={t.navLabel}>
               <TransitionLink href={`/${lang}/about`}>{getAbout(lang).nav}</TransitionLink>
               <TransitionLink href={`/${lang}#destinations`}>{t.nav.destinations}</TransitionLink>
-              <TransitionLink href={`/${lang}#map`}>{t.nav.map}</TransitionLink>
-              <TransitionLink href={`/${lang}#seasons`}>{t.nav.seasons}</TransitionLink>
-              <TransitionLink href={`/${lang}#plan`}>{t.nav.plan}</TransitionLink>
+              <TransitionLink href={`/${lang}/itineraries`}>{g.nav.itineraries}</TransitionLink>
+              <TransitionLink href={`/${lang}/culture`}>{g.nav.culture}</TransitionLink>
+              <TransitionLink href={`/${lang}/practical`}>{g.nav.practical}</TransitionLink>
             </nav>
-            <LangSwitch lang={lang} />
+            <div className="header-tools">
+              <Search lang={lang} />
+              <LangSwitch lang={lang} />
+            </div>
           </div>
         </header>
 
@@ -81,6 +87,13 @@ export default async function LangLayout({ children, params }: Props) {
             <div className="footer-brand">
               <span className="brand-name">{t.brand}</span>
               <span className="brand-sub">{t.brandSub}</span>
+              <nav className="footer-nav" aria-label={t.navLabel}>
+                <TransitionLink href={`/${lang}/about`}>{getAbout(lang).nav}</TransitionLink>
+                <TransitionLink href={`/${lang}#destinations`}>{t.nav.destinations}</TransitionLink>
+                <TransitionLink href={`/${lang}/itineraries`}>{g.nav.itineraries}</TransitionLink>
+                <TransitionLink href={`/${lang}/culture`}>{g.nav.culture}</TransitionLink>
+                <TransitionLink href={`/${lang}/practical`}>{g.nav.practical}</TransitionLink>
+              </nav>
             </div>
             <p>{t.footer}</p>
           </div>
