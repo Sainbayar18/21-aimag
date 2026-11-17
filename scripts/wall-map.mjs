@@ -43,8 +43,9 @@ const SHEET = { w: 232.5, h: 153 };
    frame would fit too, but its room for the neighbours' names is empty here
    and only makes the country smaller. */
 const MAP = { w: 1000, h: 484 };
-const SCALE = (SHEET.w - 24) / MAP.w;
-const OX = 12;
+// 15 units clear each side: 5 for the sheet's printed border, 10 of paper
+const SCALE = (SHEET.w - 30) / MAP.w;
+const OX = 15;
 const OY = (SHEET.h - MAP.h * SCALE) / 2;
 
 /* No paper and no dots here: the drawing is the land alone, on a clear

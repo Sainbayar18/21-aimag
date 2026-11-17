@@ -93,6 +93,37 @@ function expand(k: number) {
 }
 const GLOW_WIDE = expand(1.3);
 const GLOW_RIM = expand(1.09);
+
+/**
+ * The sheet with every edge moved in by d, as a polygon: each edge shifted
+ * along its inward normal and the neighbours intersected. Unlike scaling
+ * about the middle, this keeps the same distance from every edge of a sheet
+ * that is not a rectangle — what a printed border needs.
+ */
+function inset(d: number) {
+  const n = PAPER.length;
+  const lines = PAPER.map(([x, y], i) => {
+    const [qx, qy] = PAPER[(i + 1) % n];
+    const dx = qx - x;
+    const dy = qy - y;
+    const len = Math.hypot(dx, dy);
+    // corners run clockwise on screen, so the inside is to the right
+    return { px: x - (dy / len) * d, py: y + (dx / len) * d, dx, dy };
+  });
+  return lines
+    .map((l2, i) => {
+      const l1 = lines[(i - 1 + n) % n];
+      const cross = l1.dx * l2.dy - l1.dy * l2.dx;
+      const t = ((l2.px - l1.px) * l2.dy - (l2.py - l1.py) * l2.dx) / cross;
+      return `${(l1.px + t * l1.dx).toFixed(2)},${(l1.py + t * l1.dy).toFixed(2)}`;
+    })
+    .join(" ");
+}
+/* the printed border: a pale mount on the very edge, a white margin, then a
+   strong rule with a fine one inside it, as on the photographed map */
+const MOUNT_LINE = inset(1.2);
+const BORDER = inset(5);
+const BORDER_FINE = inset(6.4);
 /*
  * The lid of the enamel pot on the shelf below the map, traced round its rim,
  * dome and knob a hair inside the edge. It stands in front of the wall, so the
@@ -122,7 +153,26 @@ const PAPER_TILT = (Math.atan2(PAPER[1][1] - PAPER[0][1], PAPER[1][0] - PAPER[0]
 /** the sheet's own frame, which the drawing is laid out in */
 const SHEET = { w: 232.5, h: 153 };
 /** the dotted ground, at the size the atlas card uses, scaled to the sheet */
-const DOT = (18 * (SHEET.w - 24)) / 1000;
+const DOT = (18 * (SHEET.w - 30)) / 1000;
+/*
+ * Where the drawing goes. Not just turned: the frame is in perspective (its
+ * far edge is taller), so the drawing's rectangle is mapped onto the frame
+ * by the affine transform that comes closest to all four corners at once —
+ * least squares, which for a rectangle's corners has this closed form. The
+ * land then follows the frame's lean instead of riding high on one side.
+ */
+const SHEET_MATRIX = (() => {
+  const [p0, p1, p2, p3] = PAPER;
+  const a = (p1[0] + p2[0] - p0[0] - p3[0]) / (2 * SHEET.w);
+  const b = (p1[1] + p2[1] - p0[1] - p3[1]) / (2 * SHEET.w);
+  const c = (p2[0] + p3[0] - p0[0] - p1[0]) / (2 * SHEET.h);
+  const d = (p2[1] + p3[1] - p0[1] - p1[1]) / (2 * SHEET.h);
+  const mx = (p0[0] + p1[0] + p2[0] + p3[0]) / 4;
+  const my = (p0[1] + p1[1] + p2[1] + p3[1]) / 4;
+  const e = mx - (a * SHEET.w) / 2 - (c * SHEET.h) / 2;
+  const f = my - (b * SHEET.w) / 2 - (d * SHEET.h) / 2;
+  return [a, b, c, d, e, f].map((v) => +v.toFixed(5)).join(" ");
+})();
 const SPOTS: Record<GerObjectId, { x: number; y: number; w: number; h: number }> = {
   map: { x: 1014, y: 224, w: 248, h: 190 },
   chest: { x: 526, y: 346, w: 364, h: 226 },
@@ -352,16 +402,15 @@ function WallMap() {
         filter="url(#ger-wallmap-shade)"
       />
       <polygon className="ger-wallmap-sheet" points={PAPER_POINTS} />
-      <polygon points={PAPER_POINTS} fill="url(#ger-wallmap-dots)" />
+      {/* the dotted ground stops at the border; the margin is plain paper */}
+      <polygon points={BORDER} fill="url(#ger-wallmap-dots)" />
 
       <g clipPath="url(#ger-wallmap-clip)">
         <image
           href="/images/ger/wall-map.svg"
-          x={PAPER[0][0]}
-          y={PAPER[0][1]}
           width={SHEET.w}
           height={SHEET.h}
-          transform={`rotate(${PAPER_TILT} ${PAPER[0][0]} ${PAPER[0][1]})`}
+          transform={`matrix(${SHEET_MATRIX})`}
         />
       </g>
 
@@ -369,7 +418,9 @@ function WallMap() {
       {/* the frame: a dark rule on the sheet's own edge with a pale one just
           inside it, the way a map is mounted */}
       <polygon className="ger-wallmap-frame" points={PAPER_POINTS} />
-      <polygon className="ger-wallmap-mount" points={PAPER_POINTS} />
+      <polygon className="ger-wallmap-mount" points={MOUNT_LINE} />
+      <polygon className="ger-wallmap-border" points={BORDER} />
+      <polygon className="ger-wallmap-border-fine" points={BORDER_FINE} />
 
       {/* the enamel pot on the shelf stands in front of the sheet's corner */}
       <g clipPath="url(#ger-wallmap-front)">

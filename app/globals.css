@@ -4226,12 +4226,22 @@ body {
 }
 .ger-wallmap-mount {
   fill: none;
-  stroke: rgba(255, 250, 240, 0.55);
+  stroke: rgba(255, 250, 240, 0.7);
   stroke-width: 1;
   stroke-linejoin: round;
-  transform-box: fill-box;
-  transform-origin: center;
-  transform: scale(0.978);
+}
+/* the printed border inside the margin: a strong rule and a fine one */
+.ger-wallmap-border {
+  fill: none;
+  stroke: rgba(52, 44, 36, 0.72);
+  stroke-width: 0.9;
+  stroke-linejoin: miter;
+}
+.ger-wallmap-border-fine {
+  fill: none;
+  stroke: rgba(52, 44, 36, 0.45);
+  stroke-width: 0.4;
+  stroke-linejoin: miter;
 }
 /* the light behind it. Reaching for the map lights it from behind and the
    glow falls on the lattice around it, the way a backlit one does. */
@@ -4284,6 +4294,8 @@ body {
 .ger-wallmap-shade,
 .ger-wallmap-frame,
 .ger-wallmap-mount,
+.ger-wallmap-border,
+.ger-wallmap-border-fine,
 .ger-wallmap-glow,
 .ger-wallmap-rim {
   pointer-events: none;
