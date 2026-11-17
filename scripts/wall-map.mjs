@@ -6,8 +6,12 @@
  * built inline, the province geometry went into the home page's JavaScript,
  * 74 kB of it, for a picture that never changes.
  *
- * The sheet's frame (229.5 x 168) and the placement inside it are the ones
- * in components/ger/GerScenes.tsx; change them in both places together.
+ * It is the atlas without its names: on the wall the land is 215 units wide,
+ * where a province name would set at about two pixels. The names are in the
+ * panel that opens when the map is tapped (components/ger/GerAtlas.tsx).
+ *
+ * The sheet's frame (229.5 x 168) is the one in components/ger/GerScenes.tsx;
+ * change it in both places together.
  *
  *   node scripts/wall-map.mjs
  */
@@ -29,28 +33,29 @@ const REGION = {
   "Зүүн бүс": "east",
 };
 const FILL = { west: "#cfe0f0", khangai: "#cfe3c1", central: "#f1d9a6", east: "#ead2c6" };
-const ORDER = ["west", "khangai", "central", "east"];
-
 const SHEET = { w: 229.5, h: 168 };
-const LAND = { x: 8, y: 30, scale: 0.213 }; // the 1000x484 geometry, fitted across
-const INK = "rgba(58,46,30,.5)";
+/* the atlas's padded frame, 1060x590, fitted across the sheet */
+const MAP = { w: 1060, h: 590, x: -30, y: -50 };
+const SCALE = (SHEET.w - 12) / MAP.w;
+const OX = 6 - MAP.x * SCALE;
+const OY = (SHEET.h - MAP.h * SCALE) / 2 - MAP.y * SCALE;
 
-/* A printed wall map's furniture: the country is far wider than this sheet,
-   so a title bar and the region key fill it the way a real one would. */
+/* the same dotted ground the atlas card has in globals.css, at this scale */
+const DOT = 18 * SCALE;
+
 const parts = [
-  `<rect x="72" y="12" width="86" height="5" rx="2.5" fill="${INK}"/>`,
-  `<g transform="translate(${LAND.x} ${LAND.y}) scale(${LAND.scale})">`,
+  `<defs><pattern id="d" width="${DOT.toFixed(3)}" height="${DOT.toFixed(3)}" patternUnits="userSpaceOnUse">` +
+    `<circle cx="${(DOT / 2).toFixed(3)}" cy="${(DOT / 2).toFixed(3)}" r="0.22" fill="rgba(86,97,107,.18)"/>` +
+    `</pattern></defs>`,
+  `<rect width="${SHEET.w}" height="${SHEET.h}" fill="#fbf6ec"/>`,
+  `<rect width="${SHEET.w}" height="${SHEET.h}" fill="url(#d)"/>`,
+  `<g transform="translate(${OX.toFixed(3)} ${OY.toFixed(3)}) scale(${SCALE.toFixed(5)})">`,
   ...aimags.map(
     (a) =>
       `<path d="${a.d}" fill="${FILL[REGION[a.region]]}" stroke="#fbf8f1" stroke-width="3" stroke-linejoin="round"/>`,
   ),
   `<path d="${ub.d}" fill="#b9b1a3"/>`,
   `</g>`,
-  ...ORDER.map(
-    (r, i) =>
-      `<rect x="${12 + i * 13}" y="143" width="9" height="9" rx="1.5" fill="${FILL[r]}" stroke="rgba(58,46,30,.35)" stroke-width=".8"/>`,
-  ),
-  `<rect x="12" y="157" width="52" height="2.5" rx="1.25" fill="${INK}"/>`,
 ];
 
 const svg =

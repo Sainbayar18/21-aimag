@@ -4298,3 +4298,105 @@ body {
   fill: url(#ger-wallmap-tint);
   pointer-events: none;
 }
+
+/* ---- the map off the wall ----
+   Tapping the sheet on the lattice opens the real map. The panel grows out
+   of where the sheet hangs: GerEntry measures it on the tap and hands the
+   offset and scale over as --from-*, so the movement starts on the thing
+   that was touched. Without a measurement it simply scales up from centre. */
+.ger-mapview {
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(14, 10, 6, 0.62);
+  animation: ger-mapview-veil 0.28s ease-out both;
+}
+@keyframes ger-mapview-veil {
+  from {
+    opacity: 0;
+  }
+}
+.ger-mapview-panel {
+  position: relative;
+  width: min(92vw, 980px);
+  max-height: calc(100% - 24px);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transform-origin: center;
+  animation: ger-mapview-in 0.46s var(--ease-out) both;
+}
+@keyframes ger-mapview-in {
+  from {
+    opacity: 0;
+    transform: translate(var(--from-x, 0px), var(--from-y, 0px)) scale(var(--from-s, 0.3));
+  }
+}
+.ger-mapview-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--muted);
+}
+.ger-mapview-close:hover {
+  color: var(--ink);
+  border-color: var(--sky);
+}
+.ger-atlas-map {
+  width: 100%;
+  height: auto;
+}
+.ger-mapview-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.ger-mapview-text {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  font-size: 15px;
+  line-height: 23px;
+  color: var(--muted);
+}
+@media (max-width: 700px) {
+  .ger-mapview {
+    padding: 12px;
+  }
+  .ger-mapview-panel {
+    padding: 14px;
+    gap: 10px;
+  }
+  /* on a phone the province names are unreadable at this width, as on the
+     destinations page, so the map is the shape and the colours again */
+  .ger-atlas-map .atlas-label,
+  .ger-atlas-map .atlas-country,
+  .ger-atlas-map .atlas-compass,
+  .ger-atlas-map .atlas-capital text {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ger-mapview,
+  .ger-mapview-panel {
+    animation: none !important;
+  }
+}

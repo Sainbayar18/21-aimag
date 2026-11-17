@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import TransitionLink from "@/components/TransitionLink";
 import { useEffect, useRef, useState } from "react";
@@ -8,6 +9,10 @@ import { getGuide, gerObjectIds, gerObjects, type GerObjectId } from "@/lib/guid
 import type { Lang } from "@/lib/i18n";
 
 const SEEN_KEY = "ger-entered";
+
+/* The map comes with the whole province geometry, so it is fetched when
+   somebody reaches for it rather than with the home page. */
+const GerAtlas = dynamic(() => import("@/components/ger/GerAtlas"), { ssr: false });
 
 /* How long the door takes to swing before the walk through it begins, and
    how long that walk lasts. Both are also written into globals.css. */
@@ -30,6 +35,10 @@ export default function GerEntry({ lang }: { lang: Lang }) {
   const [active, setActive] = useState<GerObjectId | null>(null);
   const insideRef = useRef<HTMLDivElement>(null);
   const timers = useRef<number[]>([]);
+  const sceneRef = useRef<HTMLElement>(null);
+  /* where the sheet is on screen when it is tapped, so the panel can grow
+     out of it instead of appearing from nowhere */
+  const [from, setFrom] = useState<{ x: number; y: number; s: number } | null>(null);
 
   // Someone who has been in before shouldn't have to open the door again.
   useEffect(() => {
@@ -90,10 +99,38 @@ export default function GerEntry({ lang }: { lang: Lang }) {
   }
 
   const labels = Object.fromEntries(gerObjectIds.map((id) => [id, g.objects[id].name])) as Record<GerObjectId, string>;
-  const card = active ? g.objects[active] : null;
+  /*
+   * Tapping a thing. The map is not a card: it is the map, so it comes off
+   * the wall. Measuring the sheet first lets the panel grow out of where it
+   * hangs rather than fading in over the middle of the screen.
+   */
+  function pick(id: GerObjectId) {
+    if (active === id) {
+      setActive(null);
+      return;
+    }
+    if (id === "map") {
+      const sheet = sceneRef.current?.querySelector(".ger-wallmap");
+      const box = sheet?.getBoundingClientRect();
+      setFrom(
+        box && box.width > 0
+          ? {
+              x: box.left + box.width / 2 - window.innerWidth / 2,
+              y: box.top + box.height / 2 - window.innerHeight / 2,
+              s: Math.max(0.12, box.width / Math.min(window.innerWidth * 0.92, 980)),
+            }
+          : null,
+      );
+    }
+    setActive(id);
+  }
+
+  const card = active && active !== "map" ? g.objects[active] : null;
+  const mapObject = g.objects.map;
 
   return (
     <section
+      ref={sceneRef}
       className={`ger${opening ? " is-opening" : ""}${inside ? " is-inside" : ""}`}
       aria-label={g.sceneTitle}
     >
@@ -124,7 +161,7 @@ export default function GerEntry({ lang }: { lang: Lang }) {
 
       {/* ——— inside ——— */}
       <div className="ger-stage ger-stage--in" aria-hidden={!inside} ref={insideRef} tabIndex={-1}>
-        <GerInterior lang={lang} active={active} labels={labels} onPick={(id) => setActive((v) => (v === id ? null : id))} />
+        <GerInterior lang={lang} active={active} labels={labels} onPick={pick} />
 
         <div className="ger-in-top container">
           <h2 className="ger-in-title">{g.sceneTitle}</h2>
@@ -139,7 +176,7 @@ export default function GerEntry({ lang }: { lang: Lang }) {
               <button
                 type="button"
                 className={`ger-object${active === id ? " is-active" : ""}`}
-                onClick={() => setActive((v) => (v === id ? null : id))}
+                onClick={() => pick(id)}
                 aria-pressed={active === id}
                 tabIndex={inside ? 0 : -1}
               >
@@ -166,6 +203,52 @@ export default function GerEntry({ lang }: { lang: Lang }) {
                 <path d="M4 10h12M11 5l5 5-5 5" />
               </svg>
             </button>
+          </div>
+        )}
+
+        {active === "map" && (
+          <div
+            className="ger-mapview"
+            role="dialog"
+            aria-modal="true"
+            aria-label={mapObject.name}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setActive(null);
+            }}
+          >
+            <div
+              className="ger-mapview-panel atlas"
+              style={
+                from
+                  ? ({
+                      "--from-x": `${from.x}px`,
+                      "--from-y": `${from.y}px`,
+                      "--from-s": from.s,
+                    } as React.CSSProperties)
+                  : undefined
+              }
+            >
+              <button
+                type="button"
+                className="ger-mapview-close"
+                onClick={() => setActive(null)}
+                aria-label={g.close}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" aria-hidden="true">
+                  <path d="M6 6l12 12M18 6 6 18" />
+                </svg>
+              </button>
+              <GerAtlas lang={lang} />
+              <div className="ger-mapview-foot">
+                <p className="ger-mapview-text">{mapObject.teaser}</p>
+                <button type="button" className="primary-btn" onClick={() => follow("map")}>
+                  {mapObject.cta}
+                  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M4 10h12M11 5l5 5-5 5" />
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
         )}
 
