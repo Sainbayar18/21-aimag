@@ -77,6 +77,15 @@ const PAPER = [
   [1020, 409],
 ] as const;
 const PAPER_POINTS = PAPER.map(([x, y]) => `${x},${y}`).join(" ");
+/** the sheet pushed out from its middle, for the light behind it: a wide
+    soft spread onto the lattice and a hotter rim at the sheet's own edge */
+function expand(k: number) {
+  const cx = PAPER.reduce((n, p) => n + p[0], 0) / PAPER.length;
+  const cy = PAPER.reduce((n, p) => n + p[1], 0) / PAPER.length;
+  return PAPER.map(([x, y]) => `${cx + (x - cx) * k},${cy + (y - cy) * k}`).join(" ");
+}
+const GLOW_WIDE = expand(1.3);
+const GLOW_RIM = expand(1.09);
 /** the angle of the top edge, and where the map sits inside the sheet */
 const PAPER_TILT = -3.75;
 /** the sheet's own frame, which the drawing is laid out in */
@@ -202,6 +211,12 @@ function WallMap() {
         <filter id="ger-wallmap-shade" x="-20%" y="-20%" width="150%" height="150%">
           <feGaussianBlur stdDeviation="3" />
         </filter>
+        <filter id="ger-wallmap-bloom" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur stdDeviation="24" />
+        </filter>
+        <filter id="ger-wallmap-rim" x="-40%" y="-40%" width="180%" height="180%">
+          <feGaussianBlur stdDeviation="7" />
+        </filter>
         <linearGradient id="ger-wallmap-paper" x1="0%" y1="0%" x2="70%" y2="100%">
           <stop offset="0%" stopColor="#f8f5ec" />
           <stop offset="100%" stopColor="#ddd4c4" />
@@ -214,6 +229,10 @@ function WallMap() {
         </linearGradient>
       </defs>
 
+      {/* light from behind the sheet, spilling onto the lattice when a
+          cursor comes near it */}
+      <polygon className="ger-wallmap-glow" points={GLOW_WIDE} filter="url(#ger-wallmap-bloom)" />
+      <polygon className="ger-wallmap-rim" points={GLOW_RIM} filter="url(#ger-wallmap-rim)" />
       <polygon
         className="ger-wallmap-cast"
         points={PAPER_POINTS}
@@ -234,6 +253,10 @@ function WallMap() {
       </g>
 
       <polygon className="ger-wallmap-shade" points={PAPER_POINTS} />
+      {/* the frame: a dark rule on the sheet's own edge with a pale one just
+          inside it, the way a map is mounted */}
+      <polygon className="ger-wallmap-frame" points={PAPER_POINTS} />
+      <polygon className="ger-wallmap-mount" points={PAPER_POINTS} />
     </g>
   );
 }
@@ -255,14 +278,13 @@ export function GerInterior({ active, labels, onPick }: InteriorProps) {
       <svg className="ger-svg ger-svg--in ger-photo" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMax slice">
         <image href={INTERIOR} width={W} height={H} preserveAspectRatio="xMidYMax slice" aria-hidden="true" />
 
-        <WallMap />
-
         {gerObjectIds.map((id) => {
           const s = SPOTS[id];
           return (
             <g
               key={id}
               className={`ger-hotspot${active === id ? " is-active" : ""}`}
+              data-spot={id}
               role="button"
               tabIndex={0}
               aria-label={labels[id]}
@@ -283,6 +305,18 @@ export function GerInterior({ active, labels, onPick }: InteriorProps) {
             </g>
           );
         })}
+      </svg>
+
+      {/* The map hangs in a layer of its own, for the same reason the markers
+          do: its light fades in and out, and inside the picture's SVG that
+          would repaint the whole full-screen photograph on every frame. */}
+      <svg
+        className="ger-svg ger-svg--in ger-map-layer"
+        viewBox={`0 0 ${W} ${H}`}
+        preserveAspectRatio="xMidYMax slice"
+        aria-hidden="true"
+      >
+        <WallMap />
       </svg>
 
       {/* The markers live in their own SVG without the picture: an animation

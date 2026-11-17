@@ -4289,14 +4289,89 @@ body {
 }
 .ger-wallmap-sheet {
   fill: url(#ger-wallmap-paper);
-  stroke: rgba(92, 70, 44, 0.5);
+}
+/* the frame: one rule on the sheet's own edge, and a pale one just inside
+   it, so the two together read as a mount rather than as an outline */
+.ger-wallmap-frame {
+  fill: none;
+  stroke: rgba(74, 56, 34, 0.75);
+  stroke-width: 1.6;
+  stroke-linejoin: round;
+}
+.ger-wallmap-mount {
+  fill: none;
+  stroke: rgba(255, 250, 240, 0.55);
   stroke-width: 1;
+  stroke-linejoin: round;
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0.978);
+}
+/* the light behind it. Reaching for the map lights it from behind and the
+   glow falls on the lattice around it, the way a backlit one does. */
+/* the layer sits over the photograph and must not take the taps meant for
+   the hit areas underneath it */
+.ger-map-layer {
+  pointer-events: none;
+  will-change: opacity;
+}
+.ger-wallmap-glow {
+  fill: #f0a52f;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out);
+}
+.ger-wallmap-rim {
+  fill: #ffdc93;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out);
+}
+/* the cast shadow is what the light replaces, so it goes as the glow comes */
+.ger-wallmap-cast {
+  transition: opacity 0.4s var(--ease-out);
+}
+.ger-stage--in:has([data-spot="map"]:hover) .ger-wallmap-glow,
+.ger-stage--in:has([data-spot="map"]:focus-visible) .ger-wallmap-glow,
+.ger-stage--in:has([data-spot="map"].is-active) .ger-wallmap-glow {
+  opacity: 0.9;
+}
+.ger-stage--in:has([data-spot="map"]:hover) .ger-wallmap-rim,
+.ger-stage--in:has([data-spot="map"]:focus-visible) .ger-wallmap-rim,
+.ger-stage--in:has([data-spot="map"].is-active) .ger-wallmap-rim {
+  opacity: 0.95;
+}
+.ger-stage--in:has([data-spot="map"]:hover) .ger-wallmap-cast,
+.ger-stage--in:has([data-spot="map"]:focus-visible) .ger-wallmap-cast,
+.ger-stage--in:has([data-spot="map"].is-active) .ger-wallmap-cast {
+  opacity: 0.2;
+}
+/* and the sheet itself comes out of the room's shade while it is lit */
+.ger-wallmap-shade {
+  transition: opacity 0.4s var(--ease-out);
+}
+.ger-stage--in:has([data-spot="map"]:hover) .ger-wallmap-shade,
+.ger-stage--in:has([data-spot="map"]:focus-visible) .ger-wallmap-shade,
+.ger-stage--in:has([data-spot="map"].is-active) .ger-wallmap-shade {
+  opacity: 0.25;
 }
 /* the drawing itself is public/images/ger/wall-map.svg, which carries its
    own colours: an <image> cannot inherit this stylesheet */
+.ger-wallmap-shade,
+.ger-wallmap-frame,
+.ger-wallmap-mount,
+.ger-wallmap-glow,
+.ger-wallmap-rim {
+  pointer-events: none;
+}
 .ger-wallmap-shade {
   fill: url(#ger-wallmap-tint);
-  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .ger-wallmap-glow,
+  .ger-wallmap-rim,
+  .ger-wallmap-cast,
+  .ger-wallmap-shade {
+    transition: none;
+  }
 }
 
 /* ---- the map off the wall ----
