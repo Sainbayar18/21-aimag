@@ -1025,8 +1025,9 @@ html:lang(ko) li {
   fill: var(--r-deep);
 }
 /* dim everything outside the focused region */
+/* by colour, not opacity: the entrance animation holds opacity at 1 */
 .atlas-map.is-focused a:not(.in-region) path {
-  opacity: 0.38;
+  fill: color-mix(in srgb, var(--r-fill) 35%, var(--surface));
 }
 .atlas-map.is-focused a.in-region:not(.is-active) path {
   fill: color-mix(in srgb, var(--r-fill) 55%, var(--r-deep));
@@ -2768,91 +2769,87 @@ html:lang(ko) li {
   max-width: 760px;
 }
 
+/* A guidebook page rather than a deck of cards: each topic is one row, its
+   title and one-line summary in a narrow column on the left, its points as
+   a ruled list on the right. No icon tiles, no boxes, no coloured dots. */
 .guide-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
-}
-@media (max-width: 820px) {
-  .guide-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--ink);
 }
 
 .guide-card {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 26px;
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-sm);
-}
-.guide-card-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: var(--sky-tint);
-  color: var(--sky-dark);
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.6fr);
+  grid-template-rows: auto 1fr;
+  column-gap: 56px;
+  row-gap: 8px;
+  padding: 34px 0 30px;
+  border-bottom: 1px solid var(--line);
 }
 .guide-card-title {
+  grid-column: 1;
   margin: 0;
 }
 .guide-card-text {
+  grid-column: 1;
   margin: 0;
+  max-width: 34ch;
   color: var(--muted);
 }
 .guide-points {
-  margin: 4px 0 0;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  margin: 0;
   padding: 0;
   list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
 }
 .guide-points li {
-  position: relative;
-  padding-left: 20px;
-  font-size: 15px;
-  line-height: 24px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  font-size: 16px;
+  line-height: 25px;
+  max-width: 68ch;
 }
-.guide-points li::before {
-  content: "";
-  position: absolute;
-  left: 2px;
-  top: 10px;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--gobi);
+.guide-points li:first-child {
+  padding-top: 2px;
+  border-top: 0;
+}
+@media (max-width: 820px) {
+  .guide-card {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 26px 0 22px;
+  }
+  .guide-points {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: 10px;
+  }
+  .guide-points li:first-child {
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+  }
 }
 
-/* do / avoid */
+/* do / avoid: two plain columns under a rule; the marks carry the meaning */
 .etiquette {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  gap: 56px;
+  border-top: 1px solid var(--ink);
+  padding-top: 24px;
 }
 @media (max-width: 820px) {
   .etiquette {
     grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
   }
 }
 .etq {
-  padding: 24px;
-  border-radius: var(--radius-lg);
-  background: var(--surface);
-  box-shadow: var(--shadow-sm);
-  border-top: 4px solid var(--steppe);
-}
-.etq--dont {
-  border-top-color: var(--gobi);
+  padding: 0;
 }
 .etq-title {
-  margin: 0 0 14px;
+  margin: 0 0 12px;
   font-family: var(--font-display);
   font-size: 22px;
   line-height: 28px;
@@ -2863,24 +2860,25 @@ html:lang(ko) li {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
 }
 .etq li {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   align-items: flex-start;
-  font-size: 15px;
-  line-height: 23px;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+  font-size: 16px;
+  line-height: 25px;
 }
 .etq li svg {
   flex: none;
-  margin-top: 3px;
+  margin-top: 4px;
 }
 .etq--do li svg {
   color: var(--steppe);
 }
 .etq--dont li svg {
-  color: var(--gobi);
+  color: var(--door);
 }
 
 /* ================= itineraries ================= */
@@ -2912,18 +2910,6 @@ html:lang(ko) li {
 }
 .route-media img {
   object-fit: cover;
-}
-.route-num {
-  position: absolute;
-  left: 18px;
-  top: 14px;
-  z-index: 1;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 34px;
-  line-height: 40px;
-  color: rgba(255, 255, 255, 0.9);
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.5);
 }
 .route-body {
   display: flex;
@@ -3211,14 +3197,6 @@ html:lang(ko) li {
 }
 .guide-pager-card:hover .card-arrow {
   transform: translateX(4px);
-}
-.guide-pager-eyebrow {
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--gobi);
 }
 .guide-pager-title {
   font-family: var(--font-display);
@@ -3943,10 +3921,6 @@ html:lang(ko) li {
 .search-group,
 .route-tip-label,
 .phrases thead th,
-.guide-pager-eyebrow {
-  text-transform: none;
-  letter-spacing: 0;
-}
 .label {
   font-size: 14px;
   line-height: 20px;
@@ -4546,4 +4520,46 @@ body:has(.ger) .ger-in-top {
   body:has(.ger) .ger-out-content {
     padding-top: 0;
   }
+}
+
+/* destinations: a "Find your Mongolia" choice leaves only the provinces that
+   offer it in colour; hovering a dimmed one still brings it back */
+/* fill, not opacity: the provinces' entrance animation holds opacity at 1 */
+.atlas-map.is-filtered a:not(.is-match):not(.is-active) path {
+  fill: color-mix(in srgb, var(--r-fill) 30%, var(--surface));
+}
+.atlas-map.is-filtered a.is-match path {
+  fill: var(--r-deep);
+}
+.atlas-map.is-filtered .atlas-label {
+  transition: opacity 0.25s;
+}
+.map-filter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin: 0;
+  padding: 10px 0 0;
+  border-top: 1px solid var(--line);
+}
+.map-filter-clear {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 700;
+}
+.map-filter-clear:hover {
+  border-color: var(--ink);
+}
+.atlas-map.is-filtered .atlas-label.is-match {
+  fill: #fff;
+  stroke: transparent;
+}
+.atlas-map.is-filtered .atlas-label:not(.is-match):not(.is-active) {
+  opacity: 0.45;
 }

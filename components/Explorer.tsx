@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useState, type ReactNode } from "react";
 import AimagCard from "@/components/AimagCard";
 import ExperienceIcon from "@/components/ExperienceIcon";
+import { ExperienceFilterContext } from "@/components/ExperienceFilter";
 import Reveal from "@/components/Reveal";
 import { getAimags } from "@/lib/aimags";
 import { experienceIds, getDict, regionIds, type ExperienceId, type Lang } from "@/lib/i18n";
@@ -26,14 +27,16 @@ export default function Explorer({ lang, middle }: { lang: Lang; middle?: ReactN
   function pick(id: ExperienceId | null, scroll = false) {
     setFilter(id);
     if (scroll) {
-      document.getElementById("destinations")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      // the map first, where the choice lights up the provinces; the list follows it
+      const target = document.getElementById("map") ?? document.getElementById("destinations");
+      target?.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }
 
   const matches = filter ? aimags.filter((a) => a.experiences.includes(filter)) : aimags;
 
   return (
-    <>
+    <ExperienceFilterContext.Provider value={{ filter, setFilter }}>
       <section className="section" aria-labelledby="experiences-title">
         <Reveal className="section-head section-head--center">
           <h2 id="experiences-title" className="h2">{t.experiencesTitle}</h2>
@@ -121,6 +124,6 @@ export default function Explorer({ lang, middle }: { lang: Lang; middle?: ReactN
           })
         )}
       </section>
-    </>
+    </ExperienceFilterContext.Provider>
   );
 }

@@ -71,9 +71,6 @@ export default async function ItinerariesPage({ params }: Props) {
                   {photo && (
                     <Image src={photo.file} alt={photo.caption} fill sizes="(max-width: 900px) 100vw, 440px" />
                   )}
-                  <span className="route-num" aria-hidden="true">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
                 </div>
 
                 <div className="route-body">

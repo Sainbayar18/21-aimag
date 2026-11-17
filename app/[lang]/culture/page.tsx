@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import GuideIcon from "@/components/GuideIcon";
 import GuidePager from "@/components/GuidePager";
 import PhotoCredit from "@/components/PhotoCredit";
 import Reveal from "@/components/Reveal";
@@ -66,13 +65,10 @@ export default async function CulturePage({ params }: Props) {
 
         <section className="section">
           <div className="guide-grid">
-            {cultureIds.map((id, i) => {
+            {cultureIds.map((id) => {
               const s = c.sections[id];
               return (
-                <Reveal as="article" key={id} className="guide-card" delay={(i % 2) * 80}>
-                  <span className="guide-card-icon" aria-hidden="true">
-                    <GuideIcon id={id} />
-                  </span>
+                <article key={id} className="guide-card">
                   <h2 className="h3 guide-card-title">{s.title}</h2>
                   <p className="guide-card-text">{s.text}</p>
                   <ul className="guide-points">
@@ -80,7 +76,7 @@ export default async function CulturePage({ params }: Props) {
                       <li key={p.slice(0, 24)}>{p}</li>
                     ))}
                   </ul>
-                </Reveal>
+                </article>
               );
             })}
           </div>

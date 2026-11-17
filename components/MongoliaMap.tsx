@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useExperienceFilter } from "@/components/ExperienceFilter";
 import TransitionLink from "@/components/TransitionLink";
 import { getAimags, getPhoto, provinceHref, ulaanbaatarPath } from "@/lib/aimags";
 import { getDict, regionIds, type Lang, type RegionId } from "@/lib/i18n";
@@ -12,6 +13,8 @@ import { getDict, regionIds, type Lang, type RegionId } from "@/lib/i18n";
  * - hover/focus a province: it lifts (a highlight copy is drawn on top),
  *   the rest dims, and the side panel previews it
  * - hover/focus a legend entry: that region's provinces light up
+ * - on the destinations page, a "Find your Mongolia" choice keeps only the
+ *   provinces that offer it in colour, with a line under the map to clear it
  */
 
 // Padded viewBox around the 1000×484 province geometry, room for neighbours' names.
@@ -28,11 +31,15 @@ export default function MongoliaMap({ lang }: { lang: Lang }) {
   const photo = current ? getPhoto(current.slug, lang) : null;
   const focusRegion = current?.regionId ?? activeRegion;
 
+  const exp = useExperienceFilter();
+  const filter = exp?.filter ?? null;
+  const matches = filter ? aimags.filter((a) => a.experiences.includes(filter)) : [];
+
   return (
     <div className="map-layout">
       <div className="map-card atlas">
         <svg
-          className={`map atlas-map${focusRegion ? " is-focused" : ""}`}
+          className={`map atlas-map${focusRegion ? " is-focused" : ""}${filter ? " is-filtered" : ""}`}
           viewBox={VIEWBOX}
           role="group"
           aria-label={t.mapAria}
@@ -61,6 +68,7 @@ export default function MongoliaMap({ lang }: { lang: Lang }) {
                   `r-${a.regionId}`,
                   a.slug === active ? "is-active" : "",
                   focusRegion === a.regionId ? "in-region" : "",
+                  filter && a.experiences.includes(filter) ? "is-match" : "",
                 ].join(" ")}
                 onMouseEnter={() => setActive(a.slug)}
                 onFocus={() => setActive(a.slug)}
@@ -90,7 +98,7 @@ export default function MongoliaMap({ lang }: { lang: Lang }) {
                 key={a.id}
                 x={a.lx}
                 y={a.ly}
-                className={`atlas-label${a.slug === active ? " is-active" : ""}`}
+                className={`atlas-label${a.slug === active ? " is-active" : ""}${filter && a.experiences.includes(filter) ? " is-match" : ""}`}
                 aria-hidden="true"
               >
                 {a.name}
@@ -123,6 +131,16 @@ export default function MongoliaMap({ lang }: { lang: Lang }) {
             </li>
           ))}
         </ul>
+        {exp && filter && (
+          <p className="map-filter" aria-live="polite">
+            <span>
+              <strong>{t.experiences[filter].title}</strong>: {t.resultCount(matches.length)}
+            </span>
+            <button type="button" className="map-filter-clear" onClick={() => exp.setFilter(null)}>
+              {t.filterAll}
+            </button>
+          </p>
+        )}
         <p className="caption">{t.mapNote}</p>
       </div>
 
