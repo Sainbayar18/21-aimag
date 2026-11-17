@@ -10,7 +10,7 @@
  * where a province name would set at about two pixels. The names are in the
  * panel that opens when the map is tapped (components/ger/GerAtlas.tsx).
  *
- * The sheet's frame (242.5 x 177) is the one in components/ger/GerScenes.tsx;
+ * The sheet's frame (249.5 x 175.7) is the one in components/ger/GerScenes.tsx;
  * change it in both places together.
  *
  *   node scripts/wall-map.mjs
@@ -38,7 +38,7 @@ const REGION = {
 const FILL = { west: "#b7d2ea", khangai: "#b6d7a2", central: "#eccd86", east: "#e0bdab" };
 /* the raised plate the atlas draws with a drop-shadow, as a layer here */
 const PLATE = "#cfc2a9";
-const SHEET = { w: 242.5, h: 177 };
+const SHEET = { w: 249.5, h: 175.7 };
 /* the land itself, 1000x484, fitted across the sheet. The atlas's padded
    frame would fit too, but its room for the neighbours' names is empty here
    and only makes the country smaller. */

@@ -53,14 +53,11 @@ const THROUGH_Y = LEAF.y - THROUGH.y * THROUGH_S;
  * map is printed over it instead: the real provinces, in the four region
  * colours the rest of the site uses.
  *
- * PAPER is the sheet's four corners, read off the picture — it does not hang
- * square, so the top edge rises to the right and the far edge is a little
- * taller. A quadrilateral like that needs a projective transform and SVG has
- * only affine ones, so the sheet itself is drawn as a polygon through the
- * exact corners, and the map inside it is placed with a rotation that follows
- * the top edge and clipped to the sheet. The small disagreement at the far
- * bottom corner falls on empty paper, where there is no straight edge to give
- * it away.
+ * The photographed sheet does not hang square: its top edge rises to the
+ * right and its far edge is a little taller. Matching that would need a
+ * projective transform and SVG has only affine ones, so PAPER is a turned
+ * rectangle that covers it (see below), and the drawing is placed in it with
+ * the same turn.
  *
  * Province names are left off: the land is 213 units wide here, so a name
  * would set at about two pixels.
@@ -70,11 +67,22 @@ const THROUGH_Y = LEAF.y - THROUGH.y * THROUGH_S;
  * province geometry into the home page's JavaScript, 74 kB of it, for a
  * picture that never changes. Regenerate it with scripts/wall-map.mjs.
  */
+/*
+ * The sheet is a true rectangle, turned to the tilt of the photograph's top
+ * edge, so the drawing — itself a turned rectangle — fills it exactly. It
+ * used to be the photographed sheet's four corners, but that shape is not a
+ * rectangle (the far edge is taller), and an affine turn cannot fill it: a
+ * wedge of bare paper showed down the left and a band along the bottom
+ * right. The rectangle is the smallest at this tilt that still covers the
+ * photographed sheet, with two units to spare all round; worked out in the
+ * tilted axes from that sheet's corners, 1024,247 / 1257,232 / 1255,404 /
+ * 1022,400.
+ */
 const PAPER = [
-  [1016, 239],
-  [1258, 224],
-  [1263, 412],
-  [1020, 409],
+  [1010, 246],
+  [1258.9, 229.7],
+  [1270.5, 405],
+  [1021.5, 421.3],
 ] as const;
 const PAPER_POINTS = PAPER.map(([x, y]) => `${x},${y}`).join(" ");
 /** the sheet pushed out from its middle, for the light behind it: a wide
@@ -89,9 +97,9 @@ const GLOW_RIM = expand(1.09);
 /** the angle of the top edge, and where the map sits inside the sheet */
 const PAPER_TILT = -3.75;
 /** the sheet's own frame, which the drawing is laid out in */
-const SHEET = { w: 242.5, h: 177 };
+const SHEET = { w: 249.5, h: 175.7 };
 const SPOTS: Record<GerObjectId, { x: number; y: number; w: number; h: number }> = {
-  map: { x: 1016, y: 226, w: 248, h: 172 },
+  map: { x: 1008, y: 228, w: 264, h: 195 },
   chest: { x: 526, y: 346, w: 364, h: 226 },
   ticket: { x: 74, y: 644, w: 148, h: 100 },
 };
