@@ -9,6 +9,11 @@ import type { Lang } from "@/lib/i18n";
 
 const SEEN_KEY = "ger-entered";
 
+/* How long the door takes to swing before the walk through it begins, and
+   how long that walk lasts. Both are also written into globals.css. */
+const DOOR_MS = 640;
+const WALK_MS = 620;
+
 /**
  * The landing scene: a ger door you open, and then the inside of the ger, where
  * the things standing around are the way into the rest of the site.
@@ -20,9 +25,11 @@ const SEEN_KEY = "ger-entered";
 export default function GerEntry({ lang }: { lang: Lang }) {
   const router = useRouter();
   const g = getGuide(lang).ger;
+  const [opening, setOpening] = useState(false);
   const [inside, setInside] = useState(false);
   const [active, setActive] = useState<GerObjectId | null>(null);
   const insideRef = useRef<HTMLDivElement>(null);
+  const timers = useRef<number[]>([]);
 
   // Someone who has been in before shouldn't have to open the door again.
   useEffect(() => {
@@ -33,19 +40,44 @@ export default function GerEntry({ lang }: { lang: Lang }) {
     }
   }, []);
 
+  // Leaving mid-swing would otherwise set state on a gone component.
+  useEffect(() => {
+    const ids = timers.current;
+    return () => ids.forEach(window.clearTimeout);
+  }, []);
+
+  function after(ms: number, fn: () => void) {
+    timers.current.push(window.setTimeout(fn, ms));
+  }
+
+  /*
+   * Opening the door: the board swings in and the light inside comes up,
+   * and only then does the picture push through the doorway into the room.
+   * Anyone who has asked for less movement is simply put inside.
+   */
   function enter() {
-    setInside(true);
+    if (opening || inside) return;
     try {
       localStorage.setItem(SEEN_KEY, "1");
     } catch {
       /* nothing to do: it just means the door shows again next time */
     }
-    window.setTimeout(() => insideRef.current?.focus(), 420);
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setInside(true);
+      after(60, () => insideRef.current?.focus());
+      return;
+    }
+
+    setOpening(true);
+    after(DOOR_MS, () => setInside(true));
+    after(DOOR_MS + WALK_MS, () => insideRef.current?.focus());
   }
 
   function leave() {
     setActive(null);
     setInside(false);
+    setOpening(false);
   }
 
   function follow(id: GerObjectId) {
@@ -61,7 +93,10 @@ export default function GerEntry({ lang }: { lang: Lang }) {
   const card = active ? g.objects[active] : null;
 
   return (
-    <section className={`ger${inside ? " is-inside" : ""}`} aria-label={g.sceneTitle}>
+    <section
+      className={`ger${opening ? " is-opening" : ""}${inside ? " is-inside" : ""}`}
+      aria-label={g.sceneTitle}
+    >
       {/* ——— outside ——— */}
       <div className="ger-stage ger-stage--out" aria-hidden={inside}>
         <GerExterior label={g.doorAria} onEnter={enter} />
@@ -69,7 +104,13 @@ export default function GerEntry({ lang }: { lang: Lang }) {
           <p className="ger-kicker">{g.doorKicker}</p>
           <h1 className="ger-title">{g.doorTitle}</h1>
           <p className="ger-lead">{g.doorLead}</p>
-          <button type="button" className="ger-door-cta" onClick={enter} tabIndex={inside ? -1 : 0}>
+          <button
+            type="button"
+            className="ger-door-cta"
+            onClick={enter}
+            disabled={opening}
+            tabIndex={inside ? -1 : 0}
+          >
             {g.doorAction}
           </button>
         </div>

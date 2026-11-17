@@ -3335,24 +3335,6 @@ html:lang(ko) li {
   stroke: var(--sky);
   stroke-width: 4;
 }
-/* the two leaves swing apart when the door is about to be opened */
-.ger-leaf {
-  transform-box: fill-box;
-  transform-origin: left center;
-  transition: transform 0.45s var(--ease-out);
-}
-.ger-leaf--r {
-  transform-origin: right center;
-}
-.ger-door-g:hover .ger-leaf--l,
-.ger-door-g:focus-visible .ger-leaf--l,
-.ger:not(.is-inside) .ger-out-content:hover ~ .ger-svg .ger-leaf--l {
-  transform: scaleX(0.42) translateX(-4px);
-}
-.ger-door-g:hover .ger-leaf--r,
-.ger-door-g:focus-visible .ger-leaf--r {
-  transform: scaleX(0.42) translateX(4px);
-}
 
 .ger-door-cta {
   display: inline-flex;
@@ -3658,12 +3640,19 @@ html:lang(ko) li {
 @media (prefers-reduced-motion: reduce) {
   .ger-stage,
   .ger-leaf,
+  .ger-leaf-shade,
+  .ger-through,
+  .ger-spill,
   .ger-chest-lid,
   .ger-ticket {
     transition: none !important;
   }
   .ger-pin {
     animation: none !important;
+  }
+  /* the door is not opened on the way in either (GerEntry.tsx) */
+  .ger.is-inside .ger-stage--out {
+    transform: none !important;
   }
 }
 
@@ -3746,24 +3735,78 @@ html:lang(ko) li {
   filter: drop-shadow(0 0 18px rgba(255, 226, 160, 0.55));
 }
 
-/* the door: a warm glow seeps out when you reach for it */
-.ger-door-glow {
-  fill: #ffe2a8;
+/* ---- opening the door ----
+   The board is a copy of the photograph clipped to the door (GerScenes.tsx),
+   so what swings is the real door. It turns on its left edge, which is where
+   the hinges are, and the origin is given in picture pixels: view-box units
+   are the one measure that cannot drift away from the photograph.
+
+   An affine transform cannot foreshorten one edge more than the other, so a
+   true swing is out of reach here; the squeeze does the geometry and the
+   shading does the rest — the painted face turns away from the low sun and
+   goes dark as it moves, which is most of what the eye reads as a door
+   opening inwards. */
+.ger-leaf {
+  transform-box: view-box;
+  transform-origin: 596px 508px;
+  transition: transform 0.64s cubic-bezier(0.34, 0.84, 0.3, 1);
+}
+.ger-leaf-shade {
   opacity: 0;
-  transition: opacity 0.35s var(--ease-out);
+  transition: opacity 0.64s ease-in;
 }
-.ger-door-g:hover .ger-door-glow,
-.ger-door-g:focus-visible .ger-door-glow {
-  opacity: 0.22;
+/* The door layer lies over the photograph and must not swallow anything
+   but the door itself. */
+.ger-door-layer {
+  pointer-events: none;
 }
-.ger-door-g:hover .ger-hit {
-  stroke: rgba(255, 250, 240, 0.9);
+.ger-door-layer .ger-door-g {
+  pointer-events: auto;
+}
+/* These are what move, so they are worth their own compositor layer. */
+.ger-leaf {
+  will-change: transform;
+}
+.ger-through,
+.ger-spill {
+  will-change: opacity;
+}
+/* a touch of movement under the cursor: the door is not yet open, it is
+   unlatched */
+.ger:not(.is-opening):not(.is-inside) .ger-door-layer:has(.ger-door-g:hover) .ger-leaf,
+.ger:not(.is-opening):not(.is-inside) .ger-door-layer:has(.ger-door-g:focus-visible) .ger-leaf {
+  transform: scaleX(0.965);
+}
+.ger.is-opening .ger-leaf {
+  transform: scaleX(0.085);
+}
+.ger.is-opening .ger-leaf-shade {
+  opacity: 1;
 }
 
-/* walking in: the outside picture pushes towards the door as it fades */
+/* the room behind it, and the light that reaches the felt and the grass */
+.ger-through {
+  opacity: 0;
+  transition: opacity 0.42s ease-out 0.12s;
+}
+.ger-spill {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.52s ease-out 0.14s;
+}
+.ger.is-opening .ger-through {
+  opacity: 1;
+}
+.ger.is-opening .ger-spill {
+  opacity: 0.42;
+}
+
+/* walking in: the picture pushes through the doorway as it fades. The
+   origin is the opening, so the doorway is what the screen grows into. */
 .ger.is-inside .ger-stage--out {
-  transform: scale(1.35);
-  transform-origin: 52% 67%;
+  transform: scale(1.7);
+  transform-origin: 51% 66%;
+  transition: opacity 0.62s ease-in, transform 0.62s cubic-bezier(0.5, 0, 0.75, 0.3);
 }
 
 /* markers: own layer, animated with transform/opacity only (cheap to animate) */
