@@ -10,7 +10,7 @@
  * where a province name would set at about two pixels. The names are in the
  * panel that opens when the map is tapped (components/ger/GerAtlas.tsx).
  *
- * The sheet's frame (249.5 x 175.7) is the one in components/ger/GerScenes.tsx;
+ * The sheet's frame (232.5 x 153) is the one in components/ger/GerScenes.tsx;
  * change it in both places together.
  *
  *   node scripts/wall-map.mjs
@@ -38,26 +38,21 @@ const REGION = {
 const FILL = { west: "#b7d2ea", khangai: "#b6d7a2", central: "#eccd86", east: "#e0bdab" };
 /* the raised plate the atlas draws with a drop-shadow, as a layer here */
 const PLATE = "#cfc2a9";
-const SHEET = { w: 249.5, h: 175.7 };
+const SHEET = { w: 232.5, h: 153 };
 /* the land itself, 1000x484, fitted across the sheet. The atlas's padded
    frame would fit too, but its room for the neighbours' names is empty here
    and only makes the country smaller. */
 const MAP = { w: 1000, h: 484 };
-const SCALE = (SHEET.w - 16) / MAP.w;
-const OX = 8;
+const SCALE = (SHEET.w - 24) / MAP.w;
+const OX = 12;
 const OY = (SHEET.h - MAP.h * SCALE) / 2;
 
-/* the same dotted ground the atlas card has in globals.css, at this scale.
-   It is drawn harder than the original: at this size the pattern is what
-   tells the eye the sheet is a map and not blank paper. */
-const DOT = 18 * SCALE;
-
+/* No paper and no dots here: the drawing is the land alone, on a clear
+   ground. The sheet it hangs on — paper, dotted ground, frame — is drawn in
+   components/ger/GerScenes.tsx in the exact shape of the photographed
+   frame, which is not a rectangle; a rectangular drawing turned to fit it
+   would leave wedges of the wrong paper at its edges. */
 const parts = [
-  `<defs><pattern id="d" width="${DOT.toFixed(3)}" height="${DOT.toFixed(3)}" patternUnits="userSpaceOnUse">` +
-    `<circle cx="${(DOT / 2).toFixed(3)}" cy="${(DOT / 2).toFixed(3)}" r="0.3" fill="rgba(86,97,107,.3)"/>` +
-    `</pattern></defs>`,
-  `<rect width="${SHEET.w}" height="${SHEET.h}" fill="#fbf6ec"/>`,
-  `<rect width="${SHEET.w}" height="${SHEET.h}" fill="url(#d)"/>`,
   `<g transform="translate(${OX.toFixed(3)} ${OY.toFixed(3)}) scale(${SCALE.toFixed(5)})">`,
   // the plate: the same land, widened and dropped, so the country has an
   // edge against the paper instead of fading into it

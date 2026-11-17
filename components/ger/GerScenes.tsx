@@ -55,9 +55,9 @@ const THROUGH_Y = LEAF.y - THROUGH.y * THROUGH_S;
  *
  * The photographed sheet does not hang square: its top edge rises to the
  * right and its far edge is a little taller. Matching that would need a
- * projective transform and SVG has only affine ones, so PAPER is a turned
- * rectangle that covers it (see below), and the drawing is placed in it with
- * the same turn.
+ * projective transform and SVG has only affine ones, so the sheet is drawn
+ * as a polygon through the frame's exact corners with a paper of its own,
+ * and only the land is laid on it, turned to the top edge (see PAPER).
  *
  * Province names are left off: the land is 213 units wide here, so a name
  * would set at about two pixels.
@@ -68,21 +68,20 @@ const THROUGH_Y = LEAF.y - THROUGH.y * THROUGH_S;
  * picture that never changes. Regenerate it with scripts/wall-map.mjs.
  */
 /*
- * The sheet is a true rectangle, turned to the tilt of the photograph's top
- * edge, so the drawing — itself a turned rectangle — fills it exactly. It
- * used to be the photographed sheet's four corners, but that shape is not a
- * rectangle (the far edge is taller), and an affine turn cannot fill it: a
- * wedge of bare paper showed down the left and a band along the bottom
- * right. The rectangle is the smallest at this tilt that still covers the
- * photographed sheet, with two units to spare all round; worked out in the
- * tilted axes from that sheet's corners, 1024,247 / 1257,232 / 1255,404 /
- * 1022,400.
+ * The sheet laid exactly over the photographed map's frame: its four outer
+ * corners, read off the picture at ten times and pushed half a unit out so
+ * the frame's pale edge cannot show past it. The bottom-right one sits behind
+ * the enamel pot, which is drawn back over it (POT_LID).
+ *
+ * The frame is not a rectangle and the drawing inside is, so the drawing
+ * carries no paper of its own: the paper and its dotted ground belong to
+ * this polygon, and only the land is laid on it, turned to the top edge.
  */
 const PAPER = [
-  [1010, 246],
-  [1258.9, 229.7],
-  [1270.5, 405],
-  [1021.5, 421.3],
+  [1024, 245.5],
+  [1256.5, 230.5],
+  [1255.5, 408],
+  [1021, 398.5],
 ] as const;
 const PAPER_POINTS = PAPER.map(([x, y]) => `${x},${y}`).join(" ");
 /** the sheet pushed out from its middle, for the light behind it: a wide
@@ -119,11 +118,13 @@ const POT_LID = [
   .map(([x, y]) => `${x},${y}`)
   .join(" ");
 /** the angle of the top edge, and where the map sits inside the sheet */
-const PAPER_TILT = -3.75;
+const PAPER_TILT = (Math.atan2(PAPER[1][1] - PAPER[0][1], PAPER[1][0] - PAPER[0][0]) * 180) / Math.PI;
 /** the sheet's own frame, which the drawing is laid out in */
-const SHEET = { w: 249.5, h: 175.7 };
+const SHEET = { w: 232.5, h: 153 };
+/** the dotted ground, at the size the atlas card uses, scaled to the sheet */
+const DOT = (18 * (SHEET.w - 24)) / 1000;
 const SPOTS: Record<GerObjectId, { x: number; y: number; w: number; h: number }> = {
-  map: { x: 1008, y: 228, w: 264, h: 195 },
+  map: { x: 1014, y: 224, w: 248, h: 190 },
   chest: { x: 526, y: 346, w: 364, h: 226 },
   ticket: { x: 74, y: 644, w: 148, h: 100 },
 };
@@ -320,9 +321,18 @@ function WallMap() {
           <feGaussianBlur stdDeviation="7" />
         </filter>
         <linearGradient id="ger-wallmap-paper" x1="0%" y1="0%" x2="70%" y2="100%">
-          <stop offset="0%" stopColor="#f8f5ec" />
-          <stop offset="100%" stopColor="#ddd4c4" />
+          <stop offset="0%" stopColor="#fbf6ec" />
+          <stop offset="100%" stopColor="#ebe3d3" />
         </linearGradient>
+        <pattern
+          id="ger-wallmap-dots"
+          width={DOT}
+          height={DOT}
+          patternUnits="userSpaceOnUse"
+          patternTransform={`rotate(${PAPER_TILT})`}
+        >
+          <circle cx={DOT / 2} cy={DOT / 2} r="0.3" fill="rgba(86,97,107,.3)" />
+        </pattern>
         {/* the room is lit from the roof wheel, so the sheet darkens away
             from it, which is what seats it into the photograph */}
         <linearGradient id="ger-wallmap-tint" x1="0%" y1="0%" x2="85%" y2="100%">
@@ -342,6 +352,7 @@ function WallMap() {
         filter="url(#ger-wallmap-shade)"
       />
       <polygon className="ger-wallmap-sheet" points={PAPER_POINTS} />
+      <polygon points={PAPER_POINTS} fill="url(#ger-wallmap-dots)" />
 
       <g clipPath="url(#ger-wallmap-clip)">
         <image
