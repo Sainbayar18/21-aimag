@@ -4279,3 +4279,22 @@ body {
     );
   }
 }
+
+/* ---- the map on the ger's wall ----
+   The picture's own map was a blur, so the site's map is printed over it
+   (components/ger/GerScenes.tsx). The region colours come from the same
+   r-* classes the atlas uses, so the wall and the map page agree. */
+.ger-wallmap-cast {
+  fill: rgba(26, 16, 8, 0.45);
+}
+.ger-wallmap-sheet {
+  fill: url(#ger-wallmap-paper);
+  stroke: rgba(92, 70, 44, 0.5);
+  stroke-width: 1;
+}
+/* the drawing itself is public/images/ger/wall-map.svg, which carries its
+   own colours: an <image> cannot inherit this stylesheet */
+.ger-wallmap-shade {
+  fill: url(#ger-wallmap-tint);
+  pointer-events: none;
+}

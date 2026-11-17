@@ -45,6 +45,42 @@ const THROUGH = { x: 535, y: 250, w: 340, h: 455 };
 const THROUGH_S = LEAF.w / THROUGH.w;
 const THROUGH_X = LEAF.x - THROUGH.x * THROUGH_S;
 const THROUGH_Y = LEAF.y - THROUGH.y * THROUGH_S;
+
+/*
+ * The map on the wall.
+ *
+ * The picture put a blurred approximation of a map there, so the site's own
+ * map is printed over it instead: the real provinces, in the four region
+ * colours the rest of the site uses.
+ *
+ * PAPER is the sheet's four corners, read off the picture — it does not hang
+ * square, so the top edge rises to the right and the far edge is a little
+ * taller. A quadrilateral like that needs a projective transform and SVG has
+ * only affine ones, so the sheet itself is drawn as a polygon through the
+ * exact corners, and the map inside it is placed with a rotation that follows
+ * the top edge and clipped to the sheet. The small disagreement at the far
+ * bottom corner falls on empty paper, where there is no straight edge to give
+ * it away.
+ *
+ * Province names are left off: the land is 213 units wide here, so a name
+ * would set at about two pixels.
+ *
+ * The drawing itself is public/images/ger/wall-map.svg, a file rather than
+ * markup, because this is a client component: built inline it put the whole
+ * province geometry into the home page's JavaScript, 74 kB of it, for a
+ * picture that never changes. Regenerate it with scripts/wall-map.mjs.
+ */
+const PAPER = [
+  [1022, 246],
+  [1251, 231],
+  [1256, 406],
+  [1026, 402],
+] as const;
+const PAPER_POINTS = PAPER.map(([x, y]) => `${x},${y}`).join(" ");
+/** the angle of the top edge, and where the map sits inside the sheet */
+const PAPER_TILT = -3.75;
+/** the sheet's own frame, which the drawing is laid out in */
+const SHEET = { w: 229.5, h: 168 };
 const SPOTS: Record<GerObjectId, { x: number; y: number; w: number; h: number }> = {
   map: { x: 1016, y: 226, w: 248, h: 172 },
   chest: { x: 528, y: 346, w: 356, h: 216 },
@@ -154,6 +190,54 @@ export function GerExterior({ label, onEnter }: ExteriorProps) {
   );
 }
 
+/* ---------------- the map on the wall ---------------- */
+
+function WallMap() {
+  return (
+    <g className="ger-wallmap" aria-hidden="true">
+      <defs>
+        <clipPath id="ger-wallmap-clip">
+          <polygon points={PAPER_POINTS} />
+        </clipPath>
+        <filter id="ger-wallmap-shade" x="-20%" y="-20%" width="150%" height="150%">
+          <feGaussianBlur stdDeviation="3" />
+        </filter>
+        <linearGradient id="ger-wallmap-paper" x1="0%" y1="0%" x2="70%" y2="100%">
+          <stop offset="0%" stopColor="#f8f5ec" />
+          <stop offset="100%" stopColor="#ddd4c4" />
+        </linearGradient>
+        {/* the room is lit from the roof wheel, so the sheet darkens away
+            from it, which is what seats it into the photograph */}
+        <linearGradient id="ger-wallmap-tint" x1="0%" y1="0%" x2="85%" y2="100%">
+          <stop offset="0%" stopColor="#3a2612" stopOpacity="0" />
+          <stop offset="100%" stopColor="#3a2612" stopOpacity="0.2" />
+        </linearGradient>
+      </defs>
+
+      <polygon
+        className="ger-wallmap-cast"
+        points={PAPER_POINTS}
+        transform="translate(3 5)"
+        filter="url(#ger-wallmap-shade)"
+      />
+      <polygon className="ger-wallmap-sheet" points={PAPER_POINTS} />
+
+      <g clipPath="url(#ger-wallmap-clip)">
+        <image
+          href="/images/ger/wall-map.svg"
+          x={PAPER[0][0]}
+          y={PAPER[0][1]}
+          width={SHEET.w}
+          height={SHEET.h}
+          transform={`rotate(${PAPER_TILT} ${PAPER[0][0]} ${PAPER[0][1]})`}
+        />
+      </g>
+
+      <polygon className="ger-wallmap-shade" points={PAPER_POINTS} />
+    </g>
+  );
+}
+
 /* ---------------- inside ---------------- */
 
 type InteriorProps = {
@@ -170,6 +254,8 @@ export function GerInterior({ active, labels, onPick }: InteriorProps) {
     <>
       <svg className="ger-svg ger-svg--in ger-photo" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMax slice">
         <image href={INTERIOR} width={W} height={H} preserveAspectRatio="xMidYMax slice" aria-hidden="true" />
+
+        <WallMap />
 
         {gerObjectIds.map((id) => {
           const s = SPOTS[id];
