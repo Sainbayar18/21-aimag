@@ -71,16 +71,16 @@ const THROUGH_Y = LEAF.y - THROUGH.y * THROUGH_S;
  * picture that never changes. Regenerate it with scripts/wall-map.mjs.
  */
 const PAPER = [
-  [1022, 246],
-  [1251, 231],
-  [1256, 406],
-  [1026, 402],
+  [1016, 239],
+  [1258, 224],
+  [1263, 412],
+  [1020, 409],
 ] as const;
 const PAPER_POINTS = PAPER.map(([x, y]) => `${x},${y}`).join(" ");
 /** the angle of the top edge, and where the map sits inside the sheet */
 const PAPER_TILT = -3.75;
 /** the sheet's own frame, which the drawing is laid out in */
-const SHEET = { w: 229.5, h: 168 };
+const SHEET = { w: 242.5, h: 177 };
 const SPOTS: Record<GerObjectId, { x: number; y: number; w: number; h: number }> = {
   map: { x: 1016, y: 226, w: 248, h: 172 },
   chest: { x: 528, y: 346, w: 356, h: 216 },
@@ -301,7 +301,7 @@ export function GerInterior({ active, labels, onPick }: InteriorProps) {
           const toLeft = anchor.x > W / 2;
           return (
             <g key={id} className={`ger-pin-g${lit ? " is-lit" : ""}`}>
-              <circle className={`ger-pin${active === id ? " is-active" : ""}`} cx={anchor.x} cy={anchor.y} r="13" />
+              <circle className={`ger-pin${active === id ? " is-active" : ""}`} cx={anchor.x} cy={anchor.y} r="9" />
               <text
                 className="ger-pin-label"
                 x={toLeft ? anchor.x - 26 : anchor.x + 26}

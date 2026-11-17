@@ -6,11 +6,11 @@
  * built inline, the province geometry went into the home page's JavaScript,
  * 74 kB of it, for a picture that never changes.
  *
- * It is the atlas without its names: on the wall the land is 215 units wide,
+ * It is the atlas without its names: on the wall the land is 227 units wide,
  * where a province name would set at about two pixels. The names are in the
  * panel that opens when the map is tapped (components/ger/GerAtlas.tsx).
  *
- * The sheet's frame (229.5 x 168) is the one in components/ger/GerScenes.tsx;
+ * The sheet's frame (242.5 x 177) is the one in components/ger/GerScenes.tsx;
  * change it in both places together.
  *
  *   node scripts/wall-map.mjs
@@ -33,12 +33,14 @@ const REGION = {
   "Зүүн бүс": "east",
 };
 const FILL = { west: "#cfe0f0", khangai: "#cfe3c1", central: "#f1d9a6", east: "#ead2c6" };
-const SHEET = { w: 229.5, h: 168 };
-/* the atlas's padded frame, 1060x590, fitted across the sheet */
-const MAP = { w: 1060, h: 590, x: -30, y: -50 };
-const SCALE = (SHEET.w - 12) / MAP.w;
-const OX = 6 - MAP.x * SCALE;
-const OY = (SHEET.h - MAP.h * SCALE) / 2 - MAP.y * SCALE;
+const SHEET = { w: 242.5, h: 177 };
+/* the land itself, 1000x484, fitted across the sheet. The atlas's padded
+   frame would fit too, but its room for the neighbours' names is empty here
+   and only makes the country smaller. */
+const MAP = { w: 1000, h: 484 };
+const SCALE = (SHEET.w - 16) / MAP.w;
+const OX = 8;
+const OY = (SHEET.h - MAP.h * SCALE) / 2;
 
 /* the same dotted ground the atlas card has in globals.css, at this scale */
 const DOT = 18 * SCALE;
