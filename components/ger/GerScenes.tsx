@@ -111,8 +111,12 @@ type Lamp = {
   id: Exclude<GerObjectId, "map">;
   points: readonly (readonly [number, number])[];
   bloom: number;
-  /** things standing in front of the object, which its light must not fall on */
-  front?: readonly ({ ellipse: [number, number, number, number] } | { rect: [number, number, number, number] })[];
+  /**
+   * Where the light gives out, top to bottom, in picture pixels. Light from
+   * behind an object falls on the wall behind it, not on the floor in front,
+   * so it fades out before it reaches whatever stands there.
+   */
+  fade?: readonly [number, number];
 };
 
 const LAMPS: Lamp[] = [
@@ -129,12 +133,10 @@ const LAMPS: Lamp[] = [
       [528, 365],
     ],
     bloom: 1.18,
-    // the pot on its trivet and the kettle stand in front of the chest
-    front: [
-      { ellipse: [695, 560, 90, 50] },
-      { rect: [622, 560, 146, 90] },
-      { ellipse: [810, 592, 32, 34] },
-    ],
+    // the pot on its trivet and the kettle stand in front of the chest: a
+    // soft fade above them rather than cut-outs shaped like them, whose
+    // edges showed on the floor
+    fade: [500, 556],
   },
   {
     id: "ticket",
@@ -322,7 +324,7 @@ function WallMap() {
 
 /* ---------------- the chest and the ticket ---------------- */
 
-function Lamp({ id, points, bloom, front }: Lamp) {
+function Lamp({ id, points, bloom, fade }: Lamp) {
   const outline = points.map(([x, y]) => `${x},${y}`).join(" ");
   return (
     <g className={`ger-lamp ger-lamp--${id}`} aria-hidden="true">
@@ -330,26 +332,32 @@ function Lamp({ id, points, bloom, front }: Lamp) {
         <clipPath id={`ger-lamp-clip-${id}`}>
           <polygon points={outline} />
         </clipPath>
-        {front && (
-          <mask id={`ger-lamp-front-${id}`} maskUnits="userSpaceOnUse" x="0" y="0" width={W} height={H}>
-            <rect width={W} height={H} fill="#fff" />
-            {front.map((f, i) =>
-              "ellipse" in f ? (
-                <ellipse key={i} cx={f.ellipse[0]} cy={f.ellipse[1]} rx={f.ellipse[2]} ry={f.ellipse[3]} fill="#000" />
-              ) : (
-                <rect key={i} x={f.rect[0]} y={f.rect[1]} width={f.rect[2]} height={f.rect[3]} fill="#000" />
-              ),
-            )}
-          </mask>
+        {fade && (
+          <>
+            <linearGradient
+              id={`ger-lamp-fade-grad-${id}`}
+              gradientUnits="userSpaceOnUse"
+              x1="0"
+              y1={fade[0]}
+              x2="0"
+              y2={fade[1]}
+            >
+              <stop offset="0" stopColor="#fff" />
+              <stop offset="1" stopColor="#000" />
+            </linearGradient>
+            <mask id={`ger-lamp-fade-${id}`} maskUnits="userSpaceOnUse" x="0" y="0" width={W} height={H}>
+              <rect width={W} height={H} fill={`url(#ger-lamp-fade-grad-${id})`} />
+            </mask>
+          </>
         )}
       </defs>
       {/* the bloom and the rim share the map's blur filters (WallMap) */}
-      <g mask={front ? `url(#ger-lamp-front-${id})` : undefined}>
+      <g mask={fade ? `url(#ger-lamp-fade-${id})` : undefined}>
         <polygon className="ger-lamp-glow" points={spread(points, bloom)} filter="url(#ger-wallmap-bloom)" />
         <polygon className="ger-lamp-rim" points={spread(points, 1.05)} filter="url(#ger-wallmap-rim)" />
       </g>
-      {/* masked too, so the warming stops at the pot standing in front */}
-      <g mask={front ? `url(#ger-lamp-front-${id})` : undefined}>
+      {/* faded the same way, so the warming does not reach the pot either */}
+      <g mask={fade ? `url(#ger-lamp-fade-${id})` : undefined}>
         <g clipPath={`url(#ger-lamp-clip-${id})`}>
           <image
             className="ger-lamp-copy"
