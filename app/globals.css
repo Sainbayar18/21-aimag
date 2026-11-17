@@ -3429,27 +3429,6 @@ html:lang(ko) li {
   transform: scale(1.03);
 }
 
-.ger-pin {
-  fill: var(--sky);
-  stroke: #fffaf0;
-  stroke-width: 3;
-  opacity: 0.85;
-  animation: ger-pulse 2.6s var(--ease-out) infinite;
-}
-.ger-pin.is-active {
-  fill: var(--gobi);
-}
-@keyframes ger-pulse {
-  0%,
-  100% {
-    r: 11;
-    opacity: 0.75;
-  }
-  50% {
-    r: 15;
-    opacity: 1;
-  }
-}
 
 /* kept at the top so the drawing below it stays clear */
 .ger-objects {
@@ -3591,7 +3570,7 @@ html:lang(ko) li {
     padding-top: 40px;
   }
   /* the drawing becomes the backdrop; the list of objects does the work */
-  .ger-pin {
+  .ger-pin-g {
     display: none;
   }
   .ger-objects {
@@ -3624,9 +3603,6 @@ html:lang(ko) li {
   .ger-chest-lid,
   .ger-ticket {
     transition: none !important;
-  }
-  .ger-pin {
-    animation: none !important;
   }
   /* the door is not opened on the way in either (GerEntry.tsx) */
   .ger.is-inside .ger-stage--out {
@@ -3787,30 +3763,103 @@ html:lang(ko) li {
   transition: opacity 0.62s ease-in, transform 0.62s cubic-bezier(0.5, 0, 0.75, 0.3);
 }
 
-/* markers: own layer, animated with transform/opacity only (cheap to animate) */
+/* markers: a small lamp rather than a map pin — a warm core, a soft glow that
+   breathes, and a thin ring that spreads out and fades like a ripple. Each
+   marker keeps its own beat (--pin-delay). Own layer, and only transform and
+   opacity are animated, so the photograph is never repainted. */
 .ger-pins {
   pointer-events: none;
   will-change: transform;
 }
-.ger-pins .ger-pin {
+.ger-pin-glow,
+.ger-pin-ripple,
+.ger-pin-ring,
+.ger-pin-shade,
+.ger-pin-core {
   transform-box: fill-box;
   transform-origin: center;
-  animation: ger-pin-pulse 2.6s ease-in-out infinite;
 }
-@keyframes ger-pin-pulse {
+.ger-pin-glow {
+  animation: ger-pin-breathe 3.4s ease-in-out infinite;
+  animation-delay: var(--pin-delay, 0s);
+}
+.ger-pin-ripple {
+  fill: none;
+  stroke: #fff4d6;
+  stroke-width: 2;
+  opacity: 0;
+  animation: ger-pin-ripple 3s cubic-bezier(0.2, 0.6, 0.3, 1) infinite;
+  animation-delay: var(--pin-delay, 0s);
+}
+.ger-pin-ring {
+  fill: none;
+  stroke: var(--gobi);
+  stroke-width: 2.4;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: opacity 0.25s, transform 0.3s var(--ease-out);
+}
+.ger-pin-shade {
+  fill: rgba(28, 16, 4, 0.42);
+}
+.ger-pin-core {
+  fill: #fff8e8;
+  stroke: #fff;
+  stroke-width: 1.2;
+  transition: fill 0.25s, transform 0.3s var(--ease-out);
+}
+
+/* reached for, or chosen: the ripple stops, the lamp turns gold and a ring
+   settles round it */
+.ger-pin-g.is-lit .ger-pin-ripple {
+  animation: none;
+  opacity: 0;
+}
+.ger-pin-g.is-lit .ger-pin-glow {
+  animation: none;
+  opacity: 1;
+  transform: scale(1.2);
+}
+.ger-pin-g.is-lit .ger-pin-ring {
+  opacity: 1;
+  transform: scale(1);
+}
+.ger-pin-g.is-lit .ger-pin-core {
+  fill: var(--gobi);
+  transform: scale(1.1);
+}
+
+@keyframes ger-pin-breathe {
   0%,
   100% {
-    transform: scale(1);
-    opacity: 0.75;
+    opacity: 0.55;
+    transform: scale(0.88);
   }
   50% {
-    transform: scale(1.3);
-    opacity: 1;
+    opacity: 0.95;
+    transform: scale(1.05);
+  }
+}
+@keyframes ger-pin-ripple {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  14% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2.6);
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ger-pins .ger-pin {
+  .ger-pin-glow,
+  .ger-pin-ripple {
     animation: none;
+  }
+  .ger-pin-glow {
+    opacity: 0.8;
   }
 }
 
@@ -3879,14 +3928,6 @@ html:lang(ko) li {
   stroke-dasharray: 10 8;
 }
 
-/* hover feedback lives on the marker: it grows; no name is shown */
-.ger-pin-g.is-lit .ger-pin {
-  animation: none;
-  transform: scale(1.45);
-  opacity: 1;
-  fill: var(--gobi);
-  transition: transform 0.2s var(--ease-out);
-}
 
 /* =====================================================================
    Design pass (frontend-design skill), Nov 2026.

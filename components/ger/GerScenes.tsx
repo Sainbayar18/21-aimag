@@ -328,14 +328,32 @@ export function GerInterior({ active, labels, onPick }: InteriorProps) {
         preserveAspectRatio="xMidYMax slice"
         aria-hidden="true"
       >
-        {gerObjectIds.map((id) => {
+        <defs>
+          {/* warm lamplight: a zul (butter lamp) rather than a map pin */}
+          <radialGradient id="ger-pin-glow">
+            <stop offset="0" stopColor="#fff4d6" stopOpacity="0.95" />
+            <stop offset="0.38" stopColor="#ffd88a" stopOpacity="0.5" />
+            <stop offset="1" stopColor="#ffc861" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+        {gerObjectIds.map((id, i) => {
           const { anchor } = gerObjects[id];
           const lit = hovered === id || active === id;
-          // no name beside the marker: hovering only grows it, and the name
-          // stays available to screen readers through the hit area's label
+          // No name beside the marker: the name reaches screen readers through
+          // the hit area's label. Each marker breathes on its own beat, so the
+          // three never pulse in step.
           return (
-            <g key={id} className={`ger-pin-g${lit ? " is-lit" : ""}`}>
-              <circle className={`ger-pin${active === id ? " is-active" : ""}`} cx={anchor.x} cy={anchor.y} r="9" />
+            <g
+              key={id}
+              className={`ger-pin-g${lit ? " is-lit" : ""}${active === id ? " is-active" : ""}`}
+              style={{ "--pin-delay": `${i * 0.9}s` } as React.CSSProperties}
+            >
+              <circle className="ger-pin-glow" cx={anchor.x} cy={anchor.y} r="26" fill="url(#ger-pin-glow)" />
+              <circle className="ger-pin-ripple" cx={anchor.x} cy={anchor.y} r="8" />
+              <circle className="ger-pin-ring" cx={anchor.x} cy={anchor.y} r="11" />
+              {/* a dark disc under the lamp, so it reads on pale paper as well as on paint */}
+              <circle className="ger-pin-shade" cx={anchor.x} cy={anchor.y} r="9.5" />
+              <circle className="ger-pin-core" cx={anchor.x} cy={anchor.y} r="6.5" />
             </g>
           );
         })}
