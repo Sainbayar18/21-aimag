@@ -41,14 +41,14 @@ const DOOR = { x: 588, y: 362, w: 256, h: 308 };
  * scale below work out.
  */
 const LEAF = { x: 596, y: 362, w: 218, h: 292 };
-const THROUGH = { x: 540, y: 205, w: 300, h: 402 };
+const THROUGH = { x: 535, y: 250, w: 340, h: 455 };
 const THROUGH_S = LEAF.w / THROUGH.w;
 const THROUGH_X = LEAF.x - THROUGH.x * THROUGH_S;
 const THROUGH_Y = LEAF.y - THROUGH.y * THROUGH_S;
 const SPOTS: Record<GerObjectId, { x: number; y: number; w: number; h: number }> = {
-  map: { x: 1036, y: 276, w: 174, h: 122 },
-  chest: { x: 448, y: 336, w: 160, h: 200 },
-  ticket: { x: 140, y: 584, w: 196, h: 92 },
+  map: { x: 1016, y: 226, w: 248, h: 172 },
+  chest: { x: 528, y: 346, w: 356, h: 216 },
+  ticket: { x: 74, y: 644, w: 148, h: 80 },
 };
 
 /* ---------------- outside ---------------- */

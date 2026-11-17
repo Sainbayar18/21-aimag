@@ -41,9 +41,9 @@ export type GerObjectMeta = {
 };
 
 export const gerObjects: Record<GerObjectId, GerObjectMeta> = {
-  map: { id: "map", anchor: { x: 1206, y: 282 }, target: { kind: "page", path: "destinations" } },
-  chest: { id: "chest", anchor: { x: 604, y: 342 }, target: { kind: "page", path: "culture" } },
-  ticket: { id: "ticket", anchor: { x: 330, y: 592 }, target: { kind: "page", path: "practical" } },
+  map: { id: "map", anchor: { x: 1140, y: 312 }, target: { kind: "page", path: "destinations" } },
+  chest: { id: "chest", anchor: { x: 586, y: 400 }, target: { kind: "page", path: "culture" } },
+  ticket: { id: "ticket", anchor: { x: 146, y: 684 }, target: { kind: "page", path: "practical" } },
 };
 
 /* ---------------- routes ---------------- */
