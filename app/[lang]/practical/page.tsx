@@ -86,23 +86,34 @@ export default async function PracticalPage({ params }: Props) {
             <p className="lead muted">{p.phrasesLead}</p>
           </Reveal>
           <Reveal>
+            {/* On a phone globals.css lays each row out as a block, and a
+                table laid out in blocks loses its table semantics; the roles
+                are what the elements mean anyway, so they are spelled out. */}
             <div className="phrases-wrap">
-              <table className="phrases">
+              <table className="phrases" role="table">
                 <thead>
-                  <tr>
-                    <th scope="col">{p.phraseHeadMn}</th>
-                    <th scope="col">{p.phraseHeadSay}</th>
-                    <th scope="col">{p.phraseHeadMeaning}</th>
+                  <tr role="row">
+                    <th scope="col" role="columnheader">
+                      {p.phraseHeadMn}
+                    </th>
+                    <th scope="col" role="columnheader">
+                      {p.phraseHeadSay}
+                    </th>
+                    <th scope="col" role="columnheader">
+                      {p.phraseHeadMeaning}
+                    </th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody role="rowgroup">
                   {phrases.map((ph, i) => (
-                    <tr key={ph.mn}>
-                      <td lang="mn" className="phrase-mn">
+                    <tr key={ph.mn} role="row">
+                      <td lang="mn" className="phrase-mn" role="cell">
                         {ph.mn}
                       </td>
-                      <td className="phrase-say">{ph.say}</td>
-                      <td>{p.phrases[i]}</td>
+                      <td className="phrase-say" role="cell">
+                        {ph.say}
+                      </td>
+                      <td role="cell">{p.phrases[i]}</td>
                     </tr>
                   ))}
                 </tbody>

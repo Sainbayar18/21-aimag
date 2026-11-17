@@ -4119,3 +4119,120 @@ body {
 :root {
   --radius-lg: 10px;
 }
+
+/* =====================================================================
+   Portrait phones, Nov 2026.
+   Checked at 390 px wide in every language. Four things did not survive
+   the narrow screen: map labels too small to read, a panel that can only
+   be filled by hovering, a table column pushed off the right edge, and
+   white text that fell onto the lit side of the ger.
+   (These belong with the rules they override once globals.css is tidied.)
+   ===================================================================== */
+
+/* ---- the atlas map ----
+   At 390 px one map unit is about 0.29 screen px, so an 11 px province
+   label lands at roughly 3 px — thinner than the halo drawn around it.
+   The map keeps its job as a coloured picture of the four regions; the
+   legend and the province list below it do the naming. */
+@media (max-width: 760px) {
+  .atlas-map .atlas-label,
+  .atlas-map .atlas-country,
+  .atlas-map .atlas-compass,
+  .atlas-map .atlas-capital text {
+    display: none;
+  }
+}
+
+/* The preview beside the map only ever fills on hover, so on a touch
+   screen it sat there for good asking to be hovered. Without it a tap on
+   a province goes straight to that province, which is what a tap means. */
+@media (hover: none) {
+  .map-layout .preview {
+    display: none;
+  }
+}
+/* ...and the line above the map says so instead of talking about hovering */
+.map-lead-touch {
+  display: none;
+}
+@media (hover: none) {
+  .map-lead-hover {
+    display: none;
+  }
+  .map-lead-touch {
+    display: block;
+  }
+}
+
+/* ---- the ten phrases ----
+   Three columns over 520 px put the meaning — the column people came for
+   — off the right edge of a scroller with no sign it was there. Narrow
+   enough, each phrase becomes a block instead: the Mongolian, how to say
+   it, what it means. */
+@media (max-width: 560px) {
+  .phrases-wrap {
+    overflow-x: visible;
+  }
+  .phrases {
+    min-width: 0;
+  }
+  .phrases thead {
+    display: none;
+  }
+  .phrases tbody,
+  .phrases tr,
+  .phrases td {
+    display: block;
+  }
+  .phrases tr {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .phrases tbody tr:last-child {
+    border-bottom: 0;
+  }
+  .phrases td,
+  .phrases tbody tr:last-child td {
+    padding: 0;
+    border-bottom: 0;
+  }
+  .phrase-mn {
+    white-space: normal;
+  }
+  .phrase-say {
+    margin-top: 1px;
+  }
+  .phrases td:last-child {
+    margin-top: 4px;
+  }
+}
+
+/* ---- the navigation strip ----
+   Five links need about 430 px and a phone has 360, so the strip scrolls.
+   It now runs to the edge of the screen and fades out there, which reads
+   as "there is more this way" rather than as a word cut in half. */
+@media (max-width: 900px) {
+  .site-nav {
+    margin-right: -16px;
+    padding-right: 28px;
+    -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+    mask-image: linear-gradient(to right, #000 calc(100% - 32px), transparent);
+  }
+}
+
+/* ---- the ger ----
+   Portrait crops the photograph to its middle, so the lead no longer sits
+   on the sky to the left of the ger but across its sunlit roof. The veil
+   reaches further down to carry the white text over it. */
+@media (max-width: 760px) {
+  .ger-stage--out::before,
+  .ger-stage--in::before {
+    height: 62%;
+    background: linear-gradient(
+      to bottom,
+      rgba(12, 16, 20, 0.74),
+      rgba(12, 16, 20, 0.46) 42%,
+      rgba(12, 16, 20, 0)
+    );
+  }
+}

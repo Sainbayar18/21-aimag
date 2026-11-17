@@ -77,7 +77,11 @@ export default async function DestinationsPage({ params }: Props) {
             <section id="map" className="section" aria-labelledby="map-title">
               <Reveal className="section-head">
                 <h2 id="map-title" className="h2">{t.mapTitle}</h2>
-                <p className="lead muted">{t.mapLead}</p>
+                {/* one of the two is hidden by globals.css: the preview
+                    panel beside the map can only be filled by hovering,
+                    so a touch screen is told about tapping instead */}
+                <p className="lead muted map-lead-hover">{t.mapLead}</p>
+                <p className="lead muted map-lead-touch">{t.mapLeadTouch}</p>
               </Reveal>
               <Reveal>
                 <MongoliaMap lang={lang} />

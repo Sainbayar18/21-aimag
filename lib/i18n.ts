@@ -76,6 +76,8 @@ const en = {
 
   mapTitle: "Explore the map",
   mapLead: "Hover over a province for a preview, click to open it.",
+  // shown instead of the line above where there is no hover (see globals.css)
+  mapLeadTouch: "Tap a province to open it, or pick one from the list below.",
   mapEmpty: "Hover over a province on the map to see a quick preview here.",
   mapNote: "The grey area is the capital, Ulaanbaatar, which is not part of any province. The small provinces Orkhon, Darkhan-Uul and Govisümber are easiest to pick from the list.",
   mapAria: "Map of Mongolia’s 21 provinces",
@@ -198,6 +200,7 @@ const mn: Dict = {
 
   mapTitle: "Газрын зургаас сонгох",
   mapLead: "Аймаг дээр хулганаа аваачвал товч мэдээлэл, дарвал аймгийн хуудас нээгдэнэ.",
+  mapLeadTouch: "Аймаг дээр дарж хуудсыг нь нээнэ, эсвэл доорх жагсаалтаас сонгоно уу.",
   mapEmpty: "Газрын зураг дээр аймаг руу хулганаа аваачвал энд товч мэдээлэл гарна.",
   mapNote: "Саарал өнгөөр тэмдэглэсэн нь нийслэл Улаанбаатар хот бөгөөд аймагт тооцогдохгүй. Орхон, Дархан-Уул, Говьсүмбэр аймгийг жагсаалтаас сонгоход хялбар.",
   mapAria: "Монгол Улсын 21 аймгийн газрын зураг",
