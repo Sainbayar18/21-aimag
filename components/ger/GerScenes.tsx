@@ -14,7 +14,7 @@ import type { Lang } from "@/lib/i18n";
  * so the door and the table stay whole.
  *
  * Hit areas are invisible to the mouse — no boxes over the photo. Hovering an
- * object grows its marker and shows its name instead; only keyboard focus
+ * object only grows its marker, with no name beside it; only keyboard focus
  * draws a ring, so keyboard users can still see where they are.
  */
 const W = 1376;
@@ -331,19 +331,11 @@ export function GerInterior({ active, labels, onPick }: InteriorProps) {
         {gerObjectIds.map((id) => {
           const { anchor } = gerObjects[id];
           const lit = hovered === id || active === id;
-          // the name sits on whichever side of the marker has more room
-          const toLeft = anchor.x > W / 2;
+          // no name beside the marker: hovering only grows it, and the name
+          // stays available to screen readers through the hit area's label
           return (
             <g key={id} className={`ger-pin-g${lit ? " is-lit" : ""}`}>
               <circle className={`ger-pin${active === id ? " is-active" : ""}`} cx={anchor.x} cy={anchor.y} r="9" />
-              <text
-                className="ger-pin-label"
-                x={toLeft ? anchor.x - 26 : anchor.x + 26}
-                y={anchor.y + 7}
-                textAnchor={toLeft ? "end" : "start"}
-              >
-                {labels[id]}
-              </text>
             </g>
           );
         })}

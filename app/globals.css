@@ -3879,22 +3879,7 @@ html:lang(ko) li {
   stroke-dasharray: 10 8;
 }
 
-/* hover feedback lives on the marker instead: it grows and shows its name */
-.ger-pin-label {
-  font-family: var(--font-text);
-  font-size: 22px;
-  font-weight: 700;
-  fill: #fff;
-  paint-order: stroke;
-  stroke: rgba(20, 14, 8, 0.75);
-  stroke-width: 6px;
-  stroke-linejoin: round;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.ger-pin-g.is-lit .ger-pin-label {
-  opacity: 1;
-}
+/* hover feedback lives on the marker: it grows; no name is shown */
 .ger-pin-g.is-lit .ger-pin {
   animation: none;
   transform: scale(1.45);
