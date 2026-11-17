@@ -83,12 +83,6 @@ export default function GerEntry({ lang }: { lang: Lang }) {
     after(DOOR_MS + WALK_MS, () => insideRef.current?.focus());
   }
 
-  function leave() {
-    setActive(null);
-    setInside(false);
-    setOpening(false);
-  }
-
   function follow(id: GerObjectId) {
     const { target } = gerObjects[id];
     if (target.kind === "page") {
@@ -151,12 +145,6 @@ export default function GerEntry({ lang }: { lang: Lang }) {
             {g.doorAction}
           </button>
         </div>
-        <TransitionLink href={`/${lang}/destinations`} className="ger-skip" tabIndex={inside ? -1 : 0}>
-          {g.skip}
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M4 12h14M13 6l6 6-6 6" />
-          </svg>
-        </TransitionLink>
       </div>
 
       {/* ——— inside ——— */}
@@ -251,21 +239,6 @@ export default function GerEntry({ lang }: { lang: Lang }) {
             </div>
           </div>
         )}
-
-        <div className="ger-in-foot container">
-          <button type="button" className="ger-back" onClick={leave} tabIndex={inside ? 0 : -1}>
-            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M16 10H4M9 5 4 10l5 5" />
-            </svg>
-            {g.back}
-          </button>
-          <TransitionLink href={`/${lang}/destinations`} className="ger-scroll" tabIndex={inside ? 0 : -1}>
-            {g.scrollHint}
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M4 12h14M13 6l6 6-6 6" />
-            </svg>
-          </TransitionLink>
-        </div>
       </div>
     </section>
   );

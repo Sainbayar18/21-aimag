@@ -4400,3 +4400,56 @@ body {
     animation: none !important;
   }
 }
+
+/* ---- the home page is the ger ----
+   Where the ger is on the page — and it is only on the home page — the
+   site's chrome steps aside for it. No bar across the top, no footer: the
+   way on is the things standing in the room, and nothing else on the screen
+   is a link. What is left of the header is the wordmark, set over the
+   photograph the way a name is set on a print. */
+body:has(.ger) .site-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 0;
+}
+body:has(.ger) .site-nav,
+body:has(.ger) .header-tools,
+body:has(.ger) .site-footer {
+  display: none;
+}
+body:has(.ger) .brand,
+body:has(.ger) .brand svg {
+  color: #fff;
+}
+body:has(.ger) .brand {
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.55);
+}
+body:has(.ger) .brand-sub {
+  color: rgba(255, 255, 255, 0.82);
+}
+body:has(.ger) .brand:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+/* with nothing above it, the scene takes the whole screen */
+body:has(.ger) .ger {
+  min-height: 100svh;
+}
+/* and its heading starts below the wordmark rather than beside it, which at
+   phone width is the same line */
+body:has(.ger) .ger-out-content,
+body:has(.ger) .ger-in-top {
+  padding-top: 84px;
+}
+@media (min-width: 1200px) {
+  /* on a wide screen the welcome sits centred on the felt, clear of the
+     wordmark already */
+  body:has(.ger) .ger-out-content {
+    padding-top: 0;
+  }
+}
