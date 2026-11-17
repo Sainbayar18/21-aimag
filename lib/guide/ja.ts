@@ -13,7 +13,7 @@ const ja: GuideText = {
     sceneTitle: "ゲルの中",
     hint: "ゲルの中のものに触れてみてください",
     scrollHint: "または21県をすべて見る",
-    back: "扉に戻る",
+    back: "外に出る",
     close: "閉じる",
     objectsLabel: "ゲルの中のもの",
     doorAria: "ゲルの扉を開けて中に入る",

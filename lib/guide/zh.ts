@@ -12,7 +12,7 @@ const zh: GuideText = {
     sceneTitle: "蒙古包内",
     hint: "点一点包里的物件",
     scrollHint: "或浏览全部21个省",
-    back: "回到门口",
+    back: "走到外面",
     close: "关闭",
     objectsLabel: "蒙古包里的物件",
     doorAria: "推开蒙古包的门走进去",

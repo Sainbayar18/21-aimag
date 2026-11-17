@@ -13,7 +13,7 @@ const en: GuideText = {
     sceneTitle: "Inside the ger",
     hint: "Pick up the things in the ger",
     scrollHint: "or browse all 21 provinces",
-    back: "Back to the door",
+    back: "Step outside",
     close: "Close",
     objectsLabel: "Things in the ger",
     doorAria: "Open the ger door and go inside",

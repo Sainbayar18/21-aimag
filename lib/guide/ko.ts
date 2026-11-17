@@ -13,7 +13,7 @@ const ko: GuideText = {
     sceneTitle: "게르 안",
     hint: "게르 안의 물건을 눌러 보세요",
     scrollHint: "또는 21개 아이막 모두 보기",
-    back: "문으로 돌아가기",
+    back: "밖으로 나가기",
     close: "닫기",
     objectsLabel: "게르 안의 물건",
     doorAria: "게르 문을 열고 안으로 들어가기",

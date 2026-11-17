@@ -36,6 +36,7 @@ export default function GerEntry({ lang }: { lang: Lang }) {
   const insideRef = useRef<HTMLDivElement>(null);
   const timers = useRef<number[]>([]);
   const sceneRef = useRef<HTMLElement>(null);
+  const doorRef = useRef<HTMLButtonElement>(null);
   /* where the sheet is on screen when it is tapped, so the panel can grow
      out of it instead of appearing from nowhere */
   const [from, setFrom] = useState<{ x: number; y: number; s: number } | null>(null);
@@ -81,6 +82,24 @@ export default function GerEntry({ lang }: { lang: Lang }) {
     setOpening(true);
     after(DOOR_MS, () => setInside(true));
     after(DOOR_MS + WALK_MS, () => insideRef.current?.focus());
+  }
+
+  /*
+   * Going back out: the room pulls back through the doorway and the door
+   * swings shut behind you — the way in, run backwards. The door is what
+   * shows next time too, since that is where the visitor left.
+   */
+  function leave() {
+    if (!inside) return;
+    try {
+      localStorage.removeItem(SEEN_KEY);
+    } catch {
+      /* the room simply shows again next time */
+    }
+    setActive(null);
+    setOpening(false);
+    setInside(false);
+    after(80, () => doorRef.current?.focus({ preventScroll: true }));
   }
 
   function follow(id: GerObjectId) {
@@ -141,6 +160,7 @@ export default function GerEntry({ lang }: { lang: Lang }) {
           <p className="ger-lead">{g.doorLead}</p>
           <button
             type="button"
+            ref={doorRef}
             className="ger-door-cta"
             onClick={enter}
             disabled={opening}
@@ -154,6 +174,16 @@ export default function GerEntry({ lang }: { lang: Lang }) {
       {/* ——— inside ——— */}
       <div className="ger-stage ger-stage--in" aria-hidden={!inside} ref={insideRef} tabIndex={-1}>
         <GerInterior lang={lang} active={active} labels={labels} onPick={pick} />
+
+        <button type="button" className="ger-back" onClick={leave} tabIndex={inside ? 0 : -1}>
+          <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+            {/* a door standing open, and the way out through it */}
+            <path d="M8 3.5h7.5v13H8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+            <path d="M8 3.5 3.5 5v11L8 16.5z" fill="currentColor" opacity=".35" />
+            <path d="M12.5 10H6m0 0 2.4-2.4M6 10l2.4 2.4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          {g.back}
+        </button>
 
         <div className="ger-in-top container">
           <h2 className="ger-in-title">{g.sceneTitle}</h2>

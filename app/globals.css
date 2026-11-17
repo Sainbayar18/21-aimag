@@ -4504,6 +4504,15 @@ body:has(.ger) .header-tools,
 body:has(.ger) .site-footer {
   display: none;
 }
+/* the header is only the wordmark here and spans the whole width, so the
+   rest of it lets taps through to the scene (the way out sits under it) */
+body:has(.ger) .site-header {
+  pointer-events: none;
+}
+body:has(.ger) .site-header a,
+body:has(.ger) .site-header button {
+  pointer-events: auto;
+}
 body:has(.ger) .brand,
 body:has(.ger) .brand svg {
   color: #fff;
@@ -4583,4 +4592,41 @@ body:has(.ger) .ger-in-top {
 .ger-hotspot:focus,
 .ger-door-g:focus {
   outline: none;
+}
+
+/* the way back out: top right, across from the wordmark, quiet on the felt
+   until a cursor finds it */
+.ger-stage--in .ger-back {
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  z-index: 3;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 16px 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  background: rgba(30, 20, 10, 0.38);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+  transition: background 0.2s, border-color 0.2s;
+}
+.ger-stage--in .ger-back:hover {
+  background: rgba(30, 20, 10, 0.6);
+  border-color: rgba(255, 255, 255, 0.7);
+}
+.ger-stage--in .ger-back:focus-visible {
+  outline: 2px solid var(--gobi);
+  outline-offset: 3px;
+}
+@media (max-width: 760px) {
+  .ger-stage--in .ger-back {
+    top: 14px;
+    right: 16px;
+    padding: 0 12px 0 10px;
+    font-size: 13px;
+  }
 }
