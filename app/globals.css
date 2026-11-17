@@ -4312,7 +4312,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 20px;
-  background: rgba(14, 10, 6, 0.62);
+  background: rgba(14, 10, 6, 0.74);
   animation: ger-mapview-veil 0.28s ease-out both;
 }
 @keyframes ger-mapview-veil {
@@ -4320,16 +4320,15 @@ body {
     opacity: 0;
   }
 }
+/* no card behind it: the map comes off the wall and hangs in the room, so
+   the only ground it has is the darkened photograph */
 .ger-mapview-panel {
   position: relative;
   width: min(92vw, 980px);
-  max-height: calc(100% - 24px);
-  overflow: auto;
+  max-height: 100%;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
   transform-origin: center;
   animation: ger-mapview-in 0.46s var(--ease-out) both;
 }
@@ -4341,8 +4340,8 @@ body {
 }
 .ger-mapview-close {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 0;
+  right: 0;
   z-index: 1;
   display: inline-flex;
   align-items: center;
@@ -4358,9 +4357,29 @@ body {
   color: var(--ink);
   border-color: var(--sky);
 }
+/* the drawing shrinks to leave the line and the way on in view, rather
+   than pushing them off the bottom */
 .ger-atlas-map {
+  flex: 1;
+  min-height: 0;
   width: 100%;
   height: auto;
+  max-height: 100%;
+}
+/* on dark ground the raised edge of the plate reads as shadow, and the two
+   neighbours and the compass have no province under them to sit on */
+.ger-atlas-map .atlas-land {
+  filter: drop-shadow(0 6px 0 rgba(0, 0, 0, 0.3)) drop-shadow(0 20px 26px rgba(0, 0, 0, 0.55));
+}
+.ger-atlas-map .atlas-country {
+  fill: rgba(255, 250, 240, 0.5);
+}
+.ger-atlas-map .atlas-compass circle {
+  fill: rgba(255, 250, 240, 0.12);
+  stroke: rgba(255, 250, 240, 0.32);
+}
+.ger-atlas-map .atlas-compass text {
+  fill: rgba(255, 250, 240, 0.72);
 }
 .ger-mapview-foot {
   display: flex;
@@ -4375,14 +4394,14 @@ body {
   min-width: 0;
   font-size: 15px;
   line-height: 23px;
-  color: var(--muted);
+  color: rgba(255, 250, 240, 0.86);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
 }
 @media (max-width: 700px) {
   .ger-mapview {
     padding: 12px;
   }
   .ger-mapview-panel {
-    padding: 14px;
     gap: 10px;
   }
   /* on a phone the province names are unreadable at this width, as on the

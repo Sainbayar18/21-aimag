@@ -205,7 +205,7 @@ export default function GerEntry({ lang }: { lang: Lang }) {
             }}
           >
             <div
-              className="ger-mapview-panel atlas"
+              className="ger-mapview-panel"
               style={
                 from
                   ? ({
