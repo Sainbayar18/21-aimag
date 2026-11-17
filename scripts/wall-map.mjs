@@ -32,7 +32,12 @@ const REGION = {
   "Төвийн бүс": "central",
   "Зүүн бүс": "east",
 };
-const FILL = { west: "#cfe0f0", khangai: "#cfe3c1", central: "#f1d9a6", east: "#ead2c6" };
+/* A step deeper than the atlas's own fills. On screen the map is 1000 units
+   across and these read as tinted land; on the wall it is 227 and the same
+   values wash out to blank paper. Same four hues, more of them. */
+const FILL = { west: "#b7d2ea", khangai: "#b6d7a2", central: "#eccd86", east: "#e0bdab" };
+/* the raised plate the atlas draws with a drop-shadow, as a layer here */
+const PLATE = "#cfc2a9";
 const SHEET = { w: 242.5, h: 177 };
 /* the land itself, 1000x484, fitted across the sheet. The atlas's padded
    frame would fit too, but its room for the neighbours' names is empty here
@@ -42,21 +47,28 @@ const SCALE = (SHEET.w - 16) / MAP.w;
 const OX = 8;
 const OY = (SHEET.h - MAP.h * SCALE) / 2;
 
-/* the same dotted ground the atlas card has in globals.css, at this scale */
+/* the same dotted ground the atlas card has in globals.css, at this scale.
+   It is drawn harder than the original: at this size the pattern is what
+   tells the eye the sheet is a map and not blank paper. */
 const DOT = 18 * SCALE;
 
 const parts = [
   `<defs><pattern id="d" width="${DOT.toFixed(3)}" height="${DOT.toFixed(3)}" patternUnits="userSpaceOnUse">` +
-    `<circle cx="${(DOT / 2).toFixed(3)}" cy="${(DOT / 2).toFixed(3)}" r="0.22" fill="rgba(86,97,107,.18)"/>` +
+    `<circle cx="${(DOT / 2).toFixed(3)}" cy="${(DOT / 2).toFixed(3)}" r="0.3" fill="rgba(86,97,107,.3)"/>` +
     `</pattern></defs>`,
   `<rect width="${SHEET.w}" height="${SHEET.h}" fill="#fbf6ec"/>`,
   `<rect width="${SHEET.w}" height="${SHEET.h}" fill="url(#d)"/>`,
   `<g transform="translate(${OX.toFixed(3)} ${OY.toFixed(3)}) scale(${SCALE.toFixed(5)})">`,
+  // the plate: the same land, widened and dropped, so the country has an
+  // edge against the paper instead of fading into it
+  `<g transform="translate(0 5)" fill="${PLATE}" stroke="${PLATE}" stroke-width="8" stroke-linejoin="round">`,
+  ...aimags.map((a) => `<path d="${a.d}"/>`),
+  `</g>`,
   ...aimags.map(
     (a) =>
-      `<path d="${a.d}" fill="${FILL[REGION[a.region]]}" stroke="#fbf8f1" stroke-width="3" stroke-linejoin="round"/>`,
+      `<path d="${a.d}" fill="${FILL[REGION[a.region]]}" stroke="#fbf8f1" stroke-width="2" stroke-linejoin="round"/>`,
   ),
-  `<path d="${ub.d}" fill="#b9b1a3"/>`,
+  `<path d="${ub.d}" fill="#a79e8e"/>`,
   `</g>`,
 ];
 
