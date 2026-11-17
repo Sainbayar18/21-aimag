@@ -122,15 +122,18 @@ type Lamp = {
 const LAMPS: Lamp[] = [
   {
     id: "chest",
+    // measured close up: the lid's top face starts at y 356.5 and the lid
+    // runs down to 370; the outline starts a pixel inside that edge so no
+    // lattice above the lid is caught in the lit copy
     points: [
-      [528, 351],
-      [887, 351],
-      [887, 365],
-      [883, 365],
+      [528, 358],
+      [887, 358],
+      [888, 370],
+      [883, 370],
       [883, 568],
       [532, 568],
-      [532, 365],
-      [528, 365],
+      [532, 370],
+      [527, 370],
     ],
     bloom: 1.18,
     // the pot on its trivet and the kettle stand in front of the chest: a
