@@ -3635,7 +3635,7 @@ html:lang(ko) li {
    opening inwards. */
 .ger-leaf {
   transform-box: view-box;
-  transform-origin: 596px 508px;
+  transform-origin: 631px 428.5px;
   transition: transform 0.64s cubic-bezier(0.34, 0.84, 0.3, 1);
 }
 .ger-leaf-shade {
@@ -3692,7 +3692,7 @@ html:lang(ko) li {
    origin is the opening, so the doorway is what the screen grows into. */
 .ger.is-inside .ger-stage--out {
   transform: scale(1.7);
-  transform-origin: 51% 66%;
+  transform-origin: 51% 56%;
   transition: opacity 0.62s ease-in, transform 0.62s cubic-bezier(0.5, 0, 0.75, 0.3);
 }
 
@@ -3796,38 +3796,43 @@ html:lang(ko) li {
   }
 }
 
-/* wide screens: the heading moves onto the felt left of the door, so the door
-   itself stays clear; a veil from the left keeps it readable */
+/* wide screens: the heading stands on the grass at the foot of the picture,
+   left of the door. The felt is sunlit white and no veil makes white text
+   readable on it without greying the ger; the grass in the evening light
+   takes a veil from below and stays green. */
 @media (min-width: 1200px) {
   /* how many screen px one picture px takes under "slice": the larger of the
      width and height ratios (stage height = the .ger min-height) */
   .ger {
     --ger-s: max(calc(100vw / 1376), calc(max(600px, 100svh - 64px) / 768));
+    --ger-left: max(32px, calc(50vw - 640px));
   }
   .ger-out-content {
     position: absolute;
-    top: 50%;
-    /* the door's left edge sits 100 picture px left of the picture's centre;
-       the text ends 40px short of it */
-    left: auto;
-    right: calc(50% + 100 * var(--ger-s) + 40px);
+    top: auto;
+    bottom: clamp(24px, 4vh, 48px);
+    left: var(--ger-left);
+    right: auto;
     width: auto;
-    max-width: min(360px, calc(50vw - 100 * var(--ger-s) - 72px));
+    /* the door frame's left edge is 110 picture px left of the centre; the
+       text stops 40px short of it */
+    max-width: min(420px, calc(50vw - 110 * var(--ger-s) - 40px - var(--ger-left)));
     margin: 0;
     padding: 0;
     text-align: left;
-    transform: translateY(-50%);
+    transform: none;
   }
   .ger-out-content .ger-lead {
     margin-left: 0;
   }
   .ger-stage--out::before {
-    top: 0;
+    top: auto;
     bottom: 0;
-    right: auto;
-    width: 48%;
-    height: auto;
-    background: linear-gradient(to right, rgba(12, 16, 20, 0.7), rgba(12, 16, 20, 0.35) 55%, rgba(12, 16, 20, 0));
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 46%;
+    background: linear-gradient(to top, rgba(10, 14, 10, 0.72), rgba(10, 14, 10, 0.38) 50%, rgba(10, 14, 10, 0));
   }
 }
 
@@ -4628,5 +4633,24 @@ body:has(.ger) .ger-in-top {
     right: 16px;
     padding: 0 12px 0 10px;
     font-size: 13px;
+  }
+}
+
+/* phones: the welcome stands on the grass at the foot of the picture as it
+   does on a wide screen, so the door and the roof above it stay clear; the
+   veil comes up from below instead of down from the top */
+@media (max-width: 760px) {
+  body:has(.ger) .ger-out-content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 24px;
+    padding-top: 0;
+  }
+  .ger-stage--out::before {
+    top: auto;
+    bottom: 0;
+    height: 44%;
+    background: linear-gradient(to top, rgba(10, 14, 10, 0.8), rgba(10, 14, 10, 0.42) 55%, rgba(10, 14, 10, 0));
   }
 }

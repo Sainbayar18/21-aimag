@@ -155,7 +155,6 @@ export default function GerEntry({ lang }: { lang: Lang }) {
       <div className="ger-stage ger-stage--out" aria-hidden={inside}>
         <GerExterior label={g.doorAria} onEnter={enter} />
         <div className="ger-out-content container">
-          <p className="ger-kicker">{g.doorKicker}</p>
           <h1 className="ger-title">{g.doorTitle}</h1>
           <p className="ger-lead">{g.doorLead}</p>
           <button

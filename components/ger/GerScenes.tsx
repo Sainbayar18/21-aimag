@@ -24,13 +24,14 @@ const EXTERIOR = "/images/ger/ger-exterior.jpg";
 const INTERIOR = "/images/ger/ger-interior.jpg";
 
 /** Clickable areas in picture pixels: x, y, width, height. */
-const DOOR = { x: 588, y: 362, w: 256, h: 308 };
+const DOOR = { x: 578, y: 284, w: 224, h: 280 };
 
 /*
  * Opening the door.
  *
- * LEAF is the painted board itself, measured off the photograph: it fills
- * the felt-trimmed opening and is hinged on its left edge. The board that
+ * LEAF is the board that opens, measured off the photograph: the inner
+ * panel of the painted door, between its ornamented jambs, hinged on its
+ * left edge (the hinges show at x 631). The board that
  * swings is a copy of the same photograph clipped to that rectangle, so
  * what moves is the real door, ornament, worn paint and all.
  *
@@ -40,8 +41,9 @@ const DOOR = { x: 588, y: 362, w: 256, h: 308 };
  * two views agree. It is fitted into LEAF, which is what the translate and
  * scale below work out.
  */
-const LEAF = { x: 596, y: 362, w: 218, h: 292 };
-const THROUGH = { x: 535, y: 250, w: 340, h: 455 };
+const LEAF = { x: 631, y: 307, w: 131, h: 243 };
+/* the same shape as LEAF, round the avdar with the pot below it */
+const THROUGH = { x: 565, y: 228, w: 280, h: 519 };
 const THROUGH_S = LEAF.w / THROUGH.w;
 const THROUGH_X = LEAF.x - THROUGH.x * THROUGH_S;
 const THROUGH_Y = LEAF.y - THROUGH.y * THROUGH_S;
@@ -250,11 +252,14 @@ type ExteriorProps = { label: string; onEnter: () => void };
 export function GerExterior({ label, onEnter }: ExteriorProps) {
   return (
     <>
+      {/* Centred rather than sat on its bottom edge, unlike the inside: on a
+          wide screen the crop then takes grass from the foot as well as sky,
+          and the crown and its stovepipe stay in the picture. */}
       {/* The photograph on its own, with nothing moving in it. Animating
           inside this SVG makes the browser repaint the whole full-screen
           picture on every frame — the same lesson as the markers inside. */}
-      <svg className="ger-svg ger-photo" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMax slice">
-        <image href={EXTERIOR} width={W} height={H} preserveAspectRatio="xMidYMax slice" aria-hidden="true" />
+      <svg className="ger-svg ger-photo" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice">
+        <image href={EXTERIOR} width={W} height={H} preserveAspectRatio="xMidYMid slice" aria-hidden="true" />
       </svg>
 
       {/* The door, in a layer of its own with the same viewBox and the same
@@ -267,7 +272,7 @@ export function GerExterior({ label, onEnter }: ExteriorProps) {
       <svg
         className="ger-svg ger-photo ger-door-layer"
         viewBox={`0 0 ${W} ${H}`}
-        preserveAspectRatio="xMidYMax slice"
+        preserveAspectRatio="xMidYMid slice"
       >
         <defs>
           {/* the stove, seen from outside on a bright day: a small warm core
