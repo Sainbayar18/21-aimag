@@ -7,7 +7,8 @@ import Reveal from "@/components/Reveal";
 import TransitionLink from "@/components/TransitionLink";
 import { getAimag, getPhotoByFile } from "@/lib/aimags";
 import { getGuide, routes } from "@/lib/guide";
-import { getDict, isLang, langs } from "@/lib/i18n";
+import { getDict, isLang } from "@/lib/i18n";
+import { alternates, share } from "@/lib/seo";
 
 type Props = { params: Promise<{ lang: string }> };
 
@@ -17,11 +18,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang } = await params;
   if (!isLang(lang)) return {};
   const it = getGuide(lang).itineraries;
+  const hero = getPhotoByFile(HERO, lang)!;
   return {
     title: it.pageTitle,
     description: it.metaDescription,
-    alternates: { languages: Object.fromEntries(langs.map((l) => [l, `/${l}/itineraries`])) },
-    openGraph: { images: [HERO] },
+    alternates: alternates(lang, "/itineraries"),
+    ...share(lang, {
+      path: "/itineraries",
+      title: `${it.pageTitle} | ${getDict(lang).brand}`,
+      description: it.metaDescription,
+      images: [{ url: hero.file, width: hero.width, height: hero.height, alt: hero.caption }],
+    }),
   };
 }
 

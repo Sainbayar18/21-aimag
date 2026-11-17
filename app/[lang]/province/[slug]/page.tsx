@@ -3,11 +3,13 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import AimagCard from "@/components/AimagCard";
 import ExperienceIcon from "@/components/ExperienceIcon";
+import JsonLd from "@/components/JsonLd";
 import LocatorMap from "@/components/LocatorMap";
 import PhotoSlider from "@/components/PhotoSlider";
 import TransitionLink from "@/components/TransitionLink";
 import { getAimag, getGallery, getNeighbors, getPhoto, slugs } from "@/lib/aimags";
 import { getDict, isLang, langs } from "@/lib/i18n";
+import { absolute, alternates, share } from "@/lib/seo";
 
 type Props = { params: Promise<{ lang: string; slug: string }> };
 
@@ -15,7 +17,9 @@ export function generateStaticParams() {
   return langs.flatMap((lang) => slugs.map((slug) => ({ lang, slug })));
 }
 
-export const dynamicParams = false;
+// An unknown slug renders the 404 inside the language layout instead of
+// Next's bare default page.
+export const dynamicParams = true;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang, slug } = await params;
@@ -23,11 +27,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const a = getAimag(slug, lang);
   if (!a) return {};
   const t = getDict(lang);
+  const photo = getPhoto(slug, lang);
   return {
     title: a.name + t.provinceSuffix,
     description: a.lead,
-    alternates: { languages: Object.fromEntries(langs.map((l) => [l, `/${l}/province/${slug}`])) },
-    openGraph: { images: [getPhoto(slug, lang).file] },
+    alternates: alternates(lang, `/province/${slug}`),
+    ...share(lang, {
+      path: `/province/${slug}`,
+      type: "article",
+      title: `${a.name}${t.provinceSuffix} | ${t.brand}`,
+      description: a.lead,
+      images: [{ url: photo.file, width: photo.width, height: photo.height, alt: photo.caption }],
+    }),
   };
 }
 
@@ -40,6 +51,35 @@ export default async function ProvincePage({ params }: Props) {
   const { prev, next } = getNeighbors(slug, lang);
   const gallery = getGallery(slug, lang);
   const region = t.regions[a.regionId].name;
+  const url = absolute(`/${lang}/province/${slug}`);
+
+  /* The province as a place a search engine can understand, plus the trail
+     back to the province list. */
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "TouristDestination",
+        "@id": `${url}#place`,
+        name: `${a.name}${t.provinceSuffix}`,
+        description: a.lead,
+        url,
+        inLanguage: lang,
+        image: gallery.slice(0, 5).map((p) => absolute(p.file)),
+        address: { "@type": "PostalAddress", addressCountry: "MN", addressRegion: a.name },
+        containedInPlace: { "@type": "Country", name: "Mongolia", sameAs: "https://www.wikidata.org/wiki/Q711" },
+        includesAttraction: a.sights.map((s) => ({ "@type": "TouristAttraction", name: s })),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: t.brand, item: absolute(`/${lang}`) },
+          { "@type": "ListItem", position: 2, name: t.destinationsTitle, item: absolute(`/${lang}/destinations`) },
+          { "@type": "ListItem", position: 3, name: `${a.name}${t.provinceSuffix}` },
+        ],
+      },
+    ],
+  };
 
   const facts = [
     { label: t.facts.capital, value: a.capital },
@@ -50,6 +90,7 @@ export default async function ProvincePage({ params }: Props) {
 
   return (
     <main>
+      <JsonLd data={jsonLd} />
       <PhotoSlider photos={gallery} lang={lang} label={t.photosLabel(a.name)} className="hero--aimag">
         <div className="hero-content container">
           <TransitionLink href={`/${lang}/destinations`} className="back-link back-link--light anim-up">

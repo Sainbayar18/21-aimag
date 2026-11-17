@@ -7,6 +7,7 @@ import TransitionLink, { ViewTransitionResolver } from "@/components/TransitionL
 import { getGuide } from "@/lib/guide";
 import { getAbout } from "@/lib/history";
 import { getDict, isLang, langs } from "@/lib/i18n";
+import { alternates, share, siteUrl } from "@/lib/seo";
 import "../globals.css";
 
 /*
@@ -41,9 +42,14 @@ export async function generateMetadata({ params }: Omit<Props, "children">): Pro
   if (!isLang(lang)) return {};
   const t = getDict(lang);
   return {
+    // Every relative URL below — canonicals, hreflang, share images — is
+    // resolved against this, so links shared from the site carry a full URL.
+    metadataBase: new URL(siteUrl),
     title: { default: t.metaTitle, template: `%s | ${t.brand}` },
     description: t.metaDescription,
-    alternates: { languages: Object.fromEntries(langs.map((l) => [l, `/${l}`])) },
+    applicationName: t.brand,
+    alternates: alternates(lang),
+    ...share(lang, { title: t.metaTitle, description: t.metaDescription }),
   };
 }
 

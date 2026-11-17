@@ -6,7 +6,8 @@ import Reveal from "@/components/Reveal";
 import TimelineRail from "@/components/TimelineRail";
 import { getPhotoByFile } from "@/lib/aimags";
 import { entryLabel, eraLabel, eras, getAbout, history } from "@/lib/history";
-import { isLang, langs } from "@/lib/i18n";
+import { getDict, isLang } from "@/lib/i18n";
+import { alternates, share } from "@/lib/seo";
 
 type Props = { params: Promise<{ lang: string }> };
 
@@ -16,10 +17,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang } = await params;
   if (!isLang(lang)) return {};
   const a = getAbout(lang);
+  const hero = getPhotoByFile(HERO, lang)!;
   return {
     title: a.pageTitle,
     description: a.pageLead,
-    alternates: { languages: Object.fromEntries(langs.map((l) => [l, `/${l}/about`])) },
+    alternates: alternates(lang, "/about"),
+    ...share(lang, {
+      path: "/about",
+      title: `${a.pageTitle} | ${getDict(lang).brand}`,
+      description: a.pageLead,
+      images: [{ url: hero.file, width: hero.width, height: hero.height, alt: hero.caption }],
+    }),
   };
 }
 

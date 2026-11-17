@@ -139,6 +139,13 @@ const en = {
   } as Record<SeasonKey, string>,
   metaTitle: "21 Aimags — Discover Mongolia province by province",
   metaDescription: "A travel guide to Mongolia’s 21 provinces: landscapes, history, highlights and the best time to visit.",
+  ogImageAlt: "A herder’s ger on the open steppe, with mountains behind it",
+  notFound: {
+    title: "This page has wandered off",
+    text: "The link may be old, or the address mistyped. All 21 provinces are still here.",
+    home: "Back to the ger",
+    destinations: "All provinces",
+  },
 };
 
 type Dict = typeof en;
@@ -253,6 +260,13 @@ const mn: Dict = {
   },
   metaTitle: "21 Аймаг — Монгол орныг аймаг аймгаар нь",
   metaDescription: "Монгол Улсын 21 аймгийн байгаль, түүх, үзэх газар, очиход тохиромжтой үеийн аяллын хөтөч.",
+  ogImageAlt: "Уудам талд байх малчны гэр, ард нь уул харагдана",
+  notFound: {
+    title: "Энэ хуудас олдсонгүй",
+    text: "Холбоос хуучирсан эсвэл хаяг буруу бичигдсэн байж магадгүй. 21 аймаг хэвээрээ байна.",
+    home: "Гэр рүү буцах",
+    destinations: "Бүх аймаг",
+  },
 };
 
 export type SeasonKey = "gobi" | "summer" | "eagle" | "khuvsgul" | "central";

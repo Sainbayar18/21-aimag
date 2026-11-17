@@ -113,6 +113,13 @@ const ko: LocalePack = {
     },
     metaTitle: "21 아이막 — 아이막으로 만나는 몽골",
     metaDescription: "몽골 21개 아이막 여행 가이드. 풍경, 역사, 볼거리, 추천 여행 시기를 소개합니다.",
+    ogImageAlt: "초원에 서 있는 유목민의 게르와 그 뒤로 보이는 산",
+    notFound: {
+      title: "페이지를 찾을 수 없습니다",
+      text: "링크가 오래되었거나 주소를 잘못 입력했을 수 있습니다. 21개 아이막은 그대로 있습니다.",
+      home: "게르로 돌아가기",
+      destinations: "모든 아이막",
+    },
   },
 
   aimags: {

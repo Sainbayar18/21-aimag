@@ -7,7 +7,8 @@ import PhotoCredit from "@/components/PhotoCredit";
 import Reveal from "@/components/Reveal";
 import { getPhotoByFile } from "@/lib/aimags";
 import { emergencyNumbers, getGuide, phrases, practicalIds } from "@/lib/guide";
-import { isLang, langs } from "@/lib/i18n";
+import { getDict, isLang } from "@/lib/i18n";
+import { alternates, share } from "@/lib/seo";
 
 type Props = { params: Promise<{ lang: string }> };
 
@@ -17,11 +18,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang } = await params;
   if (!isLang(lang)) return {};
   const p = getGuide(lang).practical;
+  const hero = getPhotoByFile(HERO, lang)!;
   return {
     title: p.pageTitle,
     description: p.metaDescription,
-    alternates: { languages: Object.fromEntries(langs.map((l) => [l, `/${l}/practical`])) },
-    openGraph: { images: [HERO] },
+    alternates: alternates(lang, "/practical"),
+    ...share(lang, {
+      path: "/practical",
+      title: `${p.pageTitle} | ${getDict(lang).brand}`,
+      description: p.metaDescription,
+      images: [{ url: hero.file, width: hero.width, height: hero.height, alt: hero.caption }],
+    }),
   };
 }
 

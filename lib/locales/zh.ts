@@ -113,6 +113,13 @@ const zh: LocalePack = {
     },
     metaTitle: "21 个省 — 一省一省探索蒙古",
     metaDescription: "蒙古国21个省旅行指南：风光、历史、主要景点和最佳旅行时间。",
+    ogImageAlt: "草原上的牧民蒙古包，远处是连绵的群山",
+    notFound: {
+      title: "找不到该页面",
+      text: "链接可能已失效，或者地址输入有误。21 个省都还在这里。",
+      home: "回到蒙古包",
+      destinations: "全部省份",
+    },
   },
 
   aimags: {

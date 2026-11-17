@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Explorer from "@/components/Explorer";
+import JsonLd from "@/components/JsonLd";
 import MongoliaMap from "@/components/MongoliaMap";
 import PhotoCredit from "@/components/PhotoCredit";
 import Reveal from "@/components/Reveal";
-import { getPhoto } from "@/lib/aimags";
-import { getDict, isLang, langs } from "@/lib/i18n";
+import { getAimags, getPhoto, provinceHref } from "@/lib/aimags";
+import { getDict, isLang } from "@/lib/i18n";
+import { absolute, alternates, share } from "@/lib/seo";
 
 type Props = { params: Promise<{ lang: string }> };
 
@@ -14,10 +16,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang } = await params;
   if (!isLang(lang)) return {};
   const t = getDict(lang);
+  const hero = getPhoto("home", lang);
   return {
     title: t.destinationsTitle,
     description: t.destinationsLead,
-    alternates: { languages: Object.fromEntries(langs.map((l) => [l, `/${l}/destinations`])) },
+    alternates: alternates(lang, "/destinations"),
+    ...share(lang, {
+      path: "/destinations",
+      title: `${t.destinationsTitle} | ${t.brand}`,
+      description: t.destinationsLead,
+      images: [{ url: hero.file, width: hero.width, height: hero.height, alt: hero.caption }],
+    }),
   };
 }
 
@@ -28,8 +37,24 @@ export default async function DestinationsPage({ params }: Props) {
   const t = getDict(lang);
   const hero = getPhoto("home", lang);
 
+  /* The 21 provinces as one list, in the order they are shown. */
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: t.destinationsTitle,
+    description: t.destinationsLead,
+    numberOfItems: getAimags(lang).length,
+    itemListElement: getAimags(lang).map((a, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: `${a.name}${t.provinceSuffix}`,
+      url: absolute(provinceHref(lang, a.slug)),
+    })),
+  };
+
   return (
     <main>
+      <JsonLd data={jsonLd} />
       <section className="hero hero--about">
         <div className="hero-media">
           <Image src={hero.file} alt={hero.caption} fill priority sizes="100vw" />
