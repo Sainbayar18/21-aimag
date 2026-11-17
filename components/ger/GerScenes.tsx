@@ -245,6 +245,9 @@ export function GerExterior({ label, onEnter }: ExteriorProps) {
           role="button"
           tabIndex={0}
           aria-label={label}
+          // a mouse tap should not leave a focus box on the photograph;
+          // the keyboard still focuses it and gets its ring
+          onMouseDown={(e) => e.preventDefault()}
           onClick={onEnter}
           onKeyDown={(e) => {
             if (e.key === "Enter" || e.key === " ") {
@@ -400,6 +403,8 @@ export function GerInterior({ active, labels, onPick }: InteriorProps) {
               tabIndex={0}
               aria-label={labels[id]}
               aria-pressed={active === id}
+              // no focus box after a mouse tap; keyboard focus keeps its ring
+              onMouseDown={(e) => e.preventDefault()}
               onClick={() => onPick(id)}
               onPointerEnter={() => setHovered(id)}
               onPointerLeave={() => setHovered((v) => (v === id ? null : v))}

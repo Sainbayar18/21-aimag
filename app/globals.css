@@ -4565,3 +4565,10 @@ body:has(.ger) .ger-in-top {
 .atlas-map.is-filtered .atlas-label:not(.is-match):not(.is-active) {
   opacity: 0.45;
 }
+
+/* the browser's own focus box never shows on the things in the ger; keyboard
+   focus is marked by the dashed ring above (:focus-visible) instead */
+.ger-hotspot:focus,
+.ger-door-g:focus {
+  outline: none;
+}
