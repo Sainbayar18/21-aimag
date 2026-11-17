@@ -94,6 +94,30 @@ function expand(k: number) {
 }
 const GLOW_WIDE = expand(1.3);
 const GLOW_RIM = expand(1.09);
+/*
+ * The lid of the enamel pot on the shelf below the map, traced round its rim,
+ * dome and knob a hair inside the edge. It stands in front of the wall, so the
+ * sheet's bottom corner must go behind it: the photograph is drawn again over
+ * the sheet, clipped to this outline. Inside the edge, so no lattice from
+ * behind the lid is redrawn over the paper.
+ */
+const POT_LID = [
+  [1251, 412.5],
+  [1251, 408.5],
+  [1255.3, 405.8],
+  [1262.6, 404],
+  [1268.8, 402.2],
+  [1273.9, 400.9],
+  [1275.3, 398],
+  [1286.6, 397.8],
+  [1287.8, 400.9],
+  [1295, 403.3],
+  [1302.3, 406.5],
+  [1307.2, 410.6],
+  [1305, 412.5],
+]
+  .map(([x, y]) => `${x},${y}`)
+  .join(" ");
 /** the angle of the top edge, and where the map sits inside the sheet */
 const PAPER_TILT = -3.75;
 /** the sheet's own frame, which the drawing is laid out in */
@@ -283,6 +307,9 @@ function WallMap() {
         <clipPath id="ger-wallmap-clip">
           <polygon points={PAPER_POINTS} />
         </clipPath>
+        <clipPath id="ger-wallmap-front">
+          <polygon points={POT_LID} />
+        </clipPath>
         <filter id="ger-wallmap-shade" x="-20%" y="-20%" width="150%" height="150%">
           <feGaussianBlur stdDeviation="3" />
         </filter>
@@ -332,6 +359,11 @@ function WallMap() {
           inside it, the way a map is mounted */}
       <polygon className="ger-wallmap-frame" points={PAPER_POINTS} />
       <polygon className="ger-wallmap-mount" points={PAPER_POINTS} />
+
+      {/* the enamel pot on the shelf stands in front of the sheet's corner */}
+      <g clipPath="url(#ger-wallmap-front)">
+        <image href={INTERIOR} width={W} height={H} preserveAspectRatio="xMidYMax slice" />
+      </g>
     </g>
   );
 }
