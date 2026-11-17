@@ -94,32 +94,36 @@ export default function GerEntry({ lang }: { lang: Lang }) {
 
   const labels = Object.fromEntries(gerObjectIds.map((id) => [id, g.objects[id].name])) as Record<GerObjectId, string>;
   /*
-   * Tapping a thing. The map is not a card: it is the map, so it comes off
-   * the wall. Measuring the sheet first lets the panel grow out of where it
-   * hangs rather than fading in over the middle of the screen.
+   * Tapping a thing. The chest and the ticket are doors to their pages, so a
+   * tap goes straight there; marking them active first keeps them lit while
+   * the page loads. The map is the map, so it comes off the wall instead.
+   * Measuring the sheet first lets that panel grow out of where it hangs
+   * rather than fading in over the middle of the screen.
    */
   function pick(id: GerObjectId) {
+    if (id !== "map") {
+      setActive(id);
+      follow(id);
+      return;
+    }
     if (active === id) {
       setActive(null);
       return;
     }
-    if (id === "map") {
-      const sheet = sceneRef.current?.querySelector(".ger-wallmap");
-      const box = sheet?.getBoundingClientRect();
-      setFrom(
-        box && box.width > 0
-          ? {
-              x: box.left + box.width / 2 - window.innerWidth / 2,
-              y: box.top + box.height / 2 - window.innerHeight / 2,
-              s: Math.max(0.12, box.width / Math.min(window.innerWidth * 0.92, 980)),
-            }
-          : null,
-      );
-    }
+    const sheet = sceneRef.current?.querySelector(".ger-wallmap");
+    const box = sheet?.getBoundingClientRect();
+    setFrom(
+      box && box.width > 0
+        ? {
+            x: box.left + box.width / 2 - window.innerWidth / 2,
+            y: box.top + box.height / 2 - window.innerHeight / 2,
+            s: Math.max(0.12, box.width / Math.min(window.innerWidth * 0.92, 980)),
+          }
+        : null,
+    );
     setActive(id);
   }
 
-  const card = active && active !== "map" ? g.objects[active] : null;
   const mapObject = g.objects.map;
 
   return (
@@ -173,26 +177,6 @@ export default function GerEntry({ lang }: { lang: Lang }) {
             </li>
           ))}
         </ul>
-
-        {card && active && (
-          <div className="ger-card" role="group" aria-label={card.name}>
-            <button type="button" className="ger-card-close" onClick={() => setActive(null)} aria-label={g.close}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" aria-hidden="true">
-                <path d="M6 6l12 12M18 6 6 18" />
-              </svg>
-            </button>
-            <div className="ger-card-body">
-              <h3 className="ger-card-title">{card.name}</h3>
-              <p className="ger-card-text">{card.teaser}</p>
-            </div>
-            <button type="button" className="primary-btn ger-card-cta" onClick={() => follow(active)}>
-              {card.cta}
-              <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M4 10h12M11 5l5 5-5 5" />
-              </svg>
-            </button>
-          </div>
-        )}
 
         {active === "map" && (
           <div
