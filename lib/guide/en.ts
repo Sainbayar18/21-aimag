@@ -1,7 +1,7 @@
 import type { GuideText } from "@/lib/guide/types";
 
 const en: GuideText = {
-  nav: { culture: "Culture", itineraries: "Itineraries", practical: "Practical" },
+  nav: { culture: "Culture", itineraries: "Itineraries", practical: "Practical", food: "Food" },
 
   ger: {
     doorKicker: "Welcome",
@@ -333,6 +333,7 @@ const en: GuideText = {
         ],
       },
     },
+    foodLink: "Mongolian food, dish by dish",
     etiquetteTitle: "A short list",
     etiquetteLead: "If you remember nothing else from this page, remember these.",
     doTitle: "Do",
@@ -486,6 +487,99 @@ const en: GuideText = {
     emergency: ["Ambulance", "Police", "Fire", "Emergency and rescue"],
     disclaimer:
       "This page is a starting point, not official advice. Visa rules, flight routes, prices and road conditions change — confirm anything that matters with the Mongolian Immigration Agency, your embassy and a local operator before you travel.",
+  },
+
+  food: {
+    pageTitle: "Mongolian food",
+    pageLead: "Mutton, flour and milk, cooked to carry a household through a winter on the steppe. What to eat, where to find it, and how to be a good guest at the table.",
+    metaDescription: "A visitor’s guide to Mongolian food: buuz, khuushuur, tsuivan, khorkhog, milk tea, airag and the dairy of summer — where to eat, table manners and a few useful words.",
+    intro: [
+      "Mongolian cooking comes from herding, not farming. For centuries a family lived on what its animals gave: meat in the cold months, when it keeps, and milk in summer, when the herds have their young. Flour arrived through trade and became dumplings and noodles; vegetables are a recent and still modest addition.",
+      "The result is simple, filling and heavy on mutton, with salt as the main seasoning. It is food for long days outdoors at forty below, and it tastes best in that setting — out of a family’s pot in a ger, or at a roadside canteen halfway across the steppe.",
+    ],
+    dishesTitle: "Eight things to try",
+    dishesLead: "Most of them are on the menu of any guanz, the roadside canteen, and all of them will be offered to you in a family ger sooner or later.",
+    dishes: {
+      buuz: {
+        name: "Steamed dumplings",
+        text: "Minced mutton or beef with onion and a little garlic, folded into a pleated cup of dough with a hole at the top, and steamed. Families make hundreds at a time for Tsagaan Sar, the lunar new year, and keep them frozen in the snow.",
+        tip: "Bite a small hole first and drink the hot juice before you eat the rest.",
+      },
+      khuushuur: {
+        name: "Fried meat pastries",
+        text: "The same filling in a flat half-moon of dough, fried in mutton fat until crisp. It is the food of Naadam: every stall around the stadium sells it by the plate.",
+        tip: "Best straight from the pan, eaten with your hands, with a bowl of milk tea.",
+      },
+      tsuivan: {
+        name: "Stir-fried noodles",
+        text: "Hand-cut flat noodles steamed over strips of mutton with carrot, cabbage and potato, then stirred together in the one pan. The everyday dinner of the countryside, and the most filling thing on most menus.",
+        tip: "Ask for less fat (öökh) if you prefer; the cook will usually oblige.",
+      },
+      shul: {
+        name: "Noodle soup with mutton",
+        text: "Guriltai shul is a clear mutton broth with home-made noodles and a few vegetables. It is what you are given when you arrive cold, and what a family cooks on an ordinary day.",
+        tip: "With bansh, small dumplings, the same soup becomes banshtai shul.",
+      },
+      khorkhog: {
+        name: "Meat cooked with hot stones",
+        text: "Mutton on the bone, potato and carrot packed into a sealed milk can with stones heated in the fire, and left to cook in their own steam. It is made outdoors for guests and celebrations, not ordered in a restaurant.",
+        tip: "The hot stones are handed round afterwards: pass one from palm to palm — it is said to be good for you.",
+      },
+      tsai: {
+        name: "Milk tea",
+        text: "Suutei tsai is brick tea boiled with water and milk and seasoned with salt, sometimes with butter, roasted millet or a piece of meat in it. It is poured for every guest before anything else is said.",
+        tip: "Take the bowl with your right hand and drink at least a little.",
+      },
+      airag: {
+        name: "Fermented mare’s milk",
+        text: "Mare’s milk churned in a leather sack or a barrel for days until it turns sour and slightly fizzy, at two or three per cent alcohol. It is made only in summer, when the mares are milked every two hours.",
+        tip: "Start with a small sip: it is an acquired taste, and it can upset an unprepared stomach.",
+      },
+      dairy: {
+        name: "White food",
+        text: "Tsagaan idee, the dairy of summer: aaruul, curd dried hard on the ger roof; öröm, thick clotted cream; byaslag, a fresh cheese; and boortsog, fried dough to dip in tea. White is the colour of purity, so these are offered first at any celebration.",
+        tip: "Aaruul is very hard: suck it slowly rather than bite it.",
+      },
+    },
+    tableTitle: "At the table",
+    tableLead: "A meal in a family ger follows small rules that nobody will explain, but everyone notices.",
+    table: [
+      "Take food and drink with your right hand, or with both; the left hand alone is impolite.",
+      "Taste whatever you are offered, even if you leave the rest. Refusing outright can give offence; touching the bowl to your lips is enough.",
+      "Guests are served first, and the best piece — often the fatty tail of the sheep — goes to the eldest or the guest of honour.",
+      "Do not step over food, a bowl or the hearth.",
+      "When you have had enough, put the bowl down in front of you with a word of thanks. An empty bowl will simply be filled again.",
+    ],
+    whereTitle: "Where to eat",
+    whereLead: "From a canteen on the main road to a family’s own pot.",
+    where: [
+      {
+        title: "Guanz",
+        text: "The roadside canteen, in every sum centre and along the main roads. Two or three dishes and tea, quick and cheap; menus are rarely in English, so point at what others are eating.",
+      },
+      {
+        title: "Ulaanbaatar",
+        text: "The capital has Mongolian restaurants serving the classics in comfort, and Korean, Japanese, Russian, Indian and vegetarian places besides. It is the easiest place in the country to eat well without meat.",
+      },
+      {
+        title: "With a family",
+        text: "On a tour or a homestay, meals are cooked in the ger: what the family eats, which is the best introduction there is. Bring something small to the table — sweets or fruit.",
+      },
+      {
+        title: "At Naadam",
+        text: "In July the festival grounds fill with stalls of khuushuur and airag, and the khuushuur is often better here than anywhere else all year.",
+      },
+    ],
+    phrasesTitle: "Words for the table",
+    phrasesLead: "A few words of Mongolian go a long way with a cook.",
+    phrases: [
+      "Enjoy your meal",
+      "It’s delicious",
+      "I’m full, thank you",
+      "I don’t eat meat",
+      "The bill, please",
+    ],
+    note: "Vegetarians and anyone with allergies should say so early and kindly: outside Ulaanbaatar meat is in almost everything, and a dish “without meat” may still be cooked in mutton fat. On long trips, carry some food of your own.",
   },
 };
 

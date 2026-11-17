@@ -1,4 +1,4 @@
-import type { CultureId, GerObjectId, PracticalId, RouteId } from "@/lib/guide/shared";
+import type { CultureId, DishId, GerObjectId, PracticalId, RouteId } from "@/lib/guide/shared";
 
 /** One titled block with a short paragraph and a few bullet points. */
 export type GuideSection = {
@@ -42,7 +42,7 @@ export type GerText = {
 };
 
 export type GuideText = {
-  nav: { culture: string; itineraries: string; practical: string };
+  nav: { culture: string; itineraries: string; practical: string; food: string };
 
   ger: GerText;
 
@@ -85,6 +85,8 @@ export type GuideText = {
     metaDescription: string;
     intro: string[];
     sections: Record<CultureId, GuideSection>;
+    /** under the food card, to the food page */
+    foodLink: string;
     etiquetteTitle: string;
     etiquetteLead: string;
     doTitle: string;
@@ -111,5 +113,27 @@ export type GuideText = {
     /** Labels, aligned by index with `emergencyNumbers` in shared.ts */
     emergency: string[];
     disclaimer: string;
+  };
+
+  food: {
+    pageTitle: string;
+    pageLead: string;
+    metaDescription: string;
+    intro: string[];
+    dishesTitle: string;
+    dishesLead: string;
+    /** name: what the dish is, in this language (for mn, the dish's own name) */
+    dishes: Record<DishId, { name: string; text: string; tip: string }>;
+    tableTitle: string;
+    tableLead: string;
+    table: string[];
+    whereTitle: string;
+    whereLead: string;
+    where: { title: string; text: string }[];
+    phrasesTitle: string;
+    phrasesLead: string;
+    /** Meanings, aligned by index with `foodPhrases` in shared.ts */
+    phrases: string[];
+    note: string;
   };
 };

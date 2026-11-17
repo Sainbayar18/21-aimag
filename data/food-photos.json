@@ -1,0 +1,92 @@
+{
+  "hero": {
+    "file": "/images/food/hero.jpg",
+    "title": "Mongolian Cuisine - 01",
+    "author": "Satpal Dandiwal",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Mongolian_Cuisine_-_01.jpg",
+    "width": 2000,
+    "height": 1331
+  },
+  "buuz": {
+    "file": "/images/food/buuz.jpg",
+    "title": "Mongolian buuz",
+    "author": "Mizu basyo",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Mongolian_buuz.jpg",
+    "width": 1200,
+    "height": 800
+  },
+  "khuushuur": {
+    "file": "/images/food/khuushuur.jpg",
+    "title": "Khuushuur,Mongolian Ulaanbaatar style",
+    "author": "Mizu basyo",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Khuushuur,Mongolian_Ulaanbaatar_style.JPG",
+    "width": 1200,
+    "height": 900
+  },
+  "tsuivan": {
+    "file": "/images/food/tsuivan.jpg",
+    "title": "Tsuivan",
+    "author": "Mizu basyo",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Tsuivan.jpg",
+    "width": 1200,
+    "height": 900
+  },
+  "shul": {
+    "file": "/images/food/shul.jpg",
+    "title": "Mongolian noodle soup with mutton",
+    "author": "Brücke-Osteuropa",
+    "license": "Public domain",
+    "licenseUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Mongolian_noodle_soup_with_mutton.JPG",
+    "width": 1200,
+    "height": 675
+  },
+  "khorkhog": {
+    "file": "/images/food/khorkhog.jpg",
+    "title": "Khorkhog",
+    "author": "Vidor",
+    "license": "Public domain",
+    "licenseUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Khorkhog.JPG",
+    "width": 1200,
+    "height": 900
+  },
+  "tsai": {
+    "file": "/images/food/tsai.jpg",
+    "title": "Tsai",
+    "author": "takoradee",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Tsai.JPG",
+    "width": 1200,
+    "height": 883
+  },
+  "airag": {
+    "file": "/images/food/airag.jpg",
+    "title": "Airag 2",
+    "author": "Brücke-Osteuropa",
+    "license": "Public domain",
+    "licenseUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Airag_2.JPG",
+    "width": 1200,
+    "height": 675
+  },
+  "dairy": {
+    "file": "/images/food/dairy.jpg",
+    "title": "Boortsog Aaruul",
+    "author": "Brücke-Osteuropa",
+    "license": "Public domain",
+    "licenseUrl": null,
+    "source": "https://commons.wikimedia.org/wiki/File:Boortsog_Aaruul.JPG",
+    "width": 1200,
+    "height": 675
+  }
+}

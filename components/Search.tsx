@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getAimags } from "@/lib/aimags";
-import { getGuide } from "@/lib/guide";
+import { dishes, dishIds, getGuide } from "@/lib/guide";
 import { getAbout } from "@/lib/history";
 import { getDict, type Lang } from "@/lib/i18n";
 
@@ -68,6 +68,14 @@ export default function Search({ lang }: { lang: Lang }) {
         sub: g.itineraries.pageLead,
         href: `/${lang}/itineraries`,
         hay: Object.values(g.itineraries.routes).map((r) => `${r.name} ${r.summary}`).join(" "),
+      },
+      {
+        id: "p-food",
+        kind: "page",
+        title: g.food.pageTitle,
+        sub: g.food.pageLead,
+        href: `/${lang}/food`,
+        hay: Object.values(g.food.dishes).map((d) => `${d.name} ${d.text}`).join(" ") + " " + dishIds.map((id) => `${dishes[id].mn} ${dishes[id].say}`).join(" "),
       },
       {
         id: "p-practical",

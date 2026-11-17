@@ -44,8 +44,28 @@ export const gerObjects: Record<GerObjectId, GerObjectMeta> = {
   map: { id: "map", anchor: { x: 1236, y: 386 }, target: { kind: "page", path: "destinations" } },
   chest: { id: "chest", anchor: { x: 586, y: 400 }, target: { kind: "page", path: "culture" } },
   ticket: { id: "ticket", anchor: { x: 146, y: 684 }, target: { kind: "page", path: "practical" } },
-  // the food section of the culture page; the card carries id="food"
-  pot: { id: "pot", anchor: { x: 700, y: 574 }, target: { kind: "page", path: "culture#food" } },
+  pot: { id: "pot", anchor: { x: 700, y: 574 }, target: { kind: "page", path: "food" } },
+};
+
+/* ---------------- food ---------------- */
+
+/** The dishes on the food page, in the order they are shown. */
+export const dishIds = ["buuz", "khuushuur", "tsuivan", "shul", "khorkhog", "tsai", "airag", "dairy"] as const;
+export type DishId = (typeof dishIds)[number];
+
+/**
+ * Each dish's own name in Mongolian, how to say it, and its photo — a key
+ * into data/food-photos.json, where the credits are.
+ */
+export const dishes: Record<DishId, { mn: string; say: string; photo: string }> = {
+  buuz: { mn: "Бууз", say: "buuz", photo: "buuz" },
+  khuushuur: { mn: "Хуушуур", say: "khuushuur", photo: "khuushuur" },
+  tsuivan: { mn: "Цуйван", say: "tsuivan", photo: "tsuivan" },
+  shul: { mn: "Гурилтай шөл", say: "guriltai shul", photo: "shul" },
+  khorkhog: { mn: "Хорхог", say: "khorkhog", photo: "khorkhog" },
+  tsai: { mn: "Сүүтэй цай", say: "suutei tsai", photo: "tsai" },
+  airag: { mn: "Айраг", say: "airag", photo: "airag" },
+  dairy: { mn: "Цагаан идээ", say: "tsagaan idee", photo: "dairy" },
 };
 
 /* ---------------- routes ---------------- */
@@ -129,6 +149,15 @@ export const phrases: Phrase[] = [
   { mn: "Жорлон хаана байна?", say: "jorlon khaana bain" },
   { mn: "Би ойлгохгүй байна", say: "bi oilgokh-gui bain" },
   { mn: "Баяртай", say: "bayartai" },
+];
+
+/** For the food page; meanings in each language file, aligned by index. */
+export const foodPhrases: Phrase[] = [
+  { mn: "Сайхан хооллоорой", say: "saikhan khoolloorai" },
+  { mn: "Амттай байна", say: "amttai bain" },
+  { mn: "Цадлаа, баярлалаа", say: "tsadlaa, bayarlalaa" },
+  { mn: "Би мах иддэггүй", say: "bi makh iddeg-gui" },
+  { mn: "Тооцоо бодоод өгөөрэй", say: "tootsoo bodood ugurei" },
 ];
 
 /* ---------------- emergency ---------------- */

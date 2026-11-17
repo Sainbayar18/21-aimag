@@ -3,7 +3,7 @@ import { getGuide } from "@/lib/guide";
 import { getAbout } from "@/lib/history";
 import type { Lang } from "@/lib/i18n";
 
-type PageId = "about" | "culture" | "itineraries" | "practical";
+type PageId = "about" | "culture" | "food" | "itineraries" | "practical";
 
 /** Links on to the other guide pages, so no page is a dead end. */
 export default function GuidePager({ lang, current }: { lang: Lang; current: PageId }) {
@@ -13,6 +13,7 @@ export default function GuidePager({ lang, current }: { lang: Lang; current: Pag
   const pages: Record<PageId, { href: string; title: string; lead: string }> = {
     about: { href: `/${lang}/about`, title: about.pageTitle, lead: about.pageLead },
     culture: { href: `/${lang}/culture`, title: g.culture.pageTitle, lead: g.culture.pageLead },
+    food: { href: `/${lang}/food`, title: g.food.pageTitle, lead: g.food.pageLead },
     itineraries: {
       href: `/${lang}/itineraries`,
       title: g.itineraries.pageTitle,
@@ -25,8 +26,11 @@ export default function GuidePager({ lang, current }: { lang: Lang; current: Pag
     },
   };
 
-  const order: PageId[] = ["about", "culture", "itineraries", "practical"];
-  const others = order.filter((id) => id !== current).slice(0, 3);
+  /* the next three pages after this one, going round, so every page is
+     reached from somewhere */
+  const order: PageId[] = ["about", "culture", "food", "itineraries", "practical"];
+  const at = order.indexOf(current);
+  const others = [1, 2, 3].map((k) => order[(at + k) % order.length]);
 
   return (
     <nav className="guide-pager" aria-label={g.search.pages}>

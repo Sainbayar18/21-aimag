@@ -83,6 +83,7 @@ export default async function LangLayout({ children, params }: Props) {
               <TransitionLink href={`/${lang}/destinations`}>{t.nav.destinations}</TransitionLink>
               <TransitionLink href={`/${lang}/itineraries`}>{g.nav.itineraries}</TransitionLink>
               <TransitionLink href={`/${lang}/culture`}>{g.nav.culture}</TransitionLink>
+              <TransitionLink href={`/${lang}/food`}>{g.nav.food}</TransitionLink>
               <TransitionLink href={`/${lang}/practical`}>{g.nav.practical}</TransitionLink>
             </nav>
             <div className="header-tools">
@@ -104,6 +105,7 @@ export default async function LangLayout({ children, params }: Props) {
                 <TransitionLink href={`/${lang}/destinations`}>{t.nav.destinations}</TransitionLink>
                 <TransitionLink href={`/${lang}/itineraries`}>{g.nav.itineraries}</TransitionLink>
                 <TransitionLink href={`/${lang}/culture`}>{g.nav.culture}</TransitionLink>
+                <TransitionLink href={`/${lang}/food`}>{g.nav.food}</TransitionLink>
                 <TransitionLink href={`/${lang}/practical`}>{g.nav.practical}</TransitionLink>
               </nav>
             </div>
