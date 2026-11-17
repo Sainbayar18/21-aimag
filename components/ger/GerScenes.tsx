@@ -92,9 +92,68 @@ const PAPER_TILT = -3.75;
 const SHEET = { w: 242.5, h: 177 };
 const SPOTS: Record<GerObjectId, { x: number; y: number; w: number; h: number }> = {
   map: { x: 1016, y: 226, w: 248, h: 172 },
-  chest: { x: 528, y: 346, w: 356, h: 216 },
-  ticket: { x: 74, y: 644, w: 148, h: 80 },
+  chest: { x: 526, y: 346, w: 364, h: 226 },
+  ticket: { x: 74, y: 644, w: 148, h: 100 },
 };
+
+/*
+ * The chest and the ticket light up the way the map does.
+ *
+ * They are part of the photograph, so there is nothing to put a light
+ * behind. Instead each one is drawn a second time on the light layer —
+ * the same photograph, clipped to the object's outline — over a blurred
+ * warm bloom: the bloom shows only round the edges, so the light seems to
+ * come from behind the thing itself. The outlines are read off the picture,
+ * in its own pixels: the chest with its lid standing a little proud of the
+ * body, the ticket lying askew on the table.
+ */
+type Lamp = {
+  id: Exclude<GerObjectId, "map">;
+  points: readonly (readonly [number, number])[];
+  bloom: number;
+  /** things standing in front of the object, which its light must not fall on */
+  front?: readonly ({ ellipse: [number, number, number, number] } | { rect: [number, number, number, number] })[];
+};
+
+const LAMPS: Lamp[] = [
+  {
+    id: "chest",
+    points: [
+      [528, 351],
+      [887, 351],
+      [887, 365],
+      [883, 365],
+      [883, 568],
+      [532, 568],
+      [532, 365],
+      [528, 365],
+    ],
+    bloom: 1.18,
+    // the pot on its trivet and the kettle stand in front of the chest
+    front: [
+      { ellipse: [695, 560, 90, 50] },
+      { rect: [622, 560, 146, 90] },
+      { ellipse: [810, 592, 32, 34] },
+    ],
+  },
+  {
+    id: "ticket",
+    points: [
+      [91, 679],
+      [158, 666],
+      [205, 715],
+      [127, 738],
+    ],
+    bloom: 1.45,
+  },
+];
+
+/** an outline pushed out from its middle, for the light behind it */
+function spread(points: readonly (readonly [number, number])[], k: number) {
+  const cx = points.reduce((n, p) => n + p[0], 0) / points.length;
+  const cy = points.reduce((n, p) => n + p[1], 0) / points.length;
+  return points.map(([x, y]) => `${cx + (x - cx) * k},${cy + (y - cy) * k}`).join(" ");
+}
 
 /* ---------------- outside ---------------- */
 
@@ -261,6 +320,50 @@ function WallMap() {
   );
 }
 
+/* ---------------- the chest and the ticket ---------------- */
+
+function Lamp({ id, points, bloom, front }: Lamp) {
+  const outline = points.map(([x, y]) => `${x},${y}`).join(" ");
+  return (
+    <g className={`ger-lamp ger-lamp--${id}`} aria-hidden="true">
+      <defs>
+        <clipPath id={`ger-lamp-clip-${id}`}>
+          <polygon points={outline} />
+        </clipPath>
+        {front && (
+          <mask id={`ger-lamp-front-${id}`} maskUnits="userSpaceOnUse" x="0" y="0" width={W} height={H}>
+            <rect width={W} height={H} fill="#fff" />
+            {front.map((f, i) =>
+              "ellipse" in f ? (
+                <ellipse key={i} cx={f.ellipse[0]} cy={f.ellipse[1]} rx={f.ellipse[2]} ry={f.ellipse[3]} fill="#000" />
+              ) : (
+                <rect key={i} x={f.rect[0]} y={f.rect[1]} width={f.rect[2]} height={f.rect[3]} fill="#000" />
+              ),
+            )}
+          </mask>
+        )}
+      </defs>
+      {/* the bloom and the rim share the map's blur filters (WallMap) */}
+      <g mask={front ? `url(#ger-lamp-front-${id})` : undefined}>
+        <polygon className="ger-lamp-glow" points={spread(points, bloom)} filter="url(#ger-wallmap-bloom)" />
+        <polygon className="ger-lamp-rim" points={spread(points, 1.05)} filter="url(#ger-wallmap-rim)" />
+      </g>
+      {/* masked too, so the warming stops at the pot standing in front */}
+      <g mask={front ? `url(#ger-lamp-front-${id})` : undefined}>
+        <g clipPath={`url(#ger-lamp-clip-${id})`}>
+          <image
+            className="ger-lamp-copy"
+            href={INTERIOR}
+            width={W}
+            height={H}
+            preserveAspectRatio="xMidYMax slice"
+          />
+        </g>
+      </g>
+    </g>
+  );
+}
+
 /* ---------------- inside ---------------- */
 
 type InteriorProps = {
@@ -317,6 +420,9 @@ export function GerInterior({ active, labels, onPick }: InteriorProps) {
         aria-hidden="true"
       >
         <WallMap />
+        {LAMPS.map((lamp) => (
+          <Lamp key={lamp.id} {...lamp} />
+        ))}
       </svg>
 
       {/* The markers live in their own SVG without the picture: an animation

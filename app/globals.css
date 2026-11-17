@@ -4374,6 +4374,56 @@ body {
   }
 }
 
+/* ---- the chest and the ticket, lit like the map ----
+   A copy of the photograph clipped to each object sits over a blurred warm
+   bloom (components/ger/GerScenes.tsx, Lamp), so reaching for it lights it
+   from behind; the object itself warms a little as the light comes up. */
+.ger-lamp-glow,
+.ger-lamp-rim {
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out);
+}
+.ger-lamp-glow {
+  fill: #f0a52f;
+}
+.ger-lamp-rim {
+  fill: #ffdc93;
+}
+.ger-lamp-copy {
+  transition: filter 0.4s var(--ease-out);
+}
+.ger-stage--in:has([data-spot="chest"]:hover) .ger-lamp--chest .ger-lamp-glow,
+.ger-stage--in:has([data-spot="chest"]:focus-visible) .ger-lamp--chest .ger-lamp-glow,
+.ger-stage--in:has([data-spot="chest"].is-active) .ger-lamp--chest .ger-lamp-glow,
+.ger-stage--in:has([data-spot="ticket"]:hover) .ger-lamp--ticket .ger-lamp-glow,
+.ger-stage--in:has([data-spot="ticket"]:focus-visible) .ger-lamp--ticket .ger-lamp-glow,
+.ger-stage--in:has([data-spot="ticket"].is-active) .ger-lamp--ticket .ger-lamp-glow {
+  opacity: 0.85;
+}
+.ger-stage--in:has([data-spot="chest"]:hover) .ger-lamp--chest .ger-lamp-rim,
+.ger-stage--in:has([data-spot="chest"]:focus-visible) .ger-lamp--chest .ger-lamp-rim,
+.ger-stage--in:has([data-spot="chest"].is-active) .ger-lamp--chest .ger-lamp-rim,
+.ger-stage--in:has([data-spot="ticket"]:hover) .ger-lamp--ticket .ger-lamp-rim,
+.ger-stage--in:has([data-spot="ticket"]:focus-visible) .ger-lamp--ticket .ger-lamp-rim,
+.ger-stage--in:has([data-spot="ticket"].is-active) .ger-lamp--ticket .ger-lamp-rim {
+  opacity: 0.9;
+}
+.ger-stage--in:has([data-spot="chest"]:hover) .ger-lamp--chest .ger-lamp-copy,
+.ger-stage--in:has([data-spot="chest"]:focus-visible) .ger-lamp--chest .ger-lamp-copy,
+.ger-stage--in:has([data-spot="chest"].is-active) .ger-lamp--chest .ger-lamp-copy,
+.ger-stage--in:has([data-spot="ticket"]:hover) .ger-lamp--ticket .ger-lamp-copy,
+.ger-stage--in:has([data-spot="ticket"]:focus-visible) .ger-lamp--ticket .ger-lamp-copy,
+.ger-stage--in:has([data-spot="ticket"].is-active) .ger-lamp--ticket .ger-lamp-copy {
+  filter: brightness(1.14) saturate(1.06);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ger-lamp-glow,
+  .ger-lamp-rim,
+  .ger-lamp-copy {
+    transition: none;
+  }
+}
+
 /* ---- the map off the wall ----
    Tapping the sheet on the lattice opens the real map. The panel grows out
    of where the sheet hangs: GerEntry measures it on the tap and hands the
