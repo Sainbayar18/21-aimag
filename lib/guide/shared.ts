@@ -29,7 +29,7 @@ export type RouteId = (typeof routeIds)[number];
  * place in `gerObjects` below, a clickable area in components/ger/GerScenes.tsx
  * (SPOTS) and text in each language file, and it appears.
  */
-export const gerObjectIds = ["map", "chest", "ticket"] as const;
+export const gerObjectIds = ["map", "chest", "ticket", "pot"] as const;
 export type GerObjectId = (typeof gerObjectIds)[number];
 
 export type GerObjectMeta = {
@@ -44,6 +44,8 @@ export const gerObjects: Record<GerObjectId, GerObjectMeta> = {
   map: { id: "map", anchor: { x: 1236, y: 386 }, target: { kind: "page", path: "destinations" } },
   chest: { id: "chest", anchor: { x: 586, y: 400 }, target: { kind: "page", path: "culture" } },
   ticket: { id: "ticket", anchor: { x: 146, y: 684 }, target: { kind: "page", path: "practical" } },
+  // the food section of the culture page; the card carries id="food"
+  pot: { id: "pot", anchor: { x: 700, y: 574 }, target: { kind: "page", path: "culture#food" } },
 };
 
 /* ---------------- routes ---------------- */

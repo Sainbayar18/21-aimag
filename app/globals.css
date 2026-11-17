@@ -4340,7 +4340,10 @@ body {
 .ger-stage--in:has([data-spot="chest"].is-active) .ger-lamp--chest .ger-lamp-glow,
 .ger-stage--in:has([data-spot="ticket"]:hover) .ger-lamp--ticket .ger-lamp-glow,
 .ger-stage--in:has([data-spot="ticket"]:focus-visible) .ger-lamp--ticket .ger-lamp-glow,
-.ger-stage--in:has([data-spot="ticket"].is-active) .ger-lamp--ticket .ger-lamp-glow {
+.ger-stage--in:has([data-spot="ticket"].is-active) .ger-lamp--ticket .ger-lamp-glow,
+.ger-stage--in:has([data-spot="pot"]:hover) .ger-lamp--pot .ger-lamp-glow,
+.ger-stage--in:has([data-spot="pot"]:focus-visible) .ger-lamp--pot .ger-lamp-glow,
+.ger-stage--in:has([data-spot="pot"].is-active) .ger-lamp--pot .ger-lamp-glow {
   opacity: 0.85;
 }
 .ger-stage--in:has([data-spot="chest"]:hover) .ger-lamp--chest .ger-lamp-rim,
@@ -4348,7 +4351,10 @@ body {
 .ger-stage--in:has([data-spot="chest"].is-active) .ger-lamp--chest .ger-lamp-rim,
 .ger-stage--in:has([data-spot="ticket"]:hover) .ger-lamp--ticket .ger-lamp-rim,
 .ger-stage--in:has([data-spot="ticket"]:focus-visible) .ger-lamp--ticket .ger-lamp-rim,
-.ger-stage--in:has([data-spot="ticket"].is-active) .ger-lamp--ticket .ger-lamp-rim {
+.ger-stage--in:has([data-spot="ticket"].is-active) .ger-lamp--ticket .ger-lamp-rim,
+.ger-stage--in:has([data-spot="pot"]:hover) .ger-lamp--pot .ger-lamp-rim,
+.ger-stage--in:has([data-spot="pot"]:focus-visible) .ger-lamp--pot .ger-lamp-rim,
+.ger-stage--in:has([data-spot="pot"].is-active) .ger-lamp--pot .ger-lamp-rim {
   opacity: 0.9;
 }
 .ger-stage--in:has([data-spot="chest"]:hover) .ger-lamp--chest .ger-lamp-copy,
@@ -4356,7 +4362,10 @@ body {
 .ger-stage--in:has([data-spot="chest"].is-active) .ger-lamp--chest .ger-lamp-copy,
 .ger-stage--in:has([data-spot="ticket"]:hover) .ger-lamp--ticket .ger-lamp-copy,
 .ger-stage--in:has([data-spot="ticket"]:focus-visible) .ger-lamp--ticket .ger-lamp-copy,
-.ger-stage--in:has([data-spot="ticket"].is-active) .ger-lamp--ticket .ger-lamp-copy {
+.ger-stage--in:has([data-spot="ticket"].is-active) .ger-lamp--ticket .ger-lamp-copy,
+.ger-stage--in:has([data-spot="pot"]:hover) .ger-lamp--pot .ger-lamp-copy,
+.ger-stage--in:has([data-spot="pot"]:focus-visible) .ger-lamp--pot .ger-lamp-copy,
+.ger-stage--in:has([data-spot="pot"].is-active) .ger-lamp--pot .ger-lamp-copy {
   filter: brightness(1.14) saturate(1.06);
 }
 @media (prefers-reduced-motion: reduce) {
@@ -4653,4 +4662,10 @@ body:has(.ger) .ger-in-top {
     height: 44%;
     background: linear-gradient(to top, rgba(10, 14, 10, 0.8), rgba(10, 14, 10, 0.42) 55%, rgba(10, 14, 10, 0));
   }
+}
+
+/* the culture page's cards are linked to from the ger (the pot opens the food
+   card); the header is not in the way when the page arrives at one */
+.guide-card {
+  scroll-margin-top: 96px;
 }

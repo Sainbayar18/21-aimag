@@ -68,7 +68,7 @@ export default async function CulturePage({ params }: Props) {
             {cultureIds.map((id) => {
               const s = c.sections[id];
               return (
-                <article key={id} className="guide-card">
+                <article key={id} id={id} className="guide-card">
                   <h2 className="h3 guide-card-title">{s.title}</h2>
                   <p className="guide-card-text">{s.text}</p>
                   <ul className="guide-points">

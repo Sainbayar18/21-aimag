@@ -36,6 +36,12 @@ const en: GuideText = {
           "Chinggis Khaan International Airport, 50 km south of Ulaanbaatar. Visas, flights, money and the long road that starts there.",
         cta: "How to get to Mongolia",
       },
+      pot: {
+        name: "The pot on the hearth",
+        teaser:
+          "Buuz, khuushuur, tsuivan and salted milk tea: what goes into the pot, and what is poured for every guest who comes in.",
+        cta: "Mongolian food",
+      },
     },
   },
 

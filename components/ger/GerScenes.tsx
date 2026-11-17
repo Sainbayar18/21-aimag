@@ -179,6 +179,8 @@ const SPOTS: Record<GerObjectId, { x: number; y: number; w: number; h: number }>
   map: { x: 1014, y: 224, w: 248, h: 190 },
   chest: { x: 526, y: 346, w: 364, h: 226 },
   ticket: { x: 74, y: 644, w: 148, h: 100 },
+  // the pot and its lid; drawn after the chest, so it wins where they meet
+  pot: { x: 610, y: 506, w: 176, h: 122 },
 };
 
 /*
@@ -235,6 +237,20 @@ const LAMPS: Lamp[] = [
       [127, 738],
     ],
     bloom: 1.45,
+  },
+  /* the iron pot on its trivet, traced round the knob, the domed lid, both
+     handles and the round of the belly down to where it meets the fire; the
+     legs and the embers are left out, so the light stays on the pot */
+  {
+    id: "pot",
+    points: [
+      [690, 520], [691, 512], [703, 512], [704, 520], [747, 521], [767, 528],
+      [772, 532], [778, 533], [777, 540], [769, 545], [767, 560], [764, 580],
+      [760, 598], [748, 610], [722, 620], [695, 623], [668, 620], [645, 610],
+      [633, 598], [628, 575], [626, 555], [624, 545], [615, 540], [614, 534],
+      [622, 532], [628, 528], [645, 521],
+    ],
+    bloom: 1.4,
   },
 ];
 
