@@ -137,8 +137,9 @@ export const chestItems: Record<
  * The peoples on the deels page, grouped the way Mongolian ethnography groups
  * them, each family in the order shown. `image` says what stands for the
  * deel: an AI illustration drawn from written descriptions (public/images/
- * deel/{id}.jpg), a credited photograph (data/deel-photos.json), or nothing
- * where no reliable description was found to draw from.
+ * deel/{id}.jpg) or a credited photograph (data/deel-photos.json). The
+ * Khotgoid's is drawn from the general description of Oirat dress, since no
+ * account of their own was found; their entry says so.
  */
 export const deelFamilyIds = ["khalkha", "west", "northEast", "turkic"] as const;
 export type DeelFamilyId = (typeof deelFamilyIds)[number];
@@ -174,18 +175,18 @@ export const deelGroups: Record<DeelId, { family: DeelFamilyId; image: "ai" | "p
   torguud: { family: "west", image: "ai" },
   uriankhai: { family: "west", image: "ai" },
   myangad: { family: "west", image: "ai" },
-  oold: { family: "west", image: null },
-  khotgoid: { family: "west", image: null },
-  sartuul: { family: "west", image: null },
+  oold: { family: "west", image: "ai" },
+  khotgoid: { family: "west", image: "ai" },
+  sartuul: { family: "west", image: "ai" },
   buryat: { family: "northEast", image: "ai" },
   barga: { family: "northEast", image: "ai" },
   darkhad: { family: "northEast", image: "ai" },
   dariganga: { family: "northEast", image: "ai" },
-  uzemchin: { family: "northEast", image: null },
+  uzemchin: { family: "northEast", image: "ai" },
   kazakh: { family: "turkic", image: "photo" },
   tsaatan: { family: "turkic", image: "ai" },
   khamnigan: { family: "turkic", image: "ai" },
-  khoton: { family: "turkic", image: null },
+  khoton: { family: "turkic", image: "ai" },
 };
 
 /* ---------------- food ---------------- */

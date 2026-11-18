@@ -637,17 +637,17 @@ const en: GuideText = {
       oold: {
         name: "Ööld",
         place: "Khovd province",
-        text: "An Oirat people of Khovd, living alongside the Myangad in Erdenebüren district.",
+        text: "An Oirat people of Khovd. Men favour blue deels with a broad band of black trim, 15–20 cm wide, along the collar and front, and no side slits; women's deels are brightly coloured, with silver ornaments. The Ööld avoid grey, the colour bondsmen wore under the Manchus.",
       },
       khotgoid: {
         name: "Khotgoid",
         place: "Zavkhan and Khövsgöl provinces",
-        text: "Once part of the Oirat confederation, the Khotgoid rose against the Manchus under Chingünjav in 1755–57.",
+        text: "Once part of the Oirat confederation, the Khotgoid rose against the Manchus under Chingünjav in 1755–57. No account of their own dress was found, so the picture follows Oirat dress in general: a married woman's deel with a large folded white collar under an embroidered sleeveless jacket.",
       },
       sartuul: {
         name: "Sartuul",
         place: "Zavkhan province",
-        text: "A small Mongol people of Zavkhan, known for their own short songs.",
+        text: "A small Mongol people of Zavkhan, known for their short songs; Sartuul also live in Buryatia. Women wear a brocade deel with raised shoulders and black velvet cuffs under a short sleeveless khantaaz, and a round black hat ringed with red coral beads.",
       },
       buryat: {
         name: "Buryat",
@@ -672,7 +672,7 @@ const en: GuideText = {
       uzemchin: {
         name: "Üzemchin",
         place: "Dornod and Sükhbaatar provinces",
-        text: "A people of the eastern steppe, known for their archery and their long songs.",
+        text: "A people of the eastern steppe, known for archery and long songs. Every Üzemchin deel, for men, women and children, has a stand-up collar, a curved front and slits on both sides; men wear blue, women brown or green, and a wife's ceremonial uuj is edged with two rows of trim.",
       },
       kazakh: {
         name: "Kazakh",
@@ -692,7 +692,7 @@ const en: GuideText = {
       khoton: {
         name: "Khoton",
         place: "Uvs province",
-        text: "A people of Turkic origin who now speak the Oirat Mongolian of their neighbours.",
+        text: "A people of Turkic origin who now speak the Oirat Mongolian of their neighbours. The Khoton favour black for deels and hats, which they link to their faith; sleeves are cut straight, without the hoof-shaped cuffs, and sleeve warmers are pulled over them in the cold.",
       },
     },
     sources:
