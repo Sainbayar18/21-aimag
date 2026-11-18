@@ -63,68 +63,69 @@ export const chestItemIds = ["book", "deel", "zodog", "snuff"] as const;
 export type ChestItemId = (typeof chestItemIds)[number];
 
 /**
- * parts: one outline per piece. Most things are one piece; the snuff bottle
- * is three — the bottle, its spoon and its pouch — outlined apart, so the
- * felt between them stays dark when they light.
+ * parts: one outline per piece. Most things are one piece; the wrestler's
+ * outfit is three — the zodog, its cord and the shuudag — outlined apart, so
+ * the felt between them stays dark when they light.
  */
 export const chestItems: Record<
   ChestItemId,
   { path: string; anchor: { x: number; y: number }; parts: [number, number][][] }
 > = {
-  // the history book, an old green cloth hardback with frayed, yellowed edges
+  // the history book, an old green cloth hardback with worn, yellowed edges
   book: {
     path: "history",
-    anchor: { x: 252, y: 432 },
+    anchor: { x: 212, y: 432 },
     parts: [
       [
-        [157, 309], [198, 299], [298, 296], [332, 301], [361, 313], [371, 330],
-        [365, 405], [357, 455], [355, 513], [340, 551], [240, 563], [148, 553],
-        [128, 538], [144, 468], [153, 393], [155, 318],
+        [105.5, 281], [303, 278.5], [321, 294.5], [325, 401], [323.5, 560.5], [317, 578.5],
+        [221, 585], [108, 583], [101, 538], [105.5, 447], [101, 392], [98.5, 297],
       ],
     ],
   },
   // the folded blue silk deel, collar to hem
   deel: {
     path: "deels",
-    anchor: { x: 525, y: 470 },
+    anchor: { x: 500, y: 500 },
     parts: [
       [
-        [490, 244], [560, 245], [570, 258], [675, 265], [680, 285], [673, 435],
-        [668, 555], [660, 568], [560, 575], [380, 565], [368, 545], [380, 460],
-        [388, 320], [405, 280], [435, 254], [483, 250],
+        [436, 187.5], [542, 187.5], [571, 232], [642, 229], [650.5, 240.5], [656.5, 287.5],
+        [653.5, 464], [650.5, 582], [642, 605], [495, 608], [342, 602], [344.5, 493.5],
+        [350.5, 246.5], [359.5, 232], [430, 229], [433, 199],
       ],
     ],
   },
-  // the wrestler's red zodog, the shuudag laid on it; the loose ties are left out
+  // the wrestler's red zodog (sleeves and back, open in front), its white
+  // cord, and the blue shuudag laid below it: three pieces
   zodog: {
     path: "culture#naadam",
-    anchor: { x: 760, y: 468 },
+    anchor: { x: 880, y: 300 },
     parts: [
       [
-        [827, 276], [888, 276], [971, 298], [1016, 329], [1049, 418], [1043, 462],
-        [1027, 484], [1012, 492], [1016, 523], [1010, 557], [882, 565], [727, 551],
-        [718, 501], [677, 451], [674, 401], [693, 345], [738, 295], [799, 284],
+        [780, 183], [973, 187], [1020, 240], [1046.5, 283], [1086.5, 360], [1093, 533],
+        [1096.5, 646.5], [1013, 650], [1006.5, 560], [983, 413], [960, 420], [957, 397],
+        [797, 397], [796.5, 413], [780, 553], [770, 640], [676.5, 636.5], [670, 426.5],
+        [686.5, 293], [740, 236.5], [773, 186.5],
+      ],
+      [
+        [791, 414], [850, 412], [905, 408], [950, 414], [966, 428], [958, 458],
+        [930, 473], [910, 465], [900, 452], [860, 452], [830, 460], [824, 488],
+        [812, 488], [808, 470], [795, 440],
+      ],
+      [
+        [796.5, 496.5], [990, 493], [1003, 546.5], [953, 586.5], [926.5, 656.5], [873, 660],
+        [860, 620], [800, 573], [776.5, 553], [783, 513],
       ],
     ],
   },
-  // the agate snuff bottle with its coral stopper, its spoon and its pouch;
-  // the snuff bottle is passed and returned in the greeting
+  // the agate snuff bottle with its coral stopper and spoon, lying on its
+  // embroidered pouch; the pouch's strings are left out
   snuff: {
     path: "culture#greetings",
-    anchor: { x: 1164, y: 476 },
+    anchor: { x: 1130, y: 420 },
     parts: [
       [
-        [1075, 401], [1081, 399], [1087, 401], [1090, 412], [1097, 420], [1110, 440],
-        [1116, 465], [1110, 490], [1095, 502], [1078, 504], [1060, 496], [1052, 472],
-        [1053, 447], [1060, 428], [1068, 416], [1072, 405],
-      ],
-      [
-        [1092, 357], [1101, 359], [1103, 367], [1150, 397], [1147, 404], [1096, 372],
-        [1090, 365],
-      ],
-      [
-        [1120, 407], [1158, 402], [1195, 404], [1203, 420], [1206, 453], [1211, 497],
-        [1201, 515], [1181, 524], [1131, 523], [1122, 505], [1119, 470], [1121, 440],
+        [1123, 322], [1223, 325], [1228, 345], [1226, 379], [1223, 441], [1210, 470],
+        [1189, 485], [1142, 487], [1122, 472], [1113, 450], [1110, 379], [1115, 345],
       ],
     ],
   },

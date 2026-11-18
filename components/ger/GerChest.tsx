@@ -12,7 +12,7 @@ import type { GerText } from "@/lib/guide/types";
  *
  * The picture's viewBox is its own pixels (1376×768), so the outlines in
  * chestItems sit on what they trace at any size. A thing may be several
- * pieces (the snuff bottle, its spoon and its pouch), each outlined apart.
+ * pieces (the zodog, its cord and the shuudag), each outlined apart.
  */
 
 const W = 1376;
@@ -91,7 +91,7 @@ export default function GerChest({ g, onOpen }: Props) {
               }}
             >
               {/* each piece has its own light, so the felt between the pieces
-                  of the snuff bottle stays dark */}
+                  of the wrestler's outfit stays dark */}
               {item.parts.map((part, i) => (
                 <polygon key={`g${i}`} className="ger-chest-glow" points={spread(part, 1.25)} filter="url(#ger-chest-bloom)" />
               ))}
