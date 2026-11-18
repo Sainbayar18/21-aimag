@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
+import LangSwitch from "@/components/LangSwitch";
 import TransitionLink from "@/components/TransitionLink";
 import { useEffect, useRef, useState } from "react";
 import { GerExterior, GerInterior } from "@/components/ger/GerScenes";
@@ -151,6 +152,23 @@ export default function GerEntry({ lang }: { lang: Lang }) {
       className={`ger${opening ? " is-opening" : ""}${inside ? " is-inside" : ""}`}
       aria-label={g.sceneTitle}
     >
+      {/* top right, over both scenes: the way back out once inside, and the
+          language menu, which the site has nowhere else on this page */}
+      <div className="ger-corner">
+        {inside && (
+          <button type="button" className="ger-back" onClick={leave}>
+            <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
+              {/* a door standing open, and the way out through it */}
+              <path d="M8 3.5h7.5v13H8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+              <path d="M8 3.5 3.5 5v11L8 16.5z" fill="currentColor" opacity=".35" />
+              <path d="M12.5 10H6m0 0 2.4-2.4M6 10l2.4 2.4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span className="ger-back-text">{g.back}</span>
+          </button>
+        )}
+        <LangSwitch lang={lang} />
+      </div>
+
       {/* ——— outside ——— */}
       <div className="ger-stage ger-stage--out" aria-hidden={inside}>
         <GerExterior label={g.doorAria} onEnter={enter} />
@@ -173,16 +191,6 @@ export default function GerEntry({ lang }: { lang: Lang }) {
       {/* ——— inside ——— */}
       <div className="ger-stage ger-stage--in" aria-hidden={!inside} ref={insideRef} tabIndex={-1}>
         <GerInterior lang={lang} active={active} labels={labels} onPick={pick} />
-
-        <button type="button" className="ger-back" onClick={leave} tabIndex={inside ? 0 : -1}>
-          <svg viewBox="0 0 20 20" width="18" height="18" aria-hidden="true">
-            {/* a door standing open, and the way out through it */}
-            <path d="M8 3.5h7.5v13H8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
-            <path d="M8 3.5 3.5 5v11L8 16.5z" fill="currentColor" opacity=".35" />
-            <path d="M12.5 10H6m0 0 2.4-2.4M6 10l2.4 2.4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          {g.back}
-        </button>
 
         <div className="ger-in-top container">
           <h2 className="ger-in-title">{g.sceneTitle}</h2>

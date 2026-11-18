@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Alegreya, Alegreya_Sans } from "next/font/google";
 import LangSwitch from "@/components/LangSwitch";
-import Search from "@/components/Search";
 import TransitionLink, { ViewTransitionResolver } from "@/components/TransitionLink";
 import { getGuide } from "@/lib/guide";
-import { getAbout } from "@/lib/history";
 import { getDict, isLang, langs } from "@/lib/i18n";
 import { alternates, share, siteUrl } from "@/lib/seo";
 import "../globals.css";
@@ -66,8 +64,21 @@ export default async function LangLayout({ children, params }: Props) {
           {t.skip}
         </a>
         <ViewTransitionResolver />
+        {/* No menu: the ger is the way between pages. On the ger itself only
+            the wordmark shows (the scene carries its own language menu); on
+            every other page, a way back into the ger and the language menu,
+            floating over the top of the page (globals.css). */}
         <header className="site-header">
           <div className="site-header-inner">
+            <TransitionLink href={`/${lang}`} className="to-ger">
+              <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth={1.7} strokeLinecap="round" strokeLinejoin="round">
+                {/* a ger: the roof, the wall, the door */}
+                <path d="M2.5 9.5 10 4l7.5 5.5" />
+                <path d="M4 9v7.5h12V9" />
+                <path d="M8.5 16.5v-4h3v4" />
+              </svg>
+              {g.ger.toGer}
+            </TransitionLink>
             <TransitionLink href={`/${lang}`} className="brand">
               <svg width="30" height="30" viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth={2} strokeLinejoin="round">
                 <path d="M3 25 12 10l5 8 3-5 9 12Z" />
@@ -78,16 +89,7 @@ export default async function LangLayout({ children, params }: Props) {
                 <span className="brand-sub">{t.brandSub}</span>
               </span>
             </TransitionLink>
-            <nav className="site-nav" aria-label={t.navLabel}>
-              <TransitionLink href={`/${lang}/about`}>{getAbout(lang).nav}</TransitionLink>
-              <TransitionLink href={`/${lang}/destinations`}>{t.nav.destinations}</TransitionLink>
-              <TransitionLink href={`/${lang}/itineraries`}>{g.nav.itineraries}</TransitionLink>
-              <TransitionLink href={`/${lang}/culture`}>{g.nav.culture}</TransitionLink>
-              <TransitionLink href={`/${lang}/food`}>{g.nav.food}</TransitionLink>
-              <TransitionLink href={`/${lang}/practical`}>{g.nav.practical}</TransitionLink>
-            </nav>
             <div className="header-tools">
-              <Search lang={lang} />
               <LangSwitch lang={lang} />
             </div>
           </div>
@@ -100,14 +102,11 @@ export default async function LangLayout({ children, params }: Props) {
             <div className="footer-brand">
               <span className="brand-name">{t.brand}</span>
               <span className="brand-sub">{t.brandSub}</span>
-              <nav className="footer-nav" aria-label={t.navLabel}>
-                <TransitionLink href={`/${lang}/about`}>{getAbout(lang).nav}</TransitionLink>
-                <TransitionLink href={`/${lang}/destinations`}>{t.nav.destinations}</TransitionLink>
-                <TransitionLink href={`/${lang}/itineraries`}>{g.nav.itineraries}</TransitionLink>
-                <TransitionLink href={`/${lang}/culture`}>{g.nav.culture}</TransitionLink>
-                <TransitionLink href={`/${lang}/food`}>{g.nav.food}</TransitionLink>
-                <TransitionLink href={`/${lang}/practical`}>{g.nav.practical}</TransitionLink>
-              </nav>
+              {/* the end of a page is where the next one is chosen: back in
+                  the ger, from the things standing in it */}
+              <TransitionLink href={`/${lang}`} className="footer-to-ger">
+                {g.ger.toGer}
+              </TransitionLink>
             </div>
             <p>{t.footer}</p>
           </div>

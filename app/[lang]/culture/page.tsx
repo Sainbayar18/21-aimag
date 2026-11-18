@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import GuidePager from "@/components/GuidePager";
 import PhotoCredit from "@/components/PhotoCredit";
 import Reveal from "@/components/Reveal";
-import TransitionLink from "@/components/TransitionLink";
 import { getPhotoByFile } from "@/lib/aimags";
 import { cultureIds, getGuide } from "@/lib/guide";
 import { getDict, isLang } from "@/lib/i18n";
@@ -77,11 +75,6 @@ export default async function CulturePage({ params }: Props) {
                       <li key={p.slice(0, 24)}>{p}</li>
                     ))}
                   </ul>
-                  {id === "food" && (
-                    <TransitionLink href={`/${lang}/food`} className="guide-card-link">
-                      {c.foodLink}
-                    </TransitionLink>
-                  )}
                 </article>
               );
             })}
@@ -125,7 +118,6 @@ export default async function CulturePage({ params }: Props) {
           </div>
         </section>
 
-        <GuidePager lang={lang} current="culture" />
       </div>
     </main>
   );

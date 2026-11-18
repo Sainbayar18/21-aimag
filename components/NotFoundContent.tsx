@@ -29,7 +29,7 @@ export default function NotFoundContent({ texts }: { texts: Record<string, NotFo
   }, [t.title]);
 
   return (
-    <main className="container stack">
+    <main className="container stack page-plain">
       <section className="section">
         <div className="section-head">
           <h1 className="h2">{t.title}</h1>

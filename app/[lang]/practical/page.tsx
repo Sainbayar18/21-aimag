@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import GuidePager from "@/components/GuidePager";
 import PhotoCredit from "@/components/PhotoCredit";
 import Reveal from "@/components/Reveal";
 import { getPhotoByFile } from "@/lib/aimags";
@@ -141,7 +140,6 @@ export default async function PracticalPage({ params }: Props) {
           {p.disclaimer}
         </Reveal>
 
-        <GuidePager lang={lang} current="practical" />
       </div>
     </main>
   );

@@ -35,6 +35,8 @@ export type GerText = {
   hint: string;
   scrollHint: string;
   back: string;
+  /** on every other page: the way back into the ger, top and foot */
+  toGer: string;
   close: string;
   objectsLabel: string;
   doorAria: string;
@@ -85,8 +87,6 @@ export type GuideText = {
     metaDescription: string;
     intro: string[];
     sections: Record<CultureId, GuideSection>;
-    /** under the food card, to the food page */
-    foodLink: string;
     etiquetteTitle: string;
     etiquetteLead: string;
     doTitle: string;

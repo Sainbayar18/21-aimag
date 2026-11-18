@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import GuidePager from "@/components/GuidePager";
 import PhotoCredit from "@/components/PhotoCredit";
 import Reveal from "@/components/Reveal";
 import { getFoodPhoto } from "@/lib/food";
@@ -189,7 +188,6 @@ export default async function FoodPage({ params }: Props) {
           {f.note}
         </Reveal>
 
-        <GuidePager lang={lang} current="food" />
       </div>
     </main>
   );

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import GuidePager from "@/components/GuidePager";
 import PhotoCredit from "@/components/PhotoCredit";
 import Reveal from "@/components/Reveal";
 import TransitionLink from "@/components/TransitionLink";
@@ -142,7 +141,6 @@ export default async function ItinerariesPage({ params }: Props) {
           {it.note}
         </Reveal>
 
-        <GuidePager lang={lang} current="itineraries" />
       </div>
     </main>
   );
