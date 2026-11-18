@@ -1,0 +1,62 @@
+{
+  "hero": {
+    "file": "/images/naadam/hero.jpg",
+    "title": "Bokh wrestling at the Terelj National Park (3961462793)",
+    "author": "Kyle Taylor",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Bokh_wrestling_at_the_Terelj_National_Park_(3961462793).jpg",
+    "width": 2000,
+    "height": 1333
+  },
+  "outfit": {
+    "file": "/images/naadam/outfit.jpg",
+    "title": "Mongolskie zapasy na stadionie w Ułan Bator 10",
+    "author": "Marcin Konsek",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Mongolskie_zapasy_na_stadionie_w_U%C5%82an_Bator_10.JPG",
+    "width": 1400,
+    "height": 934
+  },
+  "dance": {
+    "file": "/images/naadam/dance.jpg",
+    "title": "Victory dance (5956649810)",
+    "author": "istolethetv",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Victory_dance_(5956649810).jpg",
+    "width": 1400,
+    "height": 933
+  },
+  "grapple": {
+    "file": "/images/naadam/grapple.jpg",
+    "title": "Clash of the titans (5956122041)",
+    "author": "istolethetv",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Clash_of_the_titans_(5956122041).jpg",
+    "width": 1400,
+    "height": 933
+  },
+  "horse": {
+    "file": "/images/naadam/horse.jpg",
+    "title": "Young Naadam Horse Racers in Mongolia - 2010",
+    "author": "FischerFotos",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Young_Naadam_Horse_Racers_in_Mongolia_-_2010.jpg",
+    "width": 1400,
+    "height": 930
+  },
+  "archery": {
+    "file": "/images/naadam/archery.jpg",
+    "title": "Naadam2014Archery",
+    "author": "Chinneeb",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Naadam2014Archery.JPG",
+    "width": 1400,
+    "height": 933
+  }
+}

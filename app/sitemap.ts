@@ -4,7 +4,7 @@ import { langs } from "@/lib/i18n";
 import { absolute, sitemapAlternates } from "@/lib/seo";
 
 /** Every page except the province pages, which are added from the data. */
-const pages = ["", "/destinations", "/itineraries", "/culture", "/food", "/getting-here", "/practical", "/about", "/history", "/deels"];
+const pages = ["", "/destinations", "/itineraries", "/culture", "/food", "/getting-here", "/practical", "/about", "/history", "/deels", "/naadam"];
 
 /**
  * All 186 pages, each listed once per language with the other five as

@@ -97,7 +97,7 @@ export const chestItems: Record<
   // the wrestler's red zodog (sleeves and back, open in front), its white
   // cord, and the blue shuudag laid below it: three pieces
   zodog: {
-    path: "culture#naadam",
+    path: "naadam",
     anchor: { x: 880, y: 300 },
     parts: [
       [
@@ -188,6 +188,37 @@ export const deelGroups: Record<DeelId, { family: DeelFamilyId; image: "ai" | "p
   khamnigan: { family: "turkic", image: "ai" },
   khoton: { family: "turkic", image: "ai" },
 };
+
+/* ---------------- naadam ---------------- */
+
+/** What a wrestler wears, and how each piece is called and said. */
+export const wrestlerGearIds = ["zodog", "shuudag", "gutal", "malgai"] as const;
+export type WrestlerGearId = (typeof wrestlerGearIds)[number];
+export const wrestlerGear: Record<WrestlerGearId, { mn: string; say: string }> = {
+  zodog: { mn: "Зодог", say: "zodog" },
+  shuudag: { mn: "Шуудаг", say: "shuudag" },
+  gutal: { mn: "Гутал", say: "gutal" },
+  malgai: { mn: "Малгай", say: "malgai" },
+};
+
+/**
+ * The national wrestling titles, lowest first. The order is the point: each
+ * is won by going one round further, so the page sets them as a rising stair.
+ */
+export const naadamTitleIds = ["nachin", "khartsaga", "zaan", "garid", "arslan", "avarga"] as const;
+export type NaadamTitleId = (typeof naadamTitleIds)[number];
+export const naadamTitles: Record<NaadamTitleId, { mn: string; say: string }> = {
+  nachin: { mn: "Начин", say: "nachin" },
+  khartsaga: { mn: "Харцага", say: "khartsaga" },
+  zaan: { mn: "Заан", say: "zaan" },
+  garid: { mn: "Гарьд", say: "garid" },
+  arslan: { mn: "Арслан", say: "arslan" },
+  avarga: { mn: "Аварга", say: "avarga" },
+};
+
+/** The two games after wrestling, each with its photograph. */
+export const naadamGameIds = ["horse", "archery"] as const;
+export type NaadamGameId = (typeof naadamGameIds)[number];
 
 /* ---------------- food ---------------- */
 

@@ -5,9 +5,12 @@ import type {
   DeelId,
   DishId,
   GerObjectId,
+  NaadamGameId,
+  NaadamTitleId,
   PracticalId,
   RouteId,
   WayId,
+  WrestlerGearId,
 } from "@/lib/guide/shared";
 
 /** One titled block with a short paragraph and a few bullet points. */
@@ -183,6 +186,35 @@ export type GuideText = {
     phrasesLead: string;
     /** Meanings, aligned by index with `foodPhrases` in shared.ts */
     phrases: string[];
+    note: string;
+  };
+
+  naadam: {
+    pageTitle: string;
+    pageLead: string;
+    metaDescription: string;
+    intro: string[];
+    wrestlingTitle: string;
+    wrestlingLead: string;
+    rulesTitle: string;
+    rulesLead: string;
+    rules: string[];
+    outfitTitle: string;
+    outfitText: string;
+    /** what each piece is; its Mongolian name is in shared.ts */
+    outfit: Record<WrestlerGearId, string>;
+    ritualTitle: string;
+    ritualText: string;
+    titlesTitle: string;
+    titlesLead: string;
+    titles: Record<NaadamTitleId, { meaning: string; rule: string }>;
+    gamesTitle: string;
+    games: Record<NaadamGameId, { title: string; text: string }>;
+    watchTitle: string;
+    watchLead: string;
+    watch: string[];
+    /** alt text for each photograph, keyed as in data/naadam-photos.json */
+    photoAlt: Record<string, string>;
     note: string;
   };
 };

@@ -47,7 +47,7 @@ const en: GuideText = {
     chest: {
       book: { name: "A book of Mongolian history", page: "A history of Mongolia" },
       deel: { name: "A silk deel", page: "The deels of Mongolia’s peoples" },
-      zodog: { name: "A wrestler’s zodog and shuudag", page: "Naadam and the three manly games" },
+      zodog: { name: "A wrestler’s zodog and shuudag", page: "Naadam and Mongolian wrestling" },
       snuff: { name: "A snuff bottle", page: "Greetings and small courtesies" },
     },
   },
@@ -790,6 +790,92 @@ const en: GuideText = {
       "The bill, please",
     ],
     note: "Vegetarians and anyone with allergies should say so early and kindly: outside Ulaanbaatar meat is in almost everything, and a dish “without meat” may still be cooked in mutton fat. On long trips, carry some food of your own.",
+  },
+
+  naadam: {
+    pageTitle: "Naadam and Mongolian wrestling",
+    pageLead: "Every July the country stops for the three manly games: wrestling, horse racing and archery. Wrestling comes first, and it is the one every Mongolian follows.",
+    metaDescription: "A visitor's guide to Naadam and Mongolian wrestling (bökh): the rules, the zodog and shuudag, the eagle dance, the titles from Nachin to Avarga, the horse races and archery, and where to watch.",
+    intro: [
+      "Naadam means simply ‘games’. Its full name, eriin gurvan naadam, is ‘the three games of men’, and it grew out of the gatherings at which khans tested their warriors. Today the national festival opens in Ulaanbaatar on 11 July, and every province and district holds its own naadam on its own dates through the summer. UNESCO added it to its list of intangible heritage in 2010.",
+    ],
+    wrestlingTitle: "Bökh, Mongolian wrestling",
+    wrestlingLead: "Hundreds of wrestlers take to the grass at once, in pairs, and wrestle on until one of each pair falls. There are no rings and no mats.",
+    rulesTitle: "How a bout is won",
+    rulesLead: "Simple rules, and none of the ones other wrestling has.",
+    rules: [
+      "You lose when anything but the soles of your feet or the palms of your hands touches the ground: a knee, an elbow, a shoulder or your back.",
+      "There are no weight classes. A light, quick wrestler can be drawn against one twice his size.",
+      "Traditionally there is no time limit; a long bout is eventually given a set grip to bring it to an end.",
+      "At the national Naadam 512 or 1024 wrestlers start, and each round halves the field. In the early rounds the higher-ranked wrestler chooses his opponent.",
+      "The festival's bökh is for men. Women compete in archery and girls ride in the horse races.",
+    ],
+    outfitTitle: "What a wrestler wears",
+    outfitText: "The outfit is old and nearly the same everywhere in the country, and every part of it has a reason.",
+    outfit: {
+      zodog: "A short jacket that is only two sleeves and a back, tied at the waist with a cord. Its chest is left open, by legend since a woman once entered in disguise and threw every man she met.",
+      shuudag: "Tight briefs of silk or cotton, red or blue, that give an opponent nothing to hold.",
+      gutal: "Heavy leather boots with upturned toes, bound tight with cord for the bout.",
+      malgai: "A pointed hat whose ribbons and height show the wrestler's rank. His second holds it during the bout and hands it back when he wins.",
+    },
+    ritualTitle: "The eagle dance and the second",
+    ritualText: "Before a bout each wrestler dances the eagle dance, arms spread like wings, to the judges and the banner. His second, the zasuul, slaps his thigh to send him in and calls out his titles. When it is over, the loser unties his zodog and passes under the winner's raised arm, and the winner dances the eagle dance again.",
+    titlesTitle: "From Nachin to Avarga",
+    titlesLead: "A title is won at the national Naadam and kept for life. Each one is named after a bird or a beast, and each is harder than the last.",
+    titles: {
+      nachin: {
+        meaning: "Falcon",
+        rule: "Wins five rounds",
+      },
+      khartsaga: {
+        meaning: "Hawk",
+        rule: "Wins six rounds",
+      },
+      zaan: {
+        meaning: "Elephant",
+        rule: "Wins seven rounds",
+      },
+      garid: {
+        meaning: "Garuda",
+        rule: "Wins eight rounds",
+      },
+      arslan: {
+        meaning: "Lion",
+        rule: "Wins the national Naadam",
+      },
+      avarga: {
+        meaning: "Titan",
+        rule: "Wins it a second time",
+      },
+    },
+    gamesTitle: "The other two games",
+    games: {
+      horse: {
+        title: "Horse racing",
+        text: "Races are run cross-country over 10 to 28 km, in six classes by the horses' age, ridden by children of five to thirteen. The horse, not the rider, is the winner: the first five are praised in song, and the last two-year-old home is sung a teasing verse.",
+      },
+      archery: {
+        title: "Archery",
+        text: "Men shoot from 75 metres and women from 65 at a low wall of small leather cylinders. When an arrow hits, the judges at the target raise their arms and sing out ‘uukhai’.",
+      },
+    },
+    watchTitle: "Watching it",
+    watchLead: "The capital's Naadam is the grandest; a district naadam is the friendliest.",
+    watch: [
+      "The opening ceremony is on the morning of 11 July at the National Sports Stadium in Ulaanbaatar. Tickets sell out, so buy them early through your hotel or a tour operator.",
+      "Wrestling fills the stadium for both main days; the archery ground is right beside it.",
+      "The horse races are at Khui Doloon Khudag, about 40 km west of the city, with traffic to match. Go early or go with a driver.",
+      "Every province and district holds its own naadam in July and August. They are smaller and free, and you can stand right at the edge of the wrestling.",
+    ],
+    photoAlt: {
+      hero: "Wrestlers grappling on the grass at a naadam in Terelj",
+      outfit: "A wrestler in a red zodog and blue shuudag at the national stadium",
+      dance: "A wrestler dancing the eagle dance after a win",
+      grapple: "Two wrestlers locked together in a bout",
+      horse: "Child jockeys racing their horses at Naadam",
+      archery: "Archers in deels shooting at Naadam",
+    },
+    note: "Dates and venues can change from year to year; check the schedule for the year you travel before you plan around it.",
   },
 };
 
