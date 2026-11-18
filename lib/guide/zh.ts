@@ -48,20 +48,6 @@ const zh: GuideText = {
     },
   },
 
-  search: {
-    open: "搜索",
-    title: "搜索",
-    placeholder: "省份、景点、页面…",
-    hint: "可以试试“戈壁”“金雕”“库苏古尔”“签证”。",
-    empty: (q) => `没有找到与“${q}”相关的内容。`,
-    emptyHint: "请检查拼写，或试试省份或景点的名字。",
-    provinces: "省份",
-    sights: "景点",
-    pages: "页面",
-    close: "关闭搜索",
-    results: (n) => `${n} 条结果`,
-  },
-
   /* ================= itineraries ================= */
   itineraries: {
     kicker: "推荐路线",

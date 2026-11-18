@@ -9,7 +9,7 @@ import type { Lang } from "@/lib/i18n";
 
 const guides: Record<Lang, GuideText> = { en, mn, ja, ko, zh, ru };
 
-/** Text for the culture / itineraries / practical pages and the search box. */
+/** Text for the culture / itineraries / practical pages. */
 export function getGuide(lang: Lang): GuideText {
   return guides[lang];
 }

@@ -51,20 +51,6 @@ const ko: GuideText = {
     },
   },
 
-  search: {
-    open: "검색",
-    title: "검색",
-    placeholder: "아이막, 명소, 페이지…",
-    hint: "“고비”, “독수리”, “흡스굴”, “비자” 등으로 찾아보세요.",
-    empty: (q) => `“${q}”에 대한 결과가 없습니다.`,
-    emptyHint: "철자를 확인하거나 아이막 또는 명소 이름으로 검색해 보세요.",
-    provinces: "아이막",
-    sights: "명소",
-    pages: "페이지",
-    close: "검색 닫기",
-    results: (n) => `${n}개 결과`,
-  },
-
   /* ================= itineraries ================= */
   itineraries: {
     kicker: "추천 일정",

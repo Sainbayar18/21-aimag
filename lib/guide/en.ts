@@ -51,20 +51,6 @@ const en: GuideText = {
     },
   },
 
-  search: {
-    open: "Search",
-    title: "Search",
-    placeholder: "A province, a sight, a page…",
-    hint: "Try “Gobi”, “eagle”, “Khövsgöl” or “visa”.",
-    empty: (q) => `Nothing found for “${q}”.`,
-    emptyHint: "Check the spelling, or try the name of a province or a sight.",
-    provinces: "Provinces",
-    sights: "Sights",
-    pages: "Pages",
-    close: "Close search",
-    results: (n) => `${n} ${n === 1 ? "result" : "results"}`,
-  },
-
   /* ================= itineraries ================= */
   itineraries: {
     kicker: "Itineraries",

@@ -23,7 +23,6 @@ export type RouteText = {
   stops: RouteStop[];
 };
 
-/** Everything the culture / itineraries / practical pages and the search box need. */
 /** The ger you walk into on the landing scene. */
 export type GerText = {
   doorKicker: string;
@@ -45,24 +44,11 @@ export type GerText = {
   chest: Record<ChestItemId, { name: string; page: string }>;
 };
 
+/** Everything the culture / itineraries / practical pages need. */
 export type GuideText = {
   nav: { culture: string; itineraries: string; practical: string; food: string };
 
   ger: GerText;
-
-  search: {
-    open: string;
-    title: string;
-    placeholder: string;
-    hint: string;
-    empty: (q: string) => string;
-    emptyHint: string;
-    provinces: string;
-    sights: string;
-    pages: string;
-    close: string;
-    results: (n: number) => string;
-  };
 
   itineraries: {
     kicker: string;

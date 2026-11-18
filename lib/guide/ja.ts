@@ -51,20 +51,6 @@ const ja: GuideText = {
     },
   },
 
-  search: {
-    open: "検索",
-    title: "検索",
-    placeholder: "県、見どころ、ページ…",
-    hint: "「ゴビ」「鷲」「フブスグル」「ビザ」などで試してください。",
-    empty: (q) => `「${q}」に一致するものは見つかりませんでした。`,
-    emptyHint: "つづりを確かめるか、県名や見どころの名前で探してみてください。",
-    provinces: "県",
-    sights: "見どころ",
-    pages: "ページ",
-    close: "検索を閉じる",
-    results: (n) => `${n}件`,
-  },
-
   /* ================= itineraries ================= */
   itineraries: {
     kicker: "モデルルート",
