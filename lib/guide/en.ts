@@ -45,7 +45,7 @@ const en: GuideText = {
       },
     },
     chest: {
-      book: { name: "A book of Mongolian history", page: "About Mongolia" },
+      book: { name: "A book of Mongolian history", page: "A history of Mongolia" },
       deel: { name: "A silk deel", page: "Culture and customs" },
       bowl: { name: "A silver bowl", page: "Mongolian food" },
     },

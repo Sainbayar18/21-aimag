@@ -68,7 +68,7 @@ export const chestItems: Record<
 > = {
   // the history book, an old green cloth hardback with yellowed edges
   book: {
-    path: "about",
+    path: "history",
     anchor: { x: 348, y: 380 },
     points: [
       [230, 233], [300, 229], [391, 227], [445, 227], [462, 236], [471, 260],

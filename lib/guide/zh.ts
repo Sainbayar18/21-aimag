@@ -43,7 +43,7 @@ const zh: GuideText = {
       },
     },
     chest: {
-      book: { name: "蒙古历史书", page: "关于蒙古" },
+      book: { name: "蒙古历史书", page: "蒙古历史" },
       deel: { name: "丝绸蒙古袍", page: "文化与习俗" },
       bowl: { name: "银碗", page: "蒙古美食" },
     },

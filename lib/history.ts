@@ -279,7 +279,10 @@ export const aboutText = {
     timelineTeaser: "Key moments in Mongolian history",
     readMore: "Read the full story",
     pageTitle: "About Mongolia",
-    pageLead: "Who the Mongols are, and how a nation of herders shaped the world — from the first people of the steppe to 2026.",
+    pageLead: "A nomadic nation between Russia and China: the land, the people and the facts worth knowing before you go.",
+    historyTitle: "A history of Mongolia",
+    historyLead:
+      "From the first people of the steppe to the empire of Chinggis Khaan, the Qing, independence and democracy: Mongolia’s story, up to 2026.",
     photoBy: "Photo",
     sources: "Dates follow commonly accepted histories of Mongolia. Population is an estimate; the 2020 census counted about 3.3 million.",
   },
@@ -305,7 +308,10 @@ export const aboutText = {
     timelineTeaser: "Монголын түүхийн гол үйл явдлууд",
     readMore: "Бүрэн түүхийг унших",
     pageTitle: "Монгол Улсын тухай",
-    pageLead: "Монголчууд хэн бэ, малчин ард түмэн дэлхийн түүхэнд хэрхэн нөлөөлсөн бэ — тал нутгийн анхны хүмүүсээс 2026 он хүртэл.",
+    pageLead: "Орос, Хятадын дунд орших нүүдэлчин үндэстэн: нутаг, ард түмэн, аялахаас өмнө мэдвэл зохих баримтууд.",
+    historyTitle: "Монголын түүх",
+    historyLead:
+      "Тал нутгийн анхны хүмүүсээс Чингис хааны эзэнт гүрэн, Манж Чин, тусгаар тогтнол, ардчилал хүртэл: Монголын түүх 2026 он хүртэл.",
     photoBy: "Зураг",
     sources: "Он цагийг Монголын түүхийн нийтлэг хүлээн зөвшөөрөгдсөн эх сурвалжийн дагуу бичив. Хүн ам нь ойролцоо тоо; 2020 оны тооллогоор 3.3 сая орчим байсан.",
   },

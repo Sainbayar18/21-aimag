@@ -3,15 +3,14 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import PhotoCredit from "@/components/PhotoCredit";
 import Reveal from "@/components/Reveal";
-import TimelineRail from "@/components/TimelineRail";
 import { getPhotoByFile } from "@/lib/aimags";
-import { entryLabel, eraLabel, eras, getAbout, history } from "@/lib/history";
+import { getAbout } from "@/lib/history";
 import { getDict, isLang } from "@/lib/i18n";
 import { alternates, share } from "@/lib/seo";
 
 type Props = { params: Promise<{ lang: string }> };
 
-const HERO = "/images/gallery/tuv-2.jpg";
+const HERO = "/images/home.jpg";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { lang } = await params;
@@ -76,51 +75,7 @@ export default async function AboutPage({ params }: Props) {
           </Reveal>
         </section>
 
-        <section className="section" aria-labelledby="timeline-title">
-          <Reveal className="section-head section-head--center">
-            <h2 id="timeline-title" className="h2">{a.timelineTitle}</h2>
-          </Reveal>
-
-          <TimelineRail>
-            {eras.map((era) => (
-              <div key={era.id} className="tl-era">
-                <Reveal className="tl-era-head">
-                  <span className="tl-era-range">{eraLabel(era, lang).range}</span>
-                  <h3 className="tl-era-name">{eraLabel(era, lang).name}</h3>
-                </Reveal>
-                <ol className="tl-list">
-                  {history
-                    .filter((h) => h.eraId === era.id)
-                    .map((h) => {
-                      const photo = h.photo ? getPhotoByFile(h.photo, lang) : undefined;
-                      const e = entryLabel(h, lang);
-                      return (
-                        <Reveal as="li" key={h.id} className={`tl-item${h.key ? " is-key" : ""}`}>
-                          <span className="tl-dot" aria-hidden="true" />
-                          <article className="tl-card">
-                            <p className="tl-date">{e.date}</p>
-                            <h4 className="tl-title">{e.title}</h4>
-                            <p className="tl-text">{e.text}</p>
-                            {photo && (
-                              <figure className="tl-photo">
-                                <div className="tl-photo-media">
-                                  <Image src={photo.file} alt={photo.caption} fill sizes="(max-width: 800px) 100vw, 520px" />
-                                </div>
-                                <figcaption>
-                                  <PhotoCredit photo={photo} lang={lang} />
-                                </figcaption>
-                              </figure>
-                            )}
-                          </article>
-                        </Reveal>
-                      );
-                    })}
-                </ol>
-              </div>
-            ))}
-          </TimelineRail>
-          <p className="caption about-sources">{a.sources}</p>
-        </section>
+        <p className="caption about-sources">{a.sources}</p>
       </div>
     </main>
   );

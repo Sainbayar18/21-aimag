@@ -45,7 +45,7 @@ const ja: GuideText = {
       },
     },
     chest: {
-      book: { name: "モンゴルの歴史の本", page: "モンゴルについて" },
+      book: { name: "モンゴルの歴史の本", page: "モンゴルの歴史" },
       deel: { name: "絹のデール", page: "文化と習慣" },
       bowl: { name: "銀の椀", page: "モンゴル料理" },
     },

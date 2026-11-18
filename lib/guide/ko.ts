@@ -45,7 +45,7 @@ const ko: GuideText = {
       },
     },
     chest: {
-      book: { name: "몽골 역사책", page: "몽골 소개" },
+      book: { name: "몽골 역사책", page: "몽골의 역사" },
       deel: { name: "비단 델", page: "문화와 풍습" },
       bowl: { name: "은그릇", page: "몽골 음식" },
     },

@@ -4,10 +4,10 @@ import { langs } from "@/lib/i18n";
 import { absolute, sitemapAlternates } from "@/lib/seo";
 
 /** Every page except the province pages, which are added from the data. */
-const pages = ["", "/destinations", "/itineraries", "/culture", "/food", "/getting-here", "/practical", "/about"];
+const pages = ["", "/destinations", "/itineraries", "/culture", "/food", "/getting-here", "/practical", "/about", "/history"];
 
 /**
- * All 174 pages, each listed once per language with the other five as
+ * All 180 pages, each listed once per language with the other five as
  * hreflang alternates, so a search engine can serve a visitor the version in
  * their own language.
  */
