@@ -79,7 +79,7 @@ export const chestItems: Record<
   },
   // the folded silk deel, collar to hem, with the sash lying on it
   deel: {
-    path: "culture",
+    path: "deels",
     anchor: { x: 700, y: 480 },
     points: [
       [646, 152], [718, 154], [746, 165], [824, 173], [840.5, 195.5], [874, 257],
@@ -100,6 +100,63 @@ export const chestItems: Record<
       [945, 283], [965, 262], [988, 247],
     ],
   },
+};
+
+/* ---------------- deels ---------------- */
+
+/**
+ * The peoples on the deels page, grouped the way Mongolian ethnography groups
+ * them, each family in the order shown. `image` says what stands for the
+ * deel: an AI illustration drawn from written descriptions (public/images/
+ * deel/{id}.jpg), a credited photograph (data/deel-photos.json), or nothing
+ * where no reliable description was found to draw from.
+ */
+export const deelFamilyIds = ["khalkha", "west", "northEast", "turkic"] as const;
+export type DeelFamilyId = (typeof deelFamilyIds)[number];
+
+export const deelIds = [
+  "khalkha",
+  "durvud",
+  "bayad",
+  "zakhchin",
+  "torguud",
+  "uriankhai",
+  "myangad",
+  "oold",
+  "khotgoid",
+  "sartuul",
+  "buryat",
+  "barga",
+  "darkhad",
+  "dariganga",
+  "uzemchin",
+  "kazakh",
+  "tsaatan",
+  "khamnigan",
+  "khoton",
+] as const;
+export type DeelId = (typeof deelIds)[number];
+
+export const deelGroups: Record<DeelId, { family: DeelFamilyId; image: "ai" | "photo" | null }> = {
+  khalkha: { family: "khalkha", image: "ai" },
+  durvud: { family: "west", image: "ai" },
+  bayad: { family: "west", image: "ai" },
+  zakhchin: { family: "west", image: "ai" },
+  torguud: { family: "west", image: "ai" },
+  uriankhai: { family: "west", image: "ai" },
+  myangad: { family: "west", image: "ai" },
+  oold: { family: "west", image: null },
+  khotgoid: { family: "west", image: null },
+  sartuul: { family: "west", image: null },
+  buryat: { family: "northEast", image: "ai" },
+  barga: { family: "northEast", image: "ai" },
+  darkhad: { family: "northEast", image: "ai" },
+  dariganga: { family: "northEast", image: "ai" },
+  uzemchin: { family: "northEast", image: null },
+  kazakh: { family: "turkic", image: "photo" },
+  tsaatan: { family: "turkic", image: "ai" },
+  khamnigan: { family: "turkic", image: "ai" },
+  khoton: { family: "turkic", image: null },
 };
 
 /* ---------------- food ---------------- */

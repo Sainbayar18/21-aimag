@@ -46,7 +46,7 @@ const en: GuideText = {
     },
     chest: {
       book: { name: "A book of Mongolian history", page: "A history of Mongolia" },
-      deel: { name: "A silk deel", page: "Culture and customs" },
+      deel: { name: "A silk deel", page: "The deels of Mongolia’s peoples" },
       bowl: { name: "A silver bowl", page: "Mongolian food" },
     },
   },
@@ -563,6 +563,139 @@ const en: GuideText = {
     visaLink: "The practical guide",
     disclaimer:
       "Timetables, routes and border rules change, sometimes at short notice. Check with the airline, the railway or a Mongolian embassy before you travel.",
+  },
+
+  /* ================= deels ================= */
+  deels: {
+    pageTitle: "The deels of Mongolia’s peoples",
+    pageLead:
+      "Every people in Mongolia wears the deel its own way: the cut of a collar, the height of a shoulder, a band of colour or a hat tell a Khalkha from a Buryat or a Torguud. Here they are, side by side.",
+    metaDescription:
+      "The traditional deels of Mongolia’s ethnic groups: Khalkha, Dörvöd, Bayad, Zakhchin, Torguud, Uriankhai, Myangad, Buryat, Barga, Darkhad, Dariganga, Kazakh, Dukha, Khamnigan and more, and what sets each apart.",
+    note:
+      "The pictures are illustrations made with AI from written descriptions of each people’s dress; the Kazakh family is a photograph. Dress also varies from family to family and from one century to the next, so take them as a guide, not a record.",
+    lineupLabel: "The peoples on this page",
+    aiCaption: "AI illustration",
+    imageAlt: "{name}: a man and a woman in traditional dress",
+    photoCaption: "A Kazakh eagle-hunter family in western Mongolia",
+    missing: "We have not found a reliable description of this deel yet, so it is not drawn here.",
+    families: {
+      khalkha: {
+        title: "The Khalkha",
+        text: "Four in five Mongolians are Khalkha, and theirs is the deel most visitors picture.",
+      },
+      west: {
+        title: "The west",
+        text: "The Oirat peoples and their neighbours in Uvs, Khovd and Zavkhan, where white sheepskin, black trim and tall hats are common.",
+      },
+      northEast: {
+        title: "The north and east",
+        text: "From the Khövsgöl taiga to the eastern steppe, where banded lapels and gathered shoulders show the Buryat world next door.",
+      },
+      turkic: {
+        title: "Turkic and Tungusic peoples",
+        text: "Peoples whose languages and dress come from beyond the Mongol world.",
+      },
+    },
+    groups: {
+      khalkha: {
+        name: "Khalkha",
+        place: "The whole country",
+        text: "A man’s deel closes to the right with knot buttons and has wide, cuffed sleeves. A married woman’s rises at the shoulders into stiff puffs and is worn under a sleeveless uuj edged in silk. Hats carry a red knot on top and red ribbons behind.",
+      },
+      durvud: {
+        name: "Dörvöd",
+        place: "Uvs province",
+        text: "In winter men and women wore deels of undyed white lambskin without side slits. A woman’s dark-blue summer deel closes with five silver buttons and is trimmed with black silk and a rainbow ribbon, but its hem is left plain, which sets the Dörvöd apart from other Oirats.",
+      },
+      bayad: {
+        name: "Bayad",
+        place: "Uvs province, with communities in Dundgovi and Dornod",
+        text: "Women wear crimson or burgundy deels whose collar and lapel are edged with a broad white band, with very wide cuffed sleeves and red boots. Men’s white sheepskin winter deels are bordered all round in black velvet.",
+      },
+      zakhchin: {
+        name: "Zakhchin",
+        place: "Southern Khovd province",
+        text: "Men wear a white sheepskin deel with a double band of trim at the collar and chest. A married woman’s summer deel is dark blue, wide at the upper arm and narrow at the wrist, with red silk and coloured ribbons at the hem. Hats are low, red and stitched in 32 panels.",
+      },
+      torguud: {
+        name: "Torguud",
+        place: "Bulgan district, Khovd province",
+        text: "Deels are cut roomy, with wide gussets under the arms, long sleeves that keep the hands warm on the reins, and fur along the collar, front and cuffs. Women’s tall hats are set with coral and pearls.",
+      },
+      uriankhai: {
+        name: "Altai Uriankhai",
+        place: "The Altai slopes of Khovd province",
+        text: "A man’s everyday deel is white, slit at both sides with a large black shape above each slit and wide black trim at the collar and hem, and his hat is shaped like a helmet. Women hang three or five coloured kerchiefs from the waist.",
+      },
+      myangad: {
+        name: "Myangad",
+        place: "Myangad district, Khovd province",
+        text: "Deels are cut without gores, with a wide black collar and front trim and a red edge to the collar. Men and women alike wear black velvet hats, and women hang a knife and five coloured kerchiefs from the belt.",
+      },
+      oold: {
+        name: "Ööld",
+        place: "Khovd province",
+        text: "An Oirat people of Khovd, living alongside the Myangad in Erdenebüren district.",
+      },
+      khotgoid: {
+        name: "Khotgoid",
+        place: "Zavkhan and Khövsgöl provinces",
+        text: "Once part of the Oirat confederation, the Khotgoid rose against the Manchus under Chingünjav in 1755–57.",
+      },
+      sartuul: {
+        name: "Sartuul",
+        place: "Zavkhan province",
+        text: "A small Mongol people of Zavkhan, known for their own short songs.",
+      },
+      buryat: {
+        name: "Buryat",
+        place: "Khentii, Dornod and Selenge provinces",
+        text: "A man’s deel has a square opening and a front made of three bands, white, black and red. A married woman’s is gathered into pleated, raised shoulders with a decorative band set into each sleeve. Conical hats have tassels spreading from the peak.",
+      },
+      barga: {
+        name: "Barga",
+        place: "Dornod province",
+        text: "Men’s deels have a wide black collar and lapel and a wide hem, tightly belted. Married women wear a deel with rounded shoulders under a sleeveless vest, a tall round hat trimmed with fox or squirrel fur, and two long braids reaching the hem.",
+      },
+      darkhad: {
+        name: "Darkhad",
+        place: "The Darkhad valley, northern Khövsgöl",
+        text: "At the edge of the taiga, the Darkhad wear deels with a lapel of several colour bands, like the Buryat, and a back skirt cut longer than the front.",
+      },
+      dariganga: {
+        name: "Dariganga",
+        place: "Sükhbaatar province",
+        text: "Their dress is close to the Khalkha’s. What sets them apart is silver: the Dariganga are famous smiths, and women wear headbands, hair clasps and ornaments of silver and coral.",
+      },
+      uzemchin: {
+        name: "Üzemchin",
+        place: "Dornod and Sükhbaatar provinces",
+        text: "A people of the eastern steppe, known for their archery and their long songs.",
+      },
+      kazakh: {
+        name: "Kazakh",
+        place: "Bayan-Ölgii province",
+        text: "Turkic-speaking and Muslim, Kazakhs wear their own dress rather than the deel: the long chapan robe, embroidered velvet, fox-fur coats in winter, a small embroidered cap for men and white headwear for married women.",
+      },
+      tsaatan: {
+        name: "Dukha (Tsaatan)",
+        place: "The taiga of northern Khövsgöl",
+        text: "Reindeer herders who speak a Turkic language. Their everyday deels are wide and practical, with hats like those of the Khalkha.",
+      },
+      khamnigan: {
+        name: "Khamnigan",
+        place: "Khentii province, along the Onon",
+        text: "A people of Evenki origin who live alongside the Buryat. Women’s deels are cut like Buryat ones, with a broad band at the hem and tasselled belts; hunters once wore short deels of roe-deer hide and hats of deer skin.",
+      },
+      khoton: {
+        name: "Khoton",
+        place: "Uvs province",
+        text: "A people of Turkic origin who now speak the Oirat Mongolian of their neighbours.",
+      },
+    },
+    sources:
+      "Descriptions follow Mongolian ethnographic accounts, Montsame, Insight Mongolia and the Mongolian Guide School. The dress of most of these peoples is listed in Mongolia’s national register of intangible heritage.",
   },
 
   food: {

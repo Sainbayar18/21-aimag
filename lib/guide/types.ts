@@ -1,4 +1,14 @@
-import type { ChestItemId, CultureId, DishId, GerObjectId, PracticalId, RouteId, WayId } from "@/lib/guide/shared";
+import type {
+  ChestItemId,
+  CultureId,
+  DeelFamilyId,
+  DeelId,
+  DishId,
+  GerObjectId,
+  PracticalId,
+  RouteId,
+  WayId,
+} from "@/lib/guide/shared";
 
 /** One titled block with a short paragraph and a few bullet points. */
 export type GuideSection = {
@@ -131,6 +141,27 @@ export type GuideText = {
     visa: string;
     visaLink: string;
     disclaimer: string;
+  };
+
+  /** The deels page, opened by the silk deel in the chest. */
+  deels: {
+    pageTitle: string;
+    pageLead: string;
+    metaDescription: string;
+    /** how the pictures were made, under the lead */
+    note: string;
+    lineupLabel: string;
+    /** under each AI illustration */
+    aiCaption: string;
+    /** "{name}" is replaced with the people's name */
+    imageAlt: string;
+    /** the Kazakh photograph's caption */
+    photoCaption: string;
+    /** for a people whose deel is not pictured */
+    missing: string;
+    families: Record<DeelFamilyId, { title: string; text: string }>;
+    groups: Record<DeelId, { name: string; place: string; text: string }>;
+    sources: string;
   };
 
   food: {

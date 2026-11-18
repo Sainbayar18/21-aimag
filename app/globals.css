@@ -4400,19 +4400,22 @@ body:has(.ger) .to-ger {
   --way: #a8741c; /* the butter yellow, darkened to read as a thin line */
 }
 
-.arrive-hero {
+.arrive-hero,
+.deels-hero {
   display: flex;
   flex-direction: column;
   gap: 28px;
   padding-top: 104px;
 }
-.arrive-intro {
+.arrive-intro,
+.deels-intro {
   display: flex;
   flex-direction: column;
   gap: 16px;
   max-width: 760px;
 }
-.arrive-title {
+.arrive-title,
+.deels-title {
   margin: 0;
   font-family: var(--font-display);
   font-weight: 700;
@@ -4421,15 +4424,16 @@ body:has(.ger) .to-ger {
   letter-spacing: -0.005em;
   overflow-wrap: anywhere;
 }
-html:is(:lang(ja), :lang(zh)) .arrive-title {
+html:is(:lang(ja), :lang(zh)) :is(.arrive-title, .deels-title) {
   font-size: clamp(34px, 6vw, 68px);
   line-height: 1.18;
   word-break: auto-phrase;
 }
-html:lang(ko) .arrive-title {
+html:lang(ko) :is(.arrive-title, .deels-title) {
   word-break: keep-all;
 }
-.arrive-lead {
+.arrive-lead,
+.deels-lead {
   max-width: 60ch;
   color: var(--muted);
 }
@@ -4584,7 +4588,8 @@ html:lang(ko) .arrive-title {
   max-width: 60ch;
 }
 @media (max-width: 600px) {
-  .arrive-hero {
+  .arrive-hero,
+  .deels-hero {
     gap: 22px;
     padding-top: 84px;
   }
@@ -4593,5 +4598,168 @@ html:lang(ko) .arrive-title {
   .arrive-map [data-way],
   .arrive-way {
     transition: none;
+  }
+}
+
+/* ================= deels =================
+   The silk deel's page. Every pictured people stands on the same pale
+   backdrop, a man and a woman side by side, so the line-up at the top reads
+   like a parade of deels and each entry below is a plate in a costume book.
+   Peoples with no reliable description are named, never drawn. */
+.deels-lineup {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+  gap: 14px 10px;
+  padding-top: 8px;
+}
+.deels-lineup-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--ink);
+  text-decoration: none;
+}
+.deels-lineup-media {
+  display: block;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: #e3dfd8;
+}
+.deels-lineup-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 40%;
+}
+.deels-lineup-item.is-empty .deels-lineup-media {
+  background: transparent;
+  border: 1.5px dashed var(--line);
+}
+.deels-lineup-name {
+  font-size: 13px;
+  line-height: 17px;
+  font-weight: 700;
+}
+.deels-lineup-item:hover .deels-lineup-name,
+.deels-lineup-item:focus-visible .deels-lineup-name {
+  text-decoration: underline;
+}
+.deels-lineup-item:focus-visible {
+  outline: 2px solid var(--sky);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+@media (max-width: 600px) {
+  /* one row to swipe along rather than a wall of small tiles */
+  .deels-lineup {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: 16px;
+    margin: 0 -16px;
+    padding: 8px 16px 6px;
+    scrollbar-width: none;
+  }
+  .deels-lineup::-webkit-scrollbar {
+    display: none;
+  }
+  .deels-lineup-item {
+    flex: 0 0 92px;
+    scroll-snap-align: start;
+  }
+}
+
+.deels-body {
+  padding-top: 40px;
+}
+.deels-family-head {
+  max-width: 760px;
+  padding-top: 26px;
+  border-top: 1px solid var(--ink);
+}
+.deels-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 40px;
+  row-gap: 48px;
+}
+@media (max-width: 800px) {
+  .deels-grid {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 40px;
+  }
+}
+.deel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  scroll-margin-top: 24px;
+}
+.deel-figure {
+  margin: 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.deel-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  background: #e3dfd8;
+}
+.deel-name {
+  margin: 0;
+}
+.deel-place {
+  margin: 0;
+  font-size: 15px;
+  line-height: 22px;
+  color: var(--muted);
+}
+.deel-text {
+  margin: 4px 0 0;
+  max-width: 62ch;
+}
+.deels-missing {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px 40px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.deel--missing {
+  padding: 18px 0 0;
+  border-top: 1.5px dashed var(--line);
+}
+.deel-missing-note {
+  margin: 6px 0 0;
+  font-size: 14px;
+  line-height: 21px;
+  color: var(--muted);
+}
+/* a family of one, the Khalkha, sets its text beside the picture rather
+   than leaving the second column empty */
+@media (min-width: 801px) {
+  .deels-grid > .deel:only-child {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 40px;
+    row-gap: 6px;
+    align-content: start;
+  }
+  .deels-grid > .deel:only-child .deel-figure {
+    grid-row: 1 / span 4;
+    margin: 0;
+  }
+  .deels-grid > .deel:only-child > :not(.deel-figure) {
+    grid-column: 2;
+  }
+  .deels-grid > .deel:only-child .deel-name {
+    align-self: end;
   }
 }
