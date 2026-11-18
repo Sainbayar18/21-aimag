@@ -11,7 +11,8 @@ import type { GerText } from "@/lib/guide/types";
  * when a cursor finds them or their name below, and a tap opens the page.
  *
  * The picture's viewBox is its own pixels (1376×768), so the outlines in
- * chestItems sit on what they trace at any size.
+ * chestItems sit on what they trace at any size. A thing may be several
+ * pieces (the snuff bottle, its spoon and its pouch), each outlined apart.
  */
 
 const W = 1376;
@@ -53,7 +54,9 @@ export default function GerChest({ g, onOpen }: Props) {
           </filter>
           {chestItemIds.map((id) => (
             <clipPath key={id} id={`ger-chest-clip-${id}`}>
-              <polygon points={join(chestItems[id].points)} />
+              {chestItems[id].parts.map((part, i) => (
+                <polygon key={i} points={join(part)} />
+              ))}
             </clipPath>
           ))}
           <radialGradient id="ger-chest-pin-glow">
@@ -87,8 +90,14 @@ export default function GerChest({ g, onOpen }: Props) {
                 }
               }}
             >
-              <polygon className="ger-chest-glow" points={spread(item.points, 1.25)} filter="url(#ger-chest-bloom)" />
-              <polygon className="ger-chest-rim" points={spread(item.points, 1.04)} filter="url(#ger-chest-rim)" />
+              {/* each piece has its own light, so the felt between the pieces
+                  of the snuff bottle stays dark */}
+              {item.parts.map((part, i) => (
+                <polygon key={`g${i}`} className="ger-chest-glow" points={spread(part, 1.25)} filter="url(#ger-chest-bloom)" />
+              ))}
+              {item.parts.map((part, i) => (
+                <polygon key={`r${i}`} className="ger-chest-rim" points={spread(part, 1.04)} filter="url(#ger-chest-rim)" />
+              ))}
               <image
                 className="ger-chest-copy"
                 href={PICTURE}
@@ -96,7 +105,9 @@ export default function GerChest({ g, onOpen }: Props) {
                 height={H}
                 clipPath={`url(#ger-chest-clip-${id})`}
               />
-              <polygon className="ger-chest-hit" points={join(item.points)} />
+              {item.parts.map((part, i) => (
+                <polygon key={`h${i}`} className="ger-chest-hit" points={join(part)} />
+              ))}
               <g className="ger-chest-pin" aria-hidden="true">
                 <circle cx={item.anchor.x} cy={item.anchor.y} r="30" fill="url(#ger-chest-pin-glow)" />
                 <circle className="ger-chest-pin-ring" cx={item.anchor.x} cy={item.anchor.y} r="13" />

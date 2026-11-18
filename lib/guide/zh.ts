@@ -26,7 +26,7 @@ const zh: GuideText = {
       chest: {
         name: "彩绘木箱",
         teaser:
-          "里面有一本蒙古历史书、一件丝绸蒙古袍和一只银碗。打开其中一样看看吧。",
+          "里面有一本蒙古历史书、一件丝绸蒙古袍、一套摔跤手的坎肩与短裤和一只鼻烟壶。打开其中一样看看吧。",
         cta: "文化与习俗",
       },
       ticket: {
@@ -45,7 +45,8 @@ const zh: GuideText = {
     chest: {
       book: { name: "蒙古历史书", page: "蒙古历史" },
       deel: { name: "丝绸蒙古袍", page: "蒙古各民族的袍服" },
-      bowl: { name: "银碗", page: "蒙古美食" },
+      zodog: { name: "摔跤手的坎肩与短裤", page: "那达慕与男儿三艺" },
+      snuff: { name: "鼻烟壶", page: "问候与小礼节" },
     },
   },
 

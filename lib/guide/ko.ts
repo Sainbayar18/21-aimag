@@ -28,7 +28,7 @@ const ko: GuideText = {
       chest: {
         name: "채색한 궤(아우다르)",
         teaser:
-          "안에는 몽골 역사책, 비단 델, 은그릇이 있습니다. 하나를 열어 보세요.",
+          "안에는 몽골 역사책, 비단 델, 씨름꾼의 조독과 쇼닥, 코담배병이 있습니다. 하나를 열어 보세요.",
         cta: "문화와 관습",
       },
       ticket: {
@@ -47,7 +47,8 @@ const ko: GuideText = {
     chest: {
       book: { name: "몽골 역사책", page: "몽골의 역사" },
       deel: { name: "비단 델", page: "몽골 여러 민족의 델" },
-      bowl: { name: "은그릇", page: "몽골 음식" },
+      zodog: { name: "씨름꾼의 조독과 쇼닥", page: "나담과 남자의 세 가지 경기" },
+      snuff: { name: "코담배병", page: "인사와 작은 예의" },
     },
   },
 

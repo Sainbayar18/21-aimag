@@ -4318,7 +4318,7 @@ body:has(.ger) .to-ger {
 }
 .ger-chest-list {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
   margin: 0;
   padding: 0;
@@ -4761,5 +4761,12 @@ html:lang(ko) :is(.arrive-title, .deels-title) {
   }
   .deels-grid > .deel:only-child .deel-name {
     align-self: end;
+  }
+}
+
+/* four things in the chest: two to a row before the list stacks on a phone */
+@media (max-width: 900px) and (min-width: 701px) {
+  .ger-chest-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

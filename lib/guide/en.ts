@@ -28,7 +28,7 @@ const en: GuideText = {
       chest: {
         name: "The painted chest",
         teaser:
-          "Inside: a book of Mongolian history, a silk deel and a silver bowl. Open any of them.",
+          "Inside: a book of Mongolian history, a silk deel, a wrestler’s zodog and shuudag, and a snuff bottle. Open any of them.",
         cta: "Culture and customs",
       },
       ticket: {
@@ -47,7 +47,8 @@ const en: GuideText = {
     chest: {
       book: { name: "A book of Mongolian history", page: "A history of Mongolia" },
       deel: { name: "A silk deel", page: "The deels of Mongolia’s peoples" },
-      bowl: { name: "A silver bowl", page: "Mongolian food" },
+      zodog: { name: "A wrestler’s zodog and shuudag", page: "Naadam and the three manly games" },
+      snuff: { name: "A snuff bottle", page: "Greetings and small courtesies" },
     },
   },
 
