@@ -4894,3 +4894,146 @@ body:has(.ger) .to-ger {
 .page-plain {
   padding-top: 72px;
 }
+
+/* ================= the chest, opened =================
+   The same veil and growing panel as the map (.ger-mapview). The picture
+   looks down into the open chest; its three things light like the things in
+   the ger — a warm glow behind, the thing itself brightened — and their
+   names below light them too. */
+.ger-chest {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 0;
+}
+.ger-chest-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: calc(100svh - 230px);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+.ger-chest-item {
+  cursor: pointer;
+  outline: none;
+}
+.ger-chest-glow {
+  fill: #f0a52f;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.ger-chest-rim {
+  fill: #ffdc93;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.ger-chest-copy {
+  transition: filter 0.3s;
+}
+.ger-chest-hit {
+  fill: transparent;
+}
+.ger-chest-item.is-lit .ger-chest-glow {
+  opacity: 0.7;
+}
+.ger-chest-item.is-lit .ger-chest-rim {
+  opacity: 0.85;
+}
+.ger-chest-item.is-lit .ger-chest-copy {
+  filter: brightness(1.18) saturate(1.06);
+}
+.ger-chest-item:focus-visible .ger-chest-hit {
+  stroke: var(--gobi);
+  stroke-width: 3;
+  stroke-dasharray: 9 7;
+}
+/* the markers: the same small lamp as in the ger */
+.ger-chest-pin {
+  pointer-events: none;
+}
+.ger-chest-pin-ring {
+  fill: none;
+  stroke: rgba(255, 250, 240, 0.85);
+  stroke-width: 2;
+}
+.ger-chest-pin-core {
+  fill: #fff8e8;
+  transition: fill 0.25s;
+}
+.ger-chest-item.is-lit .ger-chest-pin-core {
+  fill: var(--gobi);
+}
+.ger-chest-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ger-chest-text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 23px;
+  color: rgba(255, 250, 240, 0.86);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+}
+.ger-chest-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ger-chest-link {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 250, 240, 0.28);
+  border-radius: 8px;
+  background: rgba(255, 250, 240, 0.07);
+  color: #fff;
+  text-align: left;
+  transition: background 0.2s, border-color 0.2s;
+}
+.ger-chest-link:hover,
+.ger-chest-link.is-lit {
+  border-color: var(--gobi);
+  background: rgba(217, 164, 65, 0.18);
+}
+.ger-chest-link:focus-visible {
+  outline: 2px solid var(--gobi);
+  outline-offset: 2px;
+}
+.ger-chest-name {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 22px;
+}
+.ger-chest-page {
+  font-size: 13px;
+  line-height: 18px;
+  color: rgba(255, 250, 240, 0.72);
+}
+@media (max-width: 700px) {
+  .ger-chest-list {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+  .ger-chest-link {
+    padding: 8px 12px;
+  }
+  .ger-chest-svg {
+    max-height: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ger-chest-glow,
+  .ger-chest-rim,
+  .ger-chest-copy {
+    transition: none;
+  }
+}

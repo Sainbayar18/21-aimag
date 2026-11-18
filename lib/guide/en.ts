@@ -28,7 +28,7 @@ const en: GuideText = {
       chest: {
         name: "The painted chest",
         teaser:
-          "Inside: a deel, a silver bowl, a snuff bottle. The things a Mongolian household keeps — and the unwritten rules that come with them.",
+          "Inside: a book of Mongolian history, a silk deel and a silver bowl. Open any of them.",
         cta: "Culture and customs",
       },
       ticket: {
@@ -43,6 +43,11 @@ const en: GuideText = {
           "Buuz, khuushuur, tsuivan and salted milk tea: what goes into the pot, and what is poured for every guest who comes in.",
         cta: "Mongolian food",
       },
+    },
+    chest: {
+      book: { name: "A book of Mongolian history", page: "About Mongolia" },
+      deel: { name: "A silk deel", page: "Culture and customs" },
+      bowl: { name: "A silver bowl", page: "Mongolian food" },
     },
   },
 

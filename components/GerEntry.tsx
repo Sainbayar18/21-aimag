@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import LangSwitch from "@/components/LangSwitch";
 import TransitionLink from "@/components/TransitionLink";
 import { useEffect, useRef, useState } from "react";
+import GerChest from "@/components/ger/GerChest";
 import { GerExterior, GerInterior } from "@/components/ger/GerScenes";
 import { getGuide, gerObjectIds, gerObjects, type GerObjectId } from "@/lib/guide";
 import type { Lang } from "@/lib/i18n";
@@ -114,14 +115,14 @@ export default function GerEntry({ lang }: { lang: Lang }) {
 
   const labels = Object.fromEntries(gerObjectIds.map((id) => [id, g.objects[id].name])) as Record<GerObjectId, string>;
   /*
-   * Tapping a thing. The chest and the ticket are doors to their pages, so a
+   * Tapping a thing. The ticket and the pot are doors to their pages, so a
    * tap goes straight there; marking them active first keeps them lit while
-   * the page loads. The map is the map, so it comes off the wall instead.
-   * Measuring the sheet first lets that panel grow out of where it hangs
-   * rather than fading in over the middle of the screen.
+   * the page loads. The map comes off the wall instead, and the chest opens
+   * to show what is inside it. Measuring the thing first lets that panel grow
+   * out of where it stands rather than fading in over the middle.
    */
   function pick(id: GerObjectId) {
-    if (id !== "map") {
+    if (id !== "map" && id !== "chest") {
       setActive(id);
       follow(id);
       return;
@@ -130,8 +131,9 @@ export default function GerEntry({ lang }: { lang: Lang }) {
       setActive(null);
       return;
     }
-    const sheet = sceneRef.current?.querySelector(".ger-wallmap");
-    const box = sheet?.getBoundingClientRect();
+    // the map comes off the wall; the chest opens where it stands
+    const thing = sceneRef.current?.querySelector(id === "map" ? ".ger-wallmap" : ".ger-lamp--chest .ger-lamp-copy");
+    const box = thing?.getBoundingClientRect();
     setFrom(
       box && box.width > 0
         ? {
@@ -145,6 +147,20 @@ export default function GerEntry({ lang }: { lang: Lang }) {
   }
 
   const mapObject = g.objects.map;
+
+  // Escape puts the map back on the wall, or closes the chest
+  useEffect(() => {
+    if (active !== "map" && active !== "chest") return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActive(null);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [active]);
+
+  const fromStyle = from
+    ? ({ "--from-x": `${from.x}px`, "--from-y": `${from.y}px`, "--from-s": from.s } as React.CSSProperties)
+    : undefined;
 
   return (
     <section
@@ -225,18 +241,7 @@ export default function GerEntry({ lang }: { lang: Lang }) {
               if (e.target === e.currentTarget) setActive(null);
             }}
           >
-            <div
-              className="ger-mapview-panel"
-              style={
-                from
-                  ? ({
-                      "--from-x": `${from.x}px`,
-                      "--from-y": `${from.y}px`,
-                      "--from-s": from.s,
-                    } as React.CSSProperties)
-                  : undefined
-              }
-            >
+            <div className="ger-mapview-panel" style={fromStyle}>
               <button
                 type="button"
                 className="ger-mapview-close"
@@ -257,6 +262,34 @@ export default function GerEntry({ lang }: { lang: Lang }) {
                   </svg>
                 </button>
               </div>
+            </div>
+          </div>
+        )}
+
+        {/* the chest, opened: the same veil and the same growing panel as the
+            map, starting from where the chest stands */}
+        {active === "chest" && (
+          <div
+            className="ger-mapview ger-chestview"
+            role="dialog"
+            aria-modal="true"
+            aria-label={g.objects.chest.name}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setActive(null);
+            }}
+          >
+            <div className="ger-mapview-panel" style={fromStyle}>
+              <button
+                type="button"
+                className="ger-mapview-close"
+                onClick={() => setActive(null)}
+                aria-label={g.close}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" aria-hidden="true">
+                  <path d="M6 6l12 12M18 6 6 18" />
+                </svg>
+              </button>
+              <GerChest g={g} onOpen={(path) => router.push(`/${lang}/${path}`)} />
             </div>
           </div>
         )}

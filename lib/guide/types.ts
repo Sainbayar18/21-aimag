@@ -1,4 +1,4 @@
-import type { CultureId, DishId, GerObjectId, PracticalId, RouteId } from "@/lib/guide/shared";
+import type { ChestItemId, CultureId, DishId, GerObjectId, PracticalId, RouteId } from "@/lib/guide/shared";
 
 /** One titled block with a short paragraph and a few bullet points. */
 export type GuideSection = {
@@ -41,6 +41,8 @@ export type GerText = {
   objectsLabel: string;
   doorAria: string;
   objects: Record<GerObjectId, { name: string; teaser: string; cta: string }>;
+  /** the things in the opened chest: what each is, and the page it opens */
+  chest: Record<ChestItemId, { name: string; page: string }>;
 };
 
 export type GuideText = {
