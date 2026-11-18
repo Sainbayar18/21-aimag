@@ -33,7 +33,7 @@ export type RouteId = (typeof routeIds)[number];
  * place in `gerObjects` below, a clickable area in components/ger/GerScenes.tsx
  * (SPOTS) and text in each language file, and it appears.
  */
-export const gerObjectIds = ["map", "chest", "ticket", "pot"] as const;
+export const gerObjectIds = ["map", "chest", "treats", "ticket", "pot"] as const;
 export type GerObjectId = (typeof gerObjectIds)[number];
 
 export type GerObjectMeta = {
@@ -47,6 +47,8 @@ export type GerObjectMeta = {
 export const gerObjects: Record<GerObjectId, GerObjectMeta> = {
   map: { id: "map", anchor: { x: 1236, y: 386 }, target: { kind: "page", path: "destinations" } },
   chest: { id: "chest", anchor: { x: 586, y: 400 }, target: { kind: "page", path: "culture" } },
+  // the white food on the table: the aaruul, the boortsog and the butter
+  treats: { id: "treats", anchor: { x: 262, y: 650 }, target: { kind: "page", path: "tsagaan-sar" } },
   ticket: { id: "ticket", anchor: { x: 146, y: 684 }, target: { kind: "page", path: "getting-here" } },
   pot: { id: "pot", anchor: { x: 700, y: 574 }, target: { kind: "page", path: "food" } },
 };
@@ -225,6 +227,22 @@ export type NaadamGameId = (typeof naadamGameIds)[number];
 /** The museum bottles on the snuff page; credits in data/snuff-photos.json. */
 export const snuffBottleIds = ["agate", "coral", "silver", "jasper"] as const;
 export type SnuffBottleId = (typeof snuffBottleIds)[number];
+
+/* ---------------- tsagaan sar ---------------- */
+
+/** The eve and the first days, in order, by their Mongolian names. */
+export const tsagaanSarDays = [
+  { mn: "Битүүн", say: "bituun" },
+  { mn: "Шинийн нэгэн", say: "shiniin negen" },
+  { mn: "Золголт, айлчлал", say: "zolgolt, ailchlal" },
+];
+
+/** The greetings of the month; meanings in each language file. */
+export const tsagaanSarPhrases: Phrase[] = [
+  { mn: "Амар байна уу?", say: "amar bain uu" },
+  { mn: "Сар шинэдээ сайхан шинэлэв үү?", say: "sar shinedee saikhan shinelev uu" },
+  { mn: "Сайхан шинэлж байна", say: "saikhan shinelj bain" },
+];
 
 /* ---------------- food ---------------- */
 

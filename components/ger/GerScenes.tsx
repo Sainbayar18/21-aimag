@@ -178,6 +178,9 @@ const SHEET_MATRIX = (() => {
 const SPOTS: Record<GerObjectId, { x: number; y: number; w: number; h: number }> = {
   map: { x: 1014, y: 224, w: 248, h: 190 },
   chest: { x: 526, y: 346, w: 364, h: 226 },
+  // the aaruul, the boortsog and the butter on the table; drawn before the
+  // ticket, so the ticket wins where the two meet
+  treats: { x: 152, y: 588, w: 238, h: 102 },
   ticket: { x: 74, y: 644, w: 148, h: 100 },
   // the pot and its lid; drawn after the chest, so it wins where they meet
   pot: { x: 610, y: 506, w: 176, h: 122 },
@@ -198,6 +201,8 @@ type Lamp = {
   id: Exclude<GerObjectId, "map">;
   points: readonly (readonly [number, number])[];
   bloom: number;
+  /** further pieces lit with the first, for a thing that is several */
+  more?: readonly (readonly (readonly [number, number])[])[];
   /**
    * Where the light gives out, top to bottom, in picture pixels. Light from
    * behind an object falls on the wall behind it, not on the floor in front,
@@ -255,6 +260,26 @@ const LAMPS: Lamp[] = [
       [624.5, 540], [614.5, 539], [614, 534], [625, 533], [633, 527], [645, 522.5],
     ],
     bloom: 1.4,
+  },
+  /* the white food on the table, as one: the bowl of aaruul and the plate of
+     boortsog that overlaps it, and the bowl of butter beside them; the table
+     between them stays unlit */
+  {
+    id: "treats",
+    points: [
+      [155, 612], [162, 601], [182, 595], [200, 591], [222, 590], [242, 592],
+      [258, 600], [263, 607], [270, 609], [287, 610], [310, 616], [319, 622],
+      [338, 631], [350, 644], [351, 655], [338, 666], [308, 680], [269, 688],
+      [231, 687], [200, 680], [194, 670], [196, 662], [201, 652], [187, 651],
+      [172, 644], [161, 632],
+    ],
+    more: [
+      [
+        [315, 605], [330, 598], [346, 594], [366, 596], [386, 603], [383, 616],
+        [374, 630], [358, 641], [331, 639], [319, 626],
+      ],
+    ],
+    bloom: 1.3,
   },
 ];
 
@@ -457,13 +482,16 @@ function WallMap() {
 
 /* ---------------- the chest and the ticket ---------------- */
 
-function Lamp({ id, points, bloom, fade }: Lamp) {
+function Lamp({ id, points, more = [], bloom, fade }: Lamp) {
+  const pieces = [points, ...more];
   const outline = points.map(([x, y]) => `${x},${y}`).join(" ");
   return (
     <g className={`ger-lamp ger-lamp--${id}`} aria-hidden="true">
       <defs>
         <clipPath id={`ger-lamp-clip-${id}`}>
-          <polygon points={outline} />
+          {pieces.map((p, i) => (
+            <polygon key={i} points={p.map(([x, y]) => `${x},${y}`).join(" ")} />
+          ))}
         </clipPath>
         {fade && (
           <>
@@ -486,8 +514,12 @@ function Lamp({ id, points, bloom, fade }: Lamp) {
       </defs>
       {/* the bloom and the rim share the map's blur filters (WallMap) */}
       <g mask={fade ? `url(#ger-lamp-fade-${id})` : undefined}>
-        <polygon className="ger-lamp-glow" points={spread(points, bloom)} filter="url(#ger-wallmap-bloom)" />
-        <polygon className="ger-lamp-rim" points={spread(points, 1.05)} filter="url(#ger-wallmap-rim)" />
+        {pieces.map((p, i) => (
+          <polygon key={`g${i}`} className="ger-lamp-glow" points={spread(p, bloom)} filter="url(#ger-wallmap-bloom)" />
+        ))}
+        {pieces.map((p, i) => (
+          <polygon key={`r${i}`} className="ger-lamp-rim" points={spread(p, 1.05)} filter="url(#ger-wallmap-rim)" />
+        ))}
       </g>
       {/* faded the same way, so the warming does not reach the pot either */}
       <g mask={fade ? `url(#ger-lamp-fade-${id})` : undefined}>

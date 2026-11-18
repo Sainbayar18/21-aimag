@@ -1,0 +1,32 @@
+{
+  "hero": {
+    "file": "/images/tsagaan-sar/hero.jpg",
+    "title": "Mongolian Cuisine at World Heritage Cuisine Summit & Food Festival 2018 (19)",
+    "author": "Satdeep Gill",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Mongolian_Cuisine_at_World_Heritage_Cuisine_Summit_%26_Food_Festival_2018_(19).jpg",
+    "width": 2000,
+    "height": 1334
+  },
+  "table": {
+    "file": "/images/tsagaan-sar/table.jpg",
+    "title": "Tsagaan sar",
+    "author": "Chinneeb",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "source": "https://commons.wikimedia.org/wiki/File:Tsagaan_sar.jpg",
+    "width": 1280,
+    "height": 1043
+  },
+  "boov": {
+    "file": "/images/tsagaan-sar/boov.jpg",
+    "title": "Mongolian biscuit Ul boov at World Heritage Cuisine Summit & Food Festival 2018",
+    "author": "Satdeep Gill",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "source": "https://commons.wikimedia.org/wiki/File:Mongolian_biscuit_Ul_boov_at_World_Heritage_Cuisine_Summit_%26_Food_Festival_2018.jpg",
+    "width": 1280,
+    "height": 854
+  }
+}

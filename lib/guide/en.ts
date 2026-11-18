@@ -31,6 +31,12 @@ const en: GuideText = {
           "Inside: a book of Mongolian history, a silk deel, a wrestler’s zodog and shuudag, and a snuff bottle. Open any of them.",
         cta: "Culture and customs",
       },
+      treats: {
+        name: "White food on the table",
+        teaser:
+          "Aaruul, butter and boortsog: the white food that is laid out for Tsagaan Sar, the lunar new year, when the whole country goes visiting.",
+        cta: "Tsagaan Sar",
+      },
       ticket: {
         name: "The plane ticket on the table",
         teaser:
@@ -930,6 +936,54 @@ const en: GuideText = {
       jasper: "Jasper, shaped like a pouch",
     },
     note: "Customs vary a little from region to region and family to family. If in doubt, watch your host and do as he does.",
+  },
+
+  tsagaanSar: {
+    pageTitle: "Tsagaan Sar, the White Moon",
+    pageLead: "The Mongolian lunar new year is the family's festival: three days of greeting the elders, eating dumplings by the hundred and visiting every relative in turn.",
+    metaDescription: "A visitor's guide to Tsagaan Sar, the Mongolian lunar new year: the eve and the first day, the zolgokh greeting, the festive table of ul boov and buuz, and how to be a good guest.",
+    heroAlt: "A tower of ul boov biscuits filled with white food",
+    intro: [
+      "Tsagaan Sar, the White Moon, begins on the first day of the first spring month of the Mongolian lunar calendar, so it falls somewhere between late January and early March. White stands for purity and plenty, and the holiday is about starting the year clean, full and at peace with everyone.",
+      "It is a public holiday of three days, but the visiting can go on for weeks. In the city most offices close, and in the countryside families travel long distances to sit at their parents' table.",
+    ],
+    daysTitle: "The eve and the first days",
+    days: [
+      "The last day of the old year. The home is cleaned and old quarrels and debts are settled. The family eats until everyone is full, and some of every dish is left over so that the new year starts with plenty. Three lumps of ice are set by the door for the mule of the goddess Palden Lhamo.",
+      "Everyone is up before dawn. The men walk out from the ger in the direction the year's almanac names as lucky, and the family greets its eldest first, one by one, with the zolgokh. Only then does everyone sit down to the feast.",
+      "From the second day the visiting begins, eldest relatives first. Every household lays the same table, and at every door the greeting, the tea, the dumplings and a parting gift come round again.",
+    ],
+    zolgokhTitle: "The zolgokh greeting",
+    zolgokhText: "The younger person holds out both forearms, palms up, and supports the elder's arms from below at the elbows; the elder rests their arms on top and touches or sniffs both of the younger's cheeks. ‘Amar baina uu?’, are you at peace, says the younger. A khadag silk scarf is often laid over the hands. Two people of the same age each hold one arm over and one under. Hats stay on, and husbands and wives do not greet each other this way.",
+    zolgokhAlt: "A young man greeting his grandmother with the zolgokh, a blue khadag over his hands",
+    aiCaption: "AI illustration",
+    tableTitle: "The table",
+    tableLead: "Every home lays out the same things, and the same table waits for every guest.",
+    table: [
+      "Ul boov, ‘sole biscuits’, stamped with a pattern and stacked in an odd number of layers, higher for older households, and crowned with aaruul, sugar lumps and sweets.",
+      "Uuts, the steamed back and fat tail of a sheep, set at the head of the table and carved for the guests.",
+      "Buuz, steamed dumplings, made by the hundred in the days before and kept frozen outside, so that every visitor can be fed.",
+      "Milk tea poured for each guest on arrival, and a glass of vodka or airag offered with both hands.",
+    ],
+    tableAlt: "A Tsagaan Sar table with the sheep's back, ul boov and white food",
+    boovAlt: "Ul boov biscuits stamped with patterns",
+    guestTitle: "As a guest",
+    guestLead: "If you are invited, you will be fed well, and nobody expects you to know everything.",
+    guest: [
+      "Greet the eldest first, then the others in order of age.",
+      "Take the tea and the food with your right hand and eat at least a few buuz; three is polite, more is welcome.",
+      "You will be offered vodka. Take the glass, and if you do not drink, touch it to your lips and hand it back.",
+      "Bring a small gift for the household. You will leave with one too: the host gives every guest a present at the door.",
+      "Wear a deel if you have one, or at least something smart, and keep your hat on for the greeting.",
+    ],
+    phrasesTitle: "What to say",
+    phrasesLead: "Three phrases are heard at every door for a month.",
+    phrases: [
+      "Are you at peace? — said by the younger in the zolgokh",
+      "Did you see the new year in well?",
+      "We are seeing it in well — the reply",
+    ],
+    note: "The date moves with the lunar calendar every year; check it before you plan a visit. Customs vary from family to family, so watch your hosts and follow them.",
   },
 };
 

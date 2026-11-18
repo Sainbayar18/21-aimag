@@ -239,4 +239,32 @@ export type GuideText = {
     bottles: Record<SnuffBottleId, string>;
     note: string;
   };
+
+  tsagaanSar: {
+    pageTitle: string;
+    pageLead: string;
+    metaDescription: string;
+    heroAlt: string;
+    intro: string[];
+    daysTitle: string;
+    /** what happens on each day, aligned with `tsagaanSarDays` in shared.ts */
+    days: string[];
+    zolgokhTitle: string;
+    zolgokhText: string;
+    zolgokhAlt: string;
+    aiCaption: string;
+    tableTitle: string;
+    tableLead: string;
+    table: string[];
+    tableAlt: string;
+    boovAlt: string;
+    guestTitle: string;
+    guestLead: string;
+    guest: string[];
+    phrasesTitle: string;
+    phrasesLead: string;
+    /** meanings, aligned with `tsagaanSarPhrases` in shared.ts */
+    phrases: string[];
+    note: string;
+  };
 };

@@ -3684,7 +3684,10 @@ body {
 .ger-stage--in:has([data-spot="ticket"].is-active) .ger-lamp--ticket .ger-lamp-glow,
 .ger-stage--in:has([data-spot="pot"]:hover) .ger-lamp--pot .ger-lamp-glow,
 .ger-stage--in:has([data-spot="pot"]:focus-visible) .ger-lamp--pot .ger-lamp-glow,
-.ger-stage--in:has([data-spot="pot"].is-active) .ger-lamp--pot .ger-lamp-glow {
+.ger-stage--in:has([data-spot="pot"].is-active) .ger-lamp--pot .ger-lamp-glow,
+.ger-stage--in:has([data-spot="treats"]:hover) .ger-lamp--treats .ger-lamp-glow,
+.ger-stage--in:has([data-spot="treats"]:focus-visible) .ger-lamp--treats .ger-lamp-glow,
+.ger-stage--in:has([data-spot="treats"].is-active) .ger-lamp--treats .ger-lamp-glow {
   opacity: 0.85;
 }
 .ger-stage--in:has([data-spot="chest"]:hover) .ger-lamp--chest .ger-lamp-rim,
@@ -3695,7 +3698,10 @@ body {
 .ger-stage--in:has([data-spot="ticket"].is-active) .ger-lamp--ticket .ger-lamp-rim,
 .ger-stage--in:has([data-spot="pot"]:hover) .ger-lamp--pot .ger-lamp-rim,
 .ger-stage--in:has([data-spot="pot"]:focus-visible) .ger-lamp--pot .ger-lamp-rim,
-.ger-stage--in:has([data-spot="pot"].is-active) .ger-lamp--pot .ger-lamp-rim {
+.ger-stage--in:has([data-spot="pot"].is-active) .ger-lamp--pot .ger-lamp-rim,
+.ger-stage--in:has([data-spot="treats"]:hover) .ger-lamp--treats .ger-lamp-rim,
+.ger-stage--in:has([data-spot="treats"]:focus-visible) .ger-lamp--treats .ger-lamp-rim,
+.ger-stage--in:has([data-spot="treats"].is-active) .ger-lamp--treats .ger-lamp-rim {
   opacity: 0.9;
 }
 .ger-stage--in:has([data-spot="chest"]:hover) .ger-lamp--chest .ger-lamp-copy,
@@ -3706,7 +3712,10 @@ body {
 .ger-stage--in:has([data-spot="ticket"].is-active) .ger-lamp--ticket .ger-lamp-copy,
 .ger-stage--in:has([data-spot="pot"]:hover) .ger-lamp--pot .ger-lamp-copy,
 .ger-stage--in:has([data-spot="pot"]:focus-visible) .ger-lamp--pot .ger-lamp-copy,
-.ger-stage--in:has([data-spot="pot"].is-active) .ger-lamp--pot .ger-lamp-copy {
+.ger-stage--in:has([data-spot="pot"].is-active) .ger-lamp--pot .ger-lamp-copy,
+.ger-stage--in:has([data-spot="treats"]:hover) .ger-lamp--treats .ger-lamp-copy,
+.ger-stage--in:has([data-spot="treats"]:focus-visible) .ger-lamp--treats .ger-lamp-copy,
+.ger-stage--in:has([data-spot="treats"].is-active) .ger-lamp--treats .ger-lamp-copy {
   filter: brightness(1.14) saturate(1.06);
 }
 @media (prefers-reduced-motion: reduce) {
@@ -5077,4 +5086,71 @@ html:lang(ko) :is(.arrive-title, .deels-title) {
    above the heading rather than under it */
 .snuff .hero-media img {
   object-position: 50% 88%;
+}
+
+/* ================= tsagaan sar =================
+   The bold element is the run of days: three columns under their Mongolian
+   names, each topped by a rule that whitens from left to right, from the dark
+   eve to the bright visiting days. The pairs of picture and text reuse the
+   Naadam page's .naadam-pair. */
+.tsagaan-days {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.tsagaan-day {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 20px;
+  border-top: 6px solid var(--ink);
+}
+.tsagaan-day:nth-child(2) {
+  border-top-color: color-mix(in srgb, var(--ink) 55%, var(--gobi));
+}
+.tsagaan-day:nth-child(3) {
+  border-top-color: var(--gobi);
+}
+.tsagaan-day-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--ink);
+}
+.tsagaan-day-text {
+  margin: 8px 0 0;
+  max-width: 44ch;
+  font-size: 16px;
+  line-height: 26px;
+}
+.tsagaan-table {
+  grid-row: auto;
+}
+.tsagaan-table li:first-child {
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+.tsagaan-boov {
+  grid-column: 1;
+  margin: 14px 0 0;
+  max-width: 360px;
+}
+.tsagaan-boov figcaption {
+  margin-top: 6px;
+}
+@media (max-width: 820px) {
+  .tsagaan-days {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+}
+/* the hero is a tower of ul boov seen from above: show its lower edge, where
+   the stamped biscuits are, not only the white food heaped in the middle */
+.tsagaan .hero-media img {
+  object-position: 50% 92%;
 }
