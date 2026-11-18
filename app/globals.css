@@ -4377,3 +4377,221 @@ body:has(.ger) .to-ger {
     transition: none;
   }
 }
+
+/* ================= getting here =================
+   The plane ticket's page. Its one picture is the map: Mongolia as a felt
+   plate between its neighbours, each way in drawn in its own colour, and a
+   legend under it that doubles as the way down to each way's row. Hovering
+   or focusing a legend entry dims the other ways, with :has() and no script. */
+.arrive [data-way="air"],
+.arrive .arrive-route--air {
+  --way: var(--ink);
+}
+.arrive [data-way="china"],
+.arrive .arrive-route--china {
+  --way: var(--door);
+}
+.arrive [data-way="russia"],
+.arrive .arrive-route--russia {
+  --way: var(--steppe);
+}
+.arrive [data-way="kazakhstan"],
+.arrive .arrive-route--kazakhstan {
+  --way: #a8741c; /* the butter yellow, darkened to read as a thin line */
+}
+
+.arrive-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding-top: 104px;
+}
+.arrive-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 760px;
+}
+.arrive-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(40px, 6.4vw, 76px);
+  line-height: 1.04;
+  letter-spacing: -0.005em;
+  overflow-wrap: anywhere;
+}
+html:is(:lang(ja), :lang(zh)) .arrive-title {
+  font-size: clamp(34px, 6vw, 68px);
+  line-height: 1.18;
+  word-break: auto-phrase;
+}
+html:lang(ko) .arrive-title {
+  word-break: keep-all;
+}
+.arrive-lead {
+  max-width: 60ch;
+  color: var(--muted);
+}
+
+.arrive-figure {
+  margin: 0;
+}
+.arrive-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.arrive-land {
+  filter: drop-shadow(0 6px 0 #d8cdb6) drop-shadow(0 18px 22px rgba(28, 39, 48, 0.18));
+}
+.arrive-land path {
+  fill: var(--surface);
+  stroke: #e4dfd3;
+  stroke-width: 1.2;
+  stroke-linejoin: round;
+}
+.arrive-country text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 34px;
+  fill: #7d8b98;
+}
+.arrive-route {
+  fill: none;
+  stroke: var(--way);
+  stroke-width: 4.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.arrive-route.is-dashed {
+  stroke-width: 3;
+  stroke-dasharray: 10 9;
+}
+.arrive-place {
+  font-family: var(--font-text);
+  font-size: 22px;
+  font-weight: 700;
+  fill: var(--ink);
+  paint-order: stroke;
+  stroke: var(--ground);
+  stroke-width: 6px;
+  stroke-linejoin: round;
+}
+.arrive-place--far {
+  font-weight: 400;
+  font-style: italic;
+  fill: var(--muted);
+}
+.arrive-place--capital {
+  font-size: 26px;
+}
+.arrive-crossing {
+  fill: var(--surface);
+  stroke: var(--ink);
+  stroke-width: 3;
+}
+.arrive-capital {
+  fill: var(--ink);
+  stroke: var(--surface);
+  stroke-width: 3.5;
+}
+.arrive-map [data-way] {
+  transition: opacity 0.2s var(--ease-out);
+}
+@media (max-width: 640px) {
+  .arrive-place {
+    font-size: 36px;
+    stroke-width: 9px;
+  }
+  .arrive-place--capital {
+    font-size: 40px;
+  }
+  .arrive-country text {
+    font-size: 46px;
+  }
+}
+
+.arrive-ways {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.arrive-way {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 18px 0 14px;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+.arrive-way:hover,
+.arrive-way:focus-visible {
+  border-color: var(--way);
+  background: var(--surface);
+  color: var(--ink);
+}
+.arrive-way:focus-visible {
+  outline: 2px solid var(--way);
+  outline-offset: 2px;
+}
+/* the swatch is the line on the map: solid for the roads and rails, broken
+   for the flights and for the way from Kazakhstan that has no border of its own */
+.arrive-swatch,
+.arrive-card .guide-card-title::before {
+  display: block;
+  width: 26px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--way);
+}
+.arrive-card .guide-card-title::before {
+  content: "";
+  width: 39px;
+  margin-bottom: 14px;
+}
+.arrive [data-way="air"] .arrive-swatch,
+.arrive [data-way="kazakhstan"] .arrive-swatch,
+.arrive-card:is([data-way="air"], [data-way="kazakhstan"]) .guide-card-title::before {
+  background: repeating-linear-gradient(90deg, var(--way) 0 8px, transparent 8px 13px);
+}
+
+.arrive-hero:has(.arrive-way[data-way="air"]:is(:hover, :focus-visible)) .arrive-map [data-way]:not([data-way~="air"]),
+.arrive-hero:has(.arrive-way[data-way="china"]:is(:hover, :focus-visible)) .arrive-map [data-way]:not([data-way~="china"]),
+.arrive-hero:has(.arrive-way[data-way="russia"]:is(:hover, :focus-visible)) .arrive-map [data-way]:not([data-way~="russia"]),
+.arrive-hero:has(.arrive-way[data-way="kazakhstan"]:is(:hover, :focus-visible))
+  .arrive-map
+  [data-way]:not([data-way~="kazakhstan"]) {
+  opacity: 0.12;
+}
+
+.arrive-body {
+  padding-top: 32px;
+}
+.arrive-notes {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.arrive-visa {
+  max-width: 60ch;
+}
+@media (max-width: 600px) {
+  .arrive-hero {
+    gap: 22px;
+    padding-top: 84px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .arrive-map [data-way],
+  .arrive-way {
+    transition: none;
+  }
+}

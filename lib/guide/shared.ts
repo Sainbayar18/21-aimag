@@ -21,6 +21,10 @@ export const practicalIds = [
 ] as const;
 export type PracticalId = (typeof practicalIds)[number];
 
+/** The ways into Mongolia on the getting-here page, in the order they are shown. */
+export const wayIds = ["air", "china", "russia", "kazakhstan"] as const;
+export type WayId = (typeof wayIds)[number];
+
 export const routeIds = ["short", "orkhon", "gobi", "khuvsgul", "east", "altai"] as const;
 export type RouteId = (typeof routeIds)[number];
 
@@ -43,7 +47,7 @@ export type GerObjectMeta = {
 export const gerObjects: Record<GerObjectId, GerObjectMeta> = {
   map: { id: "map", anchor: { x: 1236, y: 386 }, target: { kind: "page", path: "destinations" } },
   chest: { id: "chest", anchor: { x: 586, y: 400 }, target: { kind: "page", path: "culture" } },
-  ticket: { id: "ticket", anchor: { x: 146, y: 684 }, target: { kind: "page", path: "practical" } },
+  ticket: { id: "ticket", anchor: { x: 146, y: 684 }, target: { kind: "page", path: "getting-here" } },
   pot: { id: "pot", anchor: { x: 700, y: 574 }, target: { kind: "page", path: "food" } },
 };
 

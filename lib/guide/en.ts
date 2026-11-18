@@ -34,7 +34,7 @@ const en: GuideText = {
       ticket: {
         name: "The plane ticket on the table",
         teaser:
-          "Chinggis Khaan International Airport, 50 km south of Ulaanbaatar. Visas, flights, money and the long road that starts there.",
+          "Fly into Chinggis Khaan International Airport, or come overland from China, Russia or Kazakhstan. Every way into Mongolia, on one map.",
         cta: "How to get to Mongolia",
       },
       pot: {
@@ -478,6 +478,91 @@ const en: GuideText = {
     emergency: ["Ambulance", "Police", "Fire", "Emergency and rescue"],
     disclaimer:
       "This page is a starting point, not official advice. Visa rules, flight routes, prices and road conditions change — confirm anything that matters with the Mongolian Immigration Agency, your embassy and a local operator before you travel.",
+  },
+
+  /* ================= getting here ================= */
+  arrive: {
+    pageTitle: "Getting to Mongolia",
+    pageLead:
+      "Mongolia lies between Russia and China, so every journey here either crosses one of them or flies over. These are the ways in, and what each one is like.",
+    metaDescription:
+      "How to get to Mongolia: flights to Chinggis Khaan International Airport, the train and road from China at Zamyn-Üüd, the crossings from Russia, and the way in from Kazakhstan through the Altai.",
+    mapLabel:
+      "Map of Mongolia with its neighbours, showing the flights into Ulaanbaatar and the border crossings at Zamyn-Üüd, Altanbulag, Tsagaannuur and Ereentsav.",
+    places: {
+      russia: "Russia",
+      china: "China",
+      kazakhstan: "Kazakhstan",
+      altai: "Altai",
+      ulaanbaatar: "Ulaanbaatar",
+      zamynUud: "Zamyn-Üüd",
+      altanbulag: "Altanbulag",
+      tsagaannuur: "Tsagaannuur",
+      ereentsav: "Ereentsav",
+      ulanUde: "Ulan-Ude",
+      beijing: "Beijing",
+    },
+    waysLabel: "Ways into Mongolia",
+    ways: {
+      air: {
+        title: "By air",
+        text: "The easiest way in, and the one most visitors take. Nearly every international flight lands at Chinggis Khaan International Airport.",
+        points: [
+          "The airport opened in 2021 in the Khöshig valley, about 50 km south of Ulaanbaatar. The expressway into the city takes 40–60 minutes.",
+          "Regular direct flights connect Ulaanbaatar with Seoul, Tokyo, Beijing, Hong Kong, Istanbul and Frankfurt, and summer adds more cities in China, Japan, Korea and Southeast Asia.",
+          "From Central Asia, Hunnu Air flies direct from Almaty in about four hours, though not in every season.",
+          "There is no train to the airport. Book a hotel pickup, or take the airport bus or a registered taxi and agree the fare first.",
+          "Heading west? Ölgii and Khovd have domestic flights from Ulaanbaatar, which turns a three-day drive into a flight of about three hours.",
+        ],
+      },
+      china: {
+        title: "From China",
+        text: "The railway and the main road south both cross at Zamyn-Üüd, opposite the Chinese town of Erenhot. It is the busiest border in the country.",
+        points: [
+          "The through train from Beijing to Ulaanbaatar has run again since June 2025, about once a week. The journey takes around 30 hours.",
+          "At Erenhot the train stands for a few hours while its wheels are changed: China uses standard gauge, and Mongolia the wider Russian gauge.",
+          "You cannot walk across at Zamyn-Üüd. Shared jeeps and minibuses in Erenhot take foot passengers over, and on the Mongolian side trains and buses leave for Ulaanbaatar, about 700 km north.",
+          "The road is paved all the way to the capital, through Sainshand and Choir.",
+          "Most other crossings on the Chinese border are open only to Mongolian and Chinese citizens, or only to freight.",
+        ],
+      },
+      russia: {
+        title: "From Russia",
+        text: "Three crossings on the northern border take foreign travellers: north of Ulaanbaatar, at Tsagaannuur in the far west, and at Ereentsav in the east.",
+        points: [
+          "Trains from Irkutsk and Ulan-Ude, and less often from Moscow, cross at Naushki and Sükhbaatar. Expect a journey of more than a day, much of it spent at the border.",
+          "Drivers use Kyakhta–Altanbulag, open around the clock and about 350 km from Ulaanbaatar on a paved road.",
+          "Tashanta–Tsagaannuur, at the end of the Chuysky Trakt through the Altai Republic, leads straight into Bayan-Ölgii. It is usually closed on Sundays.",
+          "Ereentsav, in Dornod, links eastern Mongolia with Russia’s Zabaykalsky Krai and sees few travellers.",
+          "The road crossings cannot be walked. Without a vehicle of your own, pay for a seat in one that is going across.",
+        ],
+      },
+      kazakhstan: {
+        title: "From Kazakhstan",
+        text: "Kazakhstan comes within about 40 km of Mongolia’s western tip, but the two do not touch: a narrow strip of Russia and China lies between them.",
+        points: [
+          "The quickest way is the direct flight from Almaty to Ulaanbaatar.",
+          "Overland, the road goes north through Russia: into the Altai Republic, along the Chuysky Trakt to Tashanta, and across to Tsagaannuur.",
+          "That means entering Russia too, so check whether your passport needs a Russian visa, and allow two or three days of driving from eastern Kazakhstan.",
+          "Bayan-Ölgii, just over the border, is home to most of Mongolia’s Kazakhs. In Ölgii you will hear more Kazakh than Mongolian.",
+          "Ölgii has flights to Ulaanbaatar, so the overland crossing can end with a flight east.",
+        ],
+      },
+    },
+    border: {
+      title: "At the border",
+      text: "Land crossings are slow and keep office hours. A little planning saves a day.",
+      points: [
+        "Borders close on Mongolian public holidays, including Tsagaan Sar in winter and Naadam on 11–15 July.",
+        "Arrive early. Road crossings let a few vehicles through at a time, and lines of trucks can take hours.",
+        "Bringing your own car or motorbike means a temporary import declaration and local insurance at the border. Keep the papers until you leave.",
+        "Have the address of your first night’s stay to hand; officers may ask where you are going.",
+      ],
+    },
+    visa: "Whether you need a visa depends on your passport. {link} covers visas, money, SIM cards and health.",
+    visaLink: "The practical guide",
+    disclaimer:
+      "Timetables, routes and border rules change, sometimes at short notice. Check with the airline, the railway or a Mongolian embassy before you travel.",
   },
 
   food: {

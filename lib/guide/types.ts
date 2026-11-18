@@ -1,4 +1,4 @@
-import type { ChestItemId, CultureId, DishId, GerObjectId, PracticalId, RouteId } from "@/lib/guide/shared";
+import type { ChestItemId, CultureId, DishId, GerObjectId, PracticalId, RouteId, WayId } from "@/lib/guide/shared";
 
 /** One titled block with a short paragraph and a few bullet points. */
 export type GuideSection = {
@@ -100,6 +100,36 @@ export type GuideText = {
     emergencyLead: string;
     /** Labels, aligned by index with `emergencyNumbers` in shared.ts */
     emergency: string[];
+    disclaimer: string;
+  };
+
+  /** The getting-here page, opened by the plane ticket in the ger. */
+  arrive: {
+    pageTitle: string;
+    pageLead: string;
+    metaDescription: string;
+    /** what the map shows, for a screen reader */
+    mapLabel: string;
+    /** the names written on the map */
+    places: {
+      russia: string;
+      china: string;
+      kazakhstan: string;
+      altai: string;
+      ulaanbaatar: string;
+      zamynUud: string;
+      altanbulag: string;
+      tsagaannuur: string;
+      ereentsav: string;
+      ulanUde: string;
+      beijing: string;
+    };
+    waysLabel: string;
+    ways: Record<WayId, GuideSection>;
+    border: GuideSection;
+    /** "{link}" marks where the link to the practical page goes */
+    visa: string;
+    visaLink: string;
     disclaimer: string;
   };
 
