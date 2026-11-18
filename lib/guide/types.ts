@@ -9,6 +9,7 @@ import type {
   NaadamTitleId,
   PracticalId,
   RouteId,
+  SnuffBottleId,
   WayId,
   WrestlerGearId,
 } from "@/lib/guide/shared";
@@ -215,6 +216,27 @@ export type GuideText = {
     watch: string[];
     /** alt text for each photograph, keyed as in data/naadam-photos.json */
     photoAlt: Record<string, string>;
+    note: string;
+  };
+
+  snuff: {
+    pageTitle: string;
+    pageLead: string;
+    metaDescription: string;
+    heroAlt: string;
+    aiCaption: string;
+    intro: string[];
+    stepsTitle: string;
+    /** the exchange, in order */
+    steps: { title: string; text: string }[];
+    elderTitle: string;
+    elderText: string;
+    avoidTitle: string;
+    avoidLead: string;
+    avoid: string[];
+    bottlesTitle: string;
+    bottlesText: string;
+    bottles: Record<SnuffBottleId, string>;
     note: string;
   };
 };

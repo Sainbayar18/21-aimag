@@ -48,7 +48,7 @@ const en: GuideText = {
       book: { name: "A book of Mongolian history", page: "A history of Mongolia" },
       deel: { name: "A silk deel", page: "The deels of Mongolia’s peoples" },
       zodog: { name: "A wrestler’s zodog and shuudag", page: "Naadam and Mongolian wrestling" },
-      snuff: { name: "A snuff bottle", page: "Greetings and small courtesies" },
+      snuff: { name: "A snuff bottle", page: "Exchanging snuff bottles" },
     },
   },
 
@@ -876,6 +876,60 @@ const en: GuideText = {
       archery: "Archers in deels shooting at Naadam",
     },
     note: "Dates and venues can change from year to year; check the schedule for the year you travel before you plan around it.",
+  },
+
+  snuff: {
+    pageTitle: "Exchanging snuff bottles",
+    pageLead: "When Mongolian men meet, at Tsagaan Sar or when a guest comes into the ger, they greet each other by exchanging snuff bottles. It takes a few seconds, and every movement in it means something.",
+    metaDescription: "How the Mongolian snuff-bottle greeting works: the five steps, how to greet an elder, what not to do, and the bottles themselves — agate, coral, jade and silver.",
+    heroAlt: "Two men in deels exchanging snuff bottles in a ger",
+    aiCaption: "AI illustration",
+    intro: [
+      "A snuff bottle, khöörög, is carried in a pouch at the belt and taken out to greet. Two men exchange bottles, each smells the other's, and each hands it back. It is a way of saying ‘I am at peace with you’, and between an older and a younger man it is also a show of respect. A good bottle is kept for life and passed from father to son.",
+      "Women sometimes carry one too, and anyone may be offered a bottle in a family ger. You do not have to take snuff: smelling the bottle is enough.",
+    ],
+    stepsTitle: "How the exchange goes",
+    steps: [
+      {
+        title: "Take out your bottle",
+        text: "Take the bottle from its pouch and loosen the stopper a little, so that it is ready to open.",
+      },
+      {
+        title: "Hold it out on your palm",
+        text: "Rest it in your right hand, palm up, and support your right elbow with your left hand. Keep your sleeves down and your deel buttoned.",
+      },
+      {
+        title: "Pass the bottles",
+        text: "Both men hold out their bottles at once and take each other's. A younger man receives with both hands. The bottles must not knock together.",
+      },
+      {
+        title: "Smell it",
+        text: "Open the stopper slightly and bring the bottle to your nose. You can take a pinch with the little spoon, or just smell it.",
+      },
+      {
+        title: "Hand it back",
+        text: "Return it the same way, the stopper still loose, and take your own bottle back.",
+      },
+    ],
+    elderTitle: "With an elder",
+    elderText: "With an older man the younger one rises to receive the bottle. He may go down on his left knee with his right knee raised, take the bottle with both hands, smell it and return it in the same way. The elder holds his bottle in his left hand and supports his right elbow.",
+    avoidTitle: "What not to do",
+    avoidLead: "A few things turn the greeting into an insult.",
+    avoid: [
+      "Do not press the stopper shut before handing a bottle back. In the old days a man condemned to death was offered snuff from a closed bottle.",
+      "Do not roll up your sleeves, unbutton your deel or put your hands on your hips while you exchange.",
+      "Do not let the two bottles touch: knocking them together is a sign of a quarrel.",
+      "Do not refuse a bottle. If you do not take snuff, bring it to your nose and hand it back.",
+    ],
+    bottlesTitle: "The bottles",
+    bottlesText: "Bottles are carved from agate, jade, jasper, coral or crystal, or made of silver set with coral and turquoise. The stopper is usually coral or turquoise, with a tiny spoon fixed beneath it, and the bottle lives in an embroidered silk pouch. A fine one could be worth a herd of horses; these four are in the National Museum of Mongolia.",
+    bottles: {
+      agate: "Agate with a coral stopper",
+      coral: "Carved red coral",
+      silver: "Silver set with coral and turquoise",
+      jasper: "Jasper, shaped like a pouch",
+    },
+    note: "Customs vary a little from region to region and family to family. If in doubt, watch your host and do as he does.",
   },
 };
 

@@ -4967,3 +4967,114 @@ html:lang(ko) :is(.arrive-title, .deels-title) {
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ================= snuff bottles =================
+   The exchange is the page's one bold element: five numbered steps along a
+   single rule, the numerals in the door's red, read left to right like the
+   hands passing. The museum bottles stand in a row of tall frames. */
+.snuff-steps {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--ink);
+}
+.snuff-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 18px;
+}
+.snuff-step-num {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 5vw, 72px);
+  font-weight: 800;
+  line-height: 0.9;
+  color: var(--door);
+}
+.snuff-step-title {
+  margin: 4px 0 0;
+  font-family: var(--font-display);
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--ink);
+}
+.snuff-step-text {
+  margin: 0;
+  font-size: 15px;
+  line-height: 24px;
+  color: var(--muted);
+}
+.snuff-elder {
+  margin: 0;
+  font-size: 16px;
+  line-height: 26px;
+}
+
+.snuff-bottles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+.snuff-bottle {
+  margin: 0;
+}
+.snuff-bottle-photo {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--sky-tint);
+}
+.snuff-bottle-photo img {
+  object-fit: cover;
+}
+.snuff-bottle figcaption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 8px;
+}
+.snuff-bottle-name {
+  font-weight: 700;
+  color: var(--ink);
+}
+.snuff-bottle-credit {
+  font-size: 11px;
+}
+
+@media (max-width: 960px) {
+  .snuff-steps {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+    border-top: 0;
+    border-left: 1px solid var(--ink);
+  }
+  .snuff-step {
+    display: grid;
+    grid-template-columns: 64px minmax(0, 1fr);
+    column-gap: 14px;
+    padding: 14px 0 14px 16px;
+  }
+  .snuff-step-num {
+    grid-row: 1 / span 2;
+    font-size: 48px;
+  }
+  .snuff-step-title {
+    margin: 0;
+  }
+}
+@media (max-width: 700px) {
+  .snuff-bottles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+/* the hero shows more of the picture's lower half, so the two bottles sit
+   above the heading rather than under it */
+.snuff .hero-media img {
+  object-position: 50% 88%;
+}

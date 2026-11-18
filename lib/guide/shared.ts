@@ -120,7 +120,7 @@ export const chestItems: Record<
   // the agate snuff bottle with its coral stopper and spoon, lying on its
   // embroidered pouch; the pouch's strings are left out
   snuff: {
-    path: "culture#greetings",
+    path: "snuff",
     anchor: { x: 1130, y: 420 },
     parts: [
       [
@@ -219,6 +219,12 @@ export const naadamTitles: Record<NaadamTitleId, { mn: string; say: string }> = 
 /** The two games after wrestling, each with its photograph. */
 export const naadamGameIds = ["horse", "archery"] as const;
 export type NaadamGameId = (typeof naadamGameIds)[number];
+
+/* ---------------- snuff bottles ---------------- */
+
+/** The museum bottles on the snuff page; credits in data/snuff-photos.json. */
+export const snuffBottleIds = ["agate", "coral", "silver", "jasper"] as const;
+export type SnuffBottleId = (typeof snuffBottleIds)[number];
 
 /* ---------------- food ---------------- */
 

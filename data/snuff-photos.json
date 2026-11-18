@@ -1,0 +1,42 @@
+{
+  "agate": {
+    "file": "/images/snuff/agate.jpg",
+    "title": "Agate Snuff Bottle (35709929705)",
+    "author": "Gary Todd",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Agate_Snuff_Bottle_(35709929705).jpg",
+    "width": 960,
+    "height": 1200
+  },
+  "coral": {
+    "file": "/images/snuff/coral.jpg",
+    "title": "Red Coral Snuff Bottle (35541300262)",
+    "author": "Gary Todd",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Red_Coral_Snuff_Bottle_(35541300262).jpg",
+    "width": 960,
+    "height": 1200
+  },
+  "silver": {
+    "file": "/images/snuff/silver.jpg",
+    "title": "Snuff Bottle with Coral & Turquoise Inlay (34868673014)",
+    "author": "Gary Todd",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Snuff_Bottle_with_Coral_%26_Turquoise_Inlay_(34868673014).jpg",
+    "width": 960,
+    "height": 1200
+  },
+  "jasper": {
+    "file": "/images/snuff/jasper.jpg",
+    "title": "Jasper Snuff Bottles (34900595173)",
+    "author": "Gary Todd",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "source": "https://commons.wikimedia.org/wiki/File:Jasper_Snuff_Bottles_(34900595173).jpg",
+    "width": 960,
+    "height": 1200
+  }
+}
