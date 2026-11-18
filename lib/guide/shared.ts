@@ -51,8 +51,9 @@ export const gerObjects: Record<GerObjectId, GerObjectMeta> = {
 
 /**
  * What lies in the painted chest when it is opened (public/images/ger/
- * chest-open.jpg, measured in its own 1376×768 pixels): each thing is
- * outlined for its light, has a marker, and leads to a page.
+ * chest-open.jpg, seen from straight above, measured in its own 1376×768
+ * pixels): each thing is outlined for its light, has a marker, and leads
+ * to a page.
  */
 export const chestItemIds = ["book", "deel", "bowl"] as const;
 export type ChestItemId = (typeof chestItemIds)[number];
@@ -61,36 +62,38 @@ export const chestItems: Record<
   ChestItemId,
   { path: string; anchor: { x: number; y: number }; points: [number, number][] }
 > = {
-  // the history book, leather-bound with its straps and the tab of one
+  // the history book, an old green cloth hardback with yellowed edges
   book: {
     path: "about",
-    anchor: { x: 425, y: 430 },
+    anchor: { x: 348, y: 380 },
     points: [
-      [362, 321], [520, 320], [530, 333], [534, 350], [536, 400], [535, 460],
-      [552, 462], [555, 470], [550, 476], [536, 476], [534, 500], [526, 512],
-      [512, 524], [470, 528], [400, 526], [330, 522], [304, 518], [300, 505],
-      [306, 470], [315, 430], [330, 385], [345, 340], [352, 326],
+      [230, 233], [300, 229], [391, 227], [445, 227], [462, 236], [471, 260],
+      [473, 300], [473, 407], [471, 450], [470, 486], [466, 521], [450, 530],
+      [428, 532], [340, 531], [253, 530], [228, 524], [218, 514], [222, 490],
+      [224, 473], [224, 373], [225, 300], [226, 244],
     ],
   },
-  // the folded silk deel, from the collar down to the fold at its foot
+  // the folded silk deel, collar to hem, with the sash lying on it
   deel: {
     path: "culture",
-    anchor: { x: 690, y: 470 },
+    anchor: { x: 700, y: 480 },
     points: [
-      [657, 305], [740, 305], [753, 327], [793, 325], [807, 333], [818, 377],
-      [822, 440], [827, 490], [823, 523], [700, 528], [573, 525], [563, 487],
-      [570, 430], [580, 370], [590, 340], [600, 327], [637, 327],
+      [646, 152], [718, 154], [746, 165], [824, 173], [840.5, 195.5], [874, 257],
+      [904, 268], [907, 307], [893, 379], [896, 451], [888, 495.5], [882, 548],
+      [863, 559], [707, 554], [557, 545.5], [496, 529], [496, 451], [502, 362],
+      [504.5, 251], [535, 232], [557, 173], [596, 162],
     ],
   },
-  // the silver bowl: its rim, tilted a little, and the belly under it
+  // the silver-rimmed wooden bowl: the rim, and the belly showing past it
   bowl: {
     path: "food",
-    anchor: { x: 951, y: 410 },
+    anchor: { x: 1061, y: 362 },
     points: [
-      [871.5, 396], [875, 382], [884.5, 370], [898, 359.5], [915.5, 352.5], [935, 349],
-      [955.5, 348.5], [976, 352.5], [995, 359.5], [1010.5, 369.5], [1022.5, 382], [1029, 395.5],
-      [1030.5, 410], [1024, 440], [1008, 463], [982, 478], [952, 482], [922, 477],
-      [897, 462], [880, 440],
+      [998.5, 244.5], [1028.5, 232], [1061, 228], [1093.5, 232], [1124, 244.5], [1149.5, 264.5],
+      [1169.5, 290], [1182, 320], [1186.5, 352], [1182, 384], [1182, 400], [1172, 430],
+      [1158, 452], [1138, 470], [1105, 487], [1063, 494], [1036, 494], [992, 487],
+      [959, 476], [930, 448], [918, 410], [916, 371], [920, 330], [932, 300],
+      [945, 283], [965, 262], [988, 247],
     ],
   },
 };
