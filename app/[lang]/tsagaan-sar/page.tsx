@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import PageHero from "@/components/PageHero";
 import PhotoCredit from "@/components/PhotoCredit";
 import { getGuide, tsagaanSarDays, tsagaanSarPhrases } from "@/lib/guide";
 import { getDict, isLang } from "@/lib/i18n";
@@ -47,20 +48,16 @@ export default async function TsagaanSarPage({ params }: Props) {
 
   return (
     <main className="tsagaan">
-      <section className="hero hero--guide">
-        <div className="hero-media">
-          <Image src={hero.file} alt={hero.caption} fill priority sizes="100vw" />
-        </div>
-        <div className="hero-content container">
-          <h1 className="hero-title anim-up" style={{ animationDelay: "180ms" }}>
-            {t.pageTitle}
-          </h1>
-          <p className="hero-lead anim-up" style={{ animationDelay: "300ms" }}>
-            {t.pageLead}
-          </p>
-        </div>
-        <PhotoCredit photo={hero} lang={lang} className="hero-credit" />
-      </section>
+      <PageHero
+        bed="table"
+        photo={{ src: hero.file, alt: hero.caption }}
+        // a tower of ul boov seen from above: its lower edge, where the
+        // stamped biscuits are, not only the white food in the middle
+        focus="50% 92%"
+        credit={<PhotoCredit photo={hero} lang={lang} className="page-hero-credit" />}
+        title={t.pageTitle}
+        lead={t.pageLead}
+      />
 
       <div className="container stack">
         <section className="guide-intro">

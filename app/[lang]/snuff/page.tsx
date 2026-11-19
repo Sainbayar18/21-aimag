@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import PageHero from "@/components/PageHero";
 import { getGuide, snuffBottleIds } from "@/lib/guide";
 import { getDict, isLang } from "@/lib/i18n";
 import { alternates, share } from "@/lib/seo";
@@ -37,24 +38,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function SnuffPage({ params }: Props) {
   const { lang } = await params;
   if (!isLang(lang)) notFound();
-  const s = getGuide(lang).snuff;
+  const g = getGuide(lang);
+  const s = g.snuff;
 
   return (
     <main className="snuff">
-      <section className="hero hero--guide">
-        <div className="hero-media">
-          <Image src={HERO} alt={s.heroAlt} fill priority sizes="100vw" />
-        </div>
-        <div className="hero-content container">
-          <h1 className="hero-title anim-up" style={{ animationDelay: "180ms" }}>
-            {s.pageTitle}
-          </h1>
-          <p className="hero-lead anim-up" style={{ animationDelay: "300ms" }}>
-            {s.pageLead}
-          </p>
-        </div>
-        <p className="photo-credit hero-credit">{s.aiCaption}</p>
-      </section>
+      <PageHero
+        bed="felt"
+        photo={{ src: HERO, alt: s.heroAlt }}
+        credit={<p className="photo-credit page-hero-credit">{s.aiCaption}</p>}
+        title={s.pageTitle}
+        lead={s.pageLead}
+      />
 
       <div className="container stack">
         <section className="guide-intro">
@@ -84,12 +79,16 @@ export default async function SnuffPage({ params }: Props) {
           </ol>
         </section>
 
-        <section className="section" aria-label={s.elderTitle}>
+        {/* one paragraph, so it is set as one, not as a list of one */}
+        <section className="section snuff-elder-block" aria-labelledby="elder-title">
+          <h2 id="elder-title" className="h2">
+            {s.elderTitle}
+          </h2>
+          <p className="snuff-elder">{s.elderText}</p>
+        </section>
+
+        <section className="section" aria-label={s.avoidTitle}>
           <div className="guide-grid">
-            <article className="guide-card">
-              <h2 className="h3 guide-card-title">{s.elderTitle}</h2>
-              <p className="guide-points snuff-elder">{s.elderText}</p>
-            </article>
             <article className="guide-card">
               <h2 className="h3 guide-card-title">{s.avoidTitle}</h2>
               <p className="guide-card-text">{s.avoidLead}</p>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import PageHero from "@/components/PageHero";
 import PhotoCredit from "@/components/PhotoCredit";
 import Reveal from "@/components/Reveal";
 import { getFoodPhoto } from "@/lib/food";
@@ -44,20 +45,13 @@ export default async function FoodPage({ params }: Props) {
 
   return (
     <main>
-      <section className="hero hero--guide">
-        <div className="hero-media">
-          <Image src={hero.file} alt={hero.caption} fill priority sizes="100vw" />
-        </div>
-        <div className="hero-content container">
-          <h1 className="hero-title anim-up" style={{ animationDelay: "180ms" }}>
-            {f.pageTitle}
-          </h1>
-          <p className="hero-lead anim-up" style={{ animationDelay: "300ms" }}>
-            {f.pageLead}
-          </p>
-        </div>
-        <PhotoCredit photo={hero} lang={lang} className="hero-credit" />
-      </section>
+      <PageHero
+        bed="hearth"
+        photo={{ src: hero.file, alt: hero.caption }}
+        credit={<PhotoCredit photo={hero} lang={lang} className="page-hero-credit" />}
+        title={f.pageTitle}
+        lead={f.pageLead}
+      />
 
       <div className="container stack">
         <Reveal as="section" className="guide-intro">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import PageHero from "@/components/PageHero";
 import PhotoCredit from "@/components/PhotoCredit";
 import Reveal from "@/components/Reveal";
 import TimelineRail from "@/components/TimelineRail";
@@ -44,20 +45,13 @@ export default async function HistoryPage({ params }: Props) {
 
   return (
     <main>
-      <section className="hero hero--about">
-        <div className="hero-media">
-          <Image src={hero.file} alt={hero.caption} fill priority sizes="100vw" />
-        </div>
-        <div className="hero-content container">
-          <h1 className="hero-title anim-up" style={{ animationDelay: "180ms" }}>
-            {a.historyTitle}
-          </h1>
-          <p className="hero-lead anim-up" style={{ animationDelay: "300ms" }}>
-            {a.historyLead}
-          </p>
-        </div>
-        <PhotoCredit photo={hero} lang={lang} className="hero-credit" />
-      </section>
+      <PageHero
+        bed="felt"
+        photo={{ src: hero.file, alt: hero.caption }}
+        credit={<PhotoCredit photo={hero} lang={lang} className="page-hero-credit" />}
+        title={a.historyTitle}
+        lead={a.historyLead}
+      />
 
       <div className="container stack">
         <section className="section" aria-labelledby="timeline-title">

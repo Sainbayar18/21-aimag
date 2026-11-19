@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import PageHero from "@/components/PageHero";
 import PhotoCredit from "@/components/PhotoCredit";
 import { getGuide, naadamGameIds, naadamTitleIds, naadamTitles, wrestlerGear, wrestlerGearIds } from "@/lib/guide";
 import { getDict, isLang } from "@/lib/i18n";
@@ -37,7 +38,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function NaadamPage({ params }: Props) {
   const { lang } = await params;
   if (!isLang(lang)) notFound();
-  const n = getGuide(lang).naadam;
+  const g = getGuide(lang);
+  const n = g.naadam;
   const photo = (key: string) => getNaadamPhoto(key, n.photoAlt[key]);
   const hero = photo("hero");
   const outfit = photo("outfit");
@@ -46,20 +48,14 @@ export default async function NaadamPage({ params }: Props) {
 
   return (
     <main className="naadam">
-      <section className="hero hero--guide">
-        <div className="hero-media">
-          <Image src={hero.file} alt={hero.caption} fill priority sizes="100vw" />
-        </div>
-        <div className="hero-content container">
-          <h1 className="hero-title anim-up" style={{ animationDelay: "180ms" }}>
-            {n.pageTitle}
-          </h1>
-          <p className="hero-lead anim-up" style={{ animationDelay: "300ms" }}>
-            {n.pageLead}
-          </p>
-        </div>
-        <PhotoCredit photo={hero} lang={lang} className="hero-credit" />
-      </section>
+      <PageHero
+        bed="felt"
+        photo={{ src: hero.file, alt: hero.caption }}
+        focus="50% 30%"
+        credit={<PhotoCredit photo={hero} lang={lang} className="page-hero-credit" />}
+        title={n.pageTitle}
+        lead={n.pageLead}
+      />
 
       <div className="container stack">
         <section className="guide-intro">
@@ -203,18 +199,20 @@ export default async function NaadamPage({ params }: Props) {
           </div>
         </section>
 
-        <section className="section" aria-label={n.watchTitle}>
-          <div className="guide-grid">
-            <article className="guide-card">
-              <h2 className="h3 guide-card-title">{n.watchTitle}</h2>
-              <p className="guide-card-text">{n.watchLead}</p>
-              <ul className="guide-points">
-                {n.watch.map((w) => (
-                  <li key={w.slice(0, 24)}>{w}</li>
-                ))}
-              </ul>
-            </article>
+        {/* where to watch: the whole width in two columns, not another
+            guidebook row like the rules above */}
+        <section className="section" aria-labelledby="watch-title">
+          <div className="section-head">
+            <h2 id="watch-title" className="h2">
+              {n.watchTitle}
+            </h2>
+            <p className="lead muted">{n.watchLead}</p>
           </div>
+          <ul className="naadam-watch">
+            {n.watch.map((w) => (
+              <li key={w.slice(0, 24)}>{w}</li>
+            ))}
+          </ul>
         </section>
 
         <p className="guide-note">{n.note}</p>
