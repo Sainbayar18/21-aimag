@@ -79,8 +79,12 @@ export const chestItems: Record<
     anchor: { x: 226, y: 520 },
     parts: [
       [
-        [120.5, 277.5], [327, 277.5], [336, 285.5], [341, 320], [341, 401], [340, 500],
-        [338.5, 576], [323, 583], [113.5, 585.5], [109, 447], [112, 350], [116, 288],
+        // the right side follows the back board, which stands a few pixels
+        // proud of the pages; stopping at the pages left a dark unlit strip
+        // between the book and its light
+        [120.5, 277.5], [327, 277.5], [334, 285.5], [346, 286.5], [346.5, 320], [345.5, 401],
+        [344, 500], [343, 576], [341, 580], [323, 584], [113.5, 585.5], [109, 447],
+        [112, 350], [116, 288],
       ],
     ],
   },
@@ -126,8 +130,11 @@ export const chestItems: Record<
     anchor: { x: 1130, y: 420 },
     parts: [
       [
-        [1123, 322], [1222, 325], [1226, 345], [1223, 379], [1222, 441], [1210, 470],
-        [1189, 485], [1142, 487], [1122, 472], [1114, 454], [1110.5, 385], [1115, 345],
+        // out to the pouch's dark blue piping on both sides, which an outline
+        // inside it left unlit, a dark strip between the pouch and its light
+        [1123, 321], [1222, 324], [1226, 345], [1228.5, 385], [1228.5, 430], [1223, 458],
+        [1212, 474], [1191, 485], [1142, 488], [1121, 474], [1111, 457], [1108, 410],
+        [1110, 380], [1113, 345],
       ],
     ],
   },
